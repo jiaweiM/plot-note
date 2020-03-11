@@ -1,6 +1,12 @@
+# Plotly Express
 
-# 简介
-Plotly Express 是一个包装 plotly.graph_objects 的简洁高级API，以快速实现数据搜索和生成 figure.
+## 简介
+
+Plotly Express 是一个包装 `plotly.graph_objects` 的简洁高级API，以快速实现数据搜索和生成 figure。
+
+每个 Plotly Express 函数都返回 `graph_objects.Figure` 对象，该对象的数据和布局根据提供的参数进行配置。
+
+
 
 # 导入
 下面导入 plotly.express，其中含有内置的数据集，如：

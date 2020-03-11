@@ -1,8 +1,13 @@
-- [创建图](#%e5%88%9b%e5%bb%ba%e5%9b%be)
-- [输出图像文件](#%e8%be%93%e5%87%ba%e5%9b%be%e5%83%8f%e6%96%87%e4%bb%b6)
+# Output Image
+
+- [Output Image](#output-image)
+  - [创建图](#%e5%88%9b%e5%bb%ba%e5%9b%be)
+  - [输出图像文件](#%e8%be%93%e5%87%ba%e5%9b%be%e5%83%8f%e6%96%87%e4%bb%b6)
 - [获得图像字节](#%e8%8e%b7%e5%be%97%e5%9b%be%e5%83%8f%e5%ad%97%e8%8a%82)
 - [使用 `IPython.display.Image` 显式 Bytes 图像](#%e4%bd%bf%e7%94%a8-ipythondisplayimage-%e6%98%be%e5%bc%8f-bytes-%e5%9b%be%e5%83%8f)
-# 创建图
+  
+## 创建图
+
 ```py
 import plotly.graph_objects as go
 import numpy as np
@@ -30,7 +35,8 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-# 输出图像文件
+## 输出图像文件
+
 `plotly.io.write_image` 函数用于输出图像文件。也可以使用图形对象的 `.write_image` 方法。
 
 PNG：

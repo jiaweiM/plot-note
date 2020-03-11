@@ -22,6 +22,6 @@ fig.add_trace(go.Scatter(
     )
 ))
 
-fig.show()
+# fig.show()
 
-# fig.write_image("../images/fig1.svg")
+fig.write_image("../images/fig1.svg")
