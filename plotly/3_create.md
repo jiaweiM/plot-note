@@ -27,6 +27,11 @@
 
 NOTE: plotly 将单个图形，如条形图、散点图等，称为 trace。
 
+一个图（figure）两部分：
+
+- traces，描述 figure 中数据对象，如 scatter, heatmap 等。
+- layout, 描述 figure 中余下的属性，如 title, xaxis, annotations 等。
+
 ### 字典
 
 plotly.py 主要用于为 plotly.js JavaScript 库提供Python接口。在 Plotly.js 中，图形是由声明式的 JSON 数据结构指定，所以 plotly.py 需要提供 Python 字典形式的数据，以方便序列化为 JSON 数据结构。
