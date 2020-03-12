@@ -7,8 +7,10 @@
   - [输出图像文件](#%e8%be%93%e5%87%ba%e5%9b%be%e5%83%8f%e6%96%87%e4%bb%b6)
     - [Raster Formats: PNG, JPEG, and WebP](#raster-formats-png-jpeg-and-webp)
     - [Vector Formats: SVG and PDF](#vector-formats-svg-and-pdf)
-- [获得图像字节](#%e8%8e%b7%e5%be%97%e5%9b%be%e5%83%8f%e5%ad%97%e8%8a%82)
-- [使用 `IPython.display.Image` 显式 Bytes 图像](#%e4%bd%bf%e7%94%a8-ipythondisplayimage-%e6%98%be%e5%bc%8f-bytes-%e5%9b%be%e5%83%8f)
+  - [Get Image as Bytes](#get-image-as-bytes)
+  - [使用 `IPython.display.Image` 显式 Bytes 图像](#%e4%bd%bf%e7%94%a8-ipythondisplayimage-%e6%98%be%e5%bc%8f-bytes-%e5%9b%be%e5%83%8f)
+  - [Change Image Dimensions and Scale](#change-image-dimensions-and-scale)
+  - [总结](#%e6%80%bb%e7%bb%93)
   
 ## 简介
 
@@ -102,23 +104,42 @@ EPS（需要 `poppler` 库）
 fig.write_image("images/fig1.eps")
 ```
 
-> NOTE：对包含 WebGL 轨迹的图形（如 scattergl, heatmapgl, contourgl, scatter3d, surface, mesh3d, scatterpolargl, cone, streamtube, splom, parcoords）导出为矢量图格式时，图像的部分区域会以栅格的形式封装，而不是矢量。
+> NOTE：对包含 WebGL traces的figures（如 scattergl, heatmapgl, contourgl, scatter3d, surface, mesh3d, scatterpolargl, cone, streamtube, splom, parcoords）导出为矢量图格式时，图像的部分区域以栅格的形式封装，而不是矢量。
 
-# 获得图像字节
-`plotly.io.to_image` 将图像转换为字节。
+## Get Image as Bytes
+
+`plotly.io.to_image` 将图像转换为字节。也可以使用 figure 对象的 `.to_image` 方法。
 
 例如将 PNG 转换为字节：
+
 ```py
 img_bytes = fig.to_image(format="png")
 ```
 
 然后输出前 20 个字节：
-```
+
+```py
 img_bytes[:20]
 ```
 
-# 使用 `IPython.display.Image` 显式 Bytes 图像
+## 使用 `IPython.display.Image` 显式 Bytes 图像
+
+PNG 图像的 bytes 对象可以直接在 notebook 中用 `IPython.display.Image` 类显示，在 Qt Console for Jupyter 中也可以。
+
 ```py
 from IPython.display import Image
 Image(img_bytes)
 ```
+
+## Change Image Dimensions and Scale
+
+除了图片格式，`to_image` 和 `write_image` 还可以设置 `width` 和 `height`。另外还有 `scale` 参数可用于增加（scale>1）或降低（scale < 1） 分辨率。
+
+```py
+img_bytes = fig.to_image(format="png", width=600, height=350, scale=2)
+Image(img_bytes)
+```
+
+## 总结
+
+总之，从 plotly.py 导出高质量的图片需要安装 orca, psutil 和 request，然后用 `plotly.io.write_image` 和 `plotly.io.to_image` 函数（或图对象的 `write_image` 和 `.to_image` 方法）。
