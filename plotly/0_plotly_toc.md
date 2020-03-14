@@ -6,8 +6,9 @@
 - [Plotly Express](4_express.md)
 - [图形导出](5_output.md)
 - [主题和模板](6_theme_template.md)
-- [自定义选项]
+- 自定义选项
   - [标题](11_title.md)
+  - [Legend](13_legend.md)
 - 图表
   - [Bar Chart](chart_bar.md)
 

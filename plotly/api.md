@@ -4,6 +4,7 @@
   - [Figure](#figure)
     - [参数](#%e5%8f%82%e6%95%b0)
   - [Layout](#layout)
+    - [showlegend](#showlegend)
   - [属性](#%e5%b1%9e%e6%80%a7)
     - [name](#name)
 
@@ -14,8 +15,19 @@
 ## Layout
 
 
-
 `title_text`, 标题文本。
+
+### showlegend
+
+parent: `layout`
+
+Type: boolean
+
+是否显示 legend。如果有一个 trace，并满足如下任意条件，默认为 `True`:
+
+- 包含两个或多个 trace
+- 有 pie trace
+- 显式设置 `showlegend:True`
 
 ## 属性
 
