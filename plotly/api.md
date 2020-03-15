@@ -14,7 +14,6 @@
 
 ## Layout
 
-
 `title_text`, 标题文本。
 
 ### showlegend
