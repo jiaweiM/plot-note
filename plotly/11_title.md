@@ -8,6 +8,8 @@
 
 关于设置字体、标题、Legend 以及 Axis 标题。
 
+使用 `update_layout(title="plot title")` 设置标题。
+
 ```py
 import plotly.graph_objects as go
 

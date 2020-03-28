@@ -15,7 +15,7 @@
   - [参考](#%e5%8f%82%e8%80%83)
     - [marker](#marker)
       - [cmin](#cmin)
-      - [line](#line)
+      - [marker.line](#markerline)
     - [textfont](#textfont)
     - [error_x](#errorx)
     - [error_y](#errory)
@@ -24,6 +24,7 @@
     - [unselected](#unselected)
     - [fill](#fill)
     - [mode](#mode)
+    - [line](#line)
 
 ***
 
@@ -307,6 +308,16 @@ fig.show()
 
 ## 参考
 
+- connectgaps
+
+`data[type=scatter]`
+
+Type: boolean
+
+是否连接 gaps (如 Nan 值，缺失值)。
+
+如果不连接，确实值会时线图前后断开。
+
 - text
 
 `data[type=scatter]`
@@ -347,7 +358,7 @@ Type: number or array of numbers。
 
 `data[type=scatter].marker`
 
-#### line
+#### marker.line
 
 Parent: `data[type=scatter].marker`
 
@@ -415,3 +426,39 @@ Type: "lines", "markers", "text" 用 `"+"` 进行任意组合，或者为 "none"
 - 如果 `mode` 包含 "text"，则 `text` 添加到对应位置，否则以 hover 形式显示。
 - 如果数据点小于20，trace 没有堆叠，则默认为 "lines+markers"
 - 否则为 "lines".
+
+### line
+
+`data[type=scatter]`
+
+包含如下键值属性的字典。
+
+- color
+
+线条颜色。
+
+- width
+
+Type: >=0 的数值。
+
+线条宽度（px），默认 2。
+
+- dash
+
+设置线条的虚线样式。默认 "solid"，即实线。
+
+{"solid", "dot", "dash", "longdash", "dashdot", "longdashdot}
+
+"dash" 表示虚线，"dot" 表示点。
+
+或者 dash 长度列表，如 "5px,10px,2px,2px"。
+
+- shape
+
+{"linear", "spline", "hv", "vh", "hvh", "vhv"}
+
+线条的样式，默认为 "linear"，即直线。
+
+"spline" 表示样条线；"hv" 表示水平垂直线；"hvh" 水平、垂直、水平线。
+
+![line](images/2020-03-28-15-04-52.png)

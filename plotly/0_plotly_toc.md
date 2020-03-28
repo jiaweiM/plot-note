@@ -12,6 +12,7 @@
 - 图表
   - [Bar Chart](chart_bar.md)
   - [Scatter](chart_scatter.md)
+  - [Line Chart](chart_line.md)
 
 ## References
 
