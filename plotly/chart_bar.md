@@ -2,6 +2,29 @@
 
 - [Bar chart](#bar-chart)
   - [简介](#%e7%ae%80%e4%bb%8b)
+  - [Express API](#express-api)
+    - [PX 垂直 Bar Chart](#px-%e5%9e%82%e7%9b%b4-bar-chart)
+    - [PX 水平 Bar Chart](#px-%e6%b0%b4%e5%b9%b3-bar-chart)
+    - [个性化](#%e4%b8%aa%e6%80%a7%e5%8c%96)
+    - [Facetted subplots](#facetted-subplots)
+    - [配置水平 bar chart](#%e9%85%8d%e7%bd%ae%e6%b0%b4%e5%b9%b3-bar-chart)
+  - [plotly.graph_objects API](#plotlygraphobjects-api)
+    - [go 垂直 Bar Chart](#go-%e5%9e%82%e7%9b%b4-bar-chart)
+    - [go 水平 Bar Chart](#go-%e6%b0%b4%e5%b9%b3-bar-chart)
+  - [barmode](#barmode)
+    - [Grouped Bar Chart](#grouped-bar-chart)
+    - [Stacked Bar Chart](#stacked-bar-chart)
+  - [Hover Text](#hover-text)
+  - [Direct Labels](#direct-labels)
+  - [uniformtext](#uniformtext)
+  - [旋转坐标轴标签](#%e6%97%8b%e8%bd%ac%e5%9d%90%e6%a0%87%e8%bd%b4%e6%a0%87%e7%ad%be)
+  - [设置单个 Bar 颜色](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e9%a2%9c%e8%89%b2)
+  - [设置单个 bar 宽度](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e5%ae%bd%e5%ba%a6)
+  - [设置初始值](#%e8%ae%be%e7%bd%ae%e5%88%9d%e5%a7%8b%e5%80%bc)
+  - [颜色样式](#%e9%a2%9c%e8%89%b2%e6%a0%b7%e5%bc%8f)
+  - [Relative Barmode](#relative-barmode)
+  - [排序](#%e6%8e%92%e5%ba%8f)
+  - [参考](#%e5%8f%82%e8%80%83)
     - [`data[type=bar]` 参数](#datatypebar-%e5%8f%82%e6%95%b0)
     - [marker](#marker)
       - [line](#line)
@@ -13,104 +36,16 @@
     - [error_x](#errorx)
     - [error_y](#errory)
     - [meta](#meta)
-  - [Express API](#express-api)
-    - [PX 垂直 Bar Chart](#px-%e5%9e%82%e7%9b%b4-bar-chart)
-    - [PX 水平 Bar Chart](#px-%e6%b0%b4%e5%b9%b3-bar-chart)
-    - [个性化](#%e4%b8%aa%e6%80%a7%e5%8c%96)
-    - [Facetted subplots](#facetted-subplots)
-    - [配置水平 bar chart](#%e9%85%8d%e7%bd%ae%e6%b0%b4%e5%b9%b3-bar-chart)
-  - [plotly.graph_objects API](#plotlygraphobjects-api)
-    - [GO 垂直 Bar Chart](#go-%e5%9e%82%e7%9b%b4-bar-chart)
-    - [GO 水平 Bar Chart](#go-%e6%b0%b4%e5%b9%b3-bar-chart)
-    - [Grouped Bar Chart](#grouped-bar-chart)
-    - [GO Stacked Bar Chart](#go-stacked-bar-chart)
-      - [垂直 Stacked Bar Chart](#%e5%9e%82%e7%9b%b4-stacked-bar-chart)
-      - [水平 Stacked Bar Chart](#%e6%b0%b4%e5%b9%b3-stacked-bar-chart)
-  - [Bar Chart with Hover Text](#bar-chart-with-hover-text)
-  - [Bar Chart with Direct Labels](#bar-chart-with-direct-labels)
-  - [uniformtext](#uniformtext)
-  - [旋转坐标轴标签](#%e6%97%8b%e8%bd%ac%e5%9d%90%e6%a0%87%e8%bd%b4%e6%a0%87%e7%ad%be)
-  - [设置单个 Bar 颜色](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e9%a2%9c%e8%89%b2)
-  - [设置单个 bar 宽度](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e5%ae%bd%e5%ba%a6)
-  - [设置初始值](#%e8%ae%be%e7%bd%ae%e5%88%9d%e5%a7%8b%e5%80%bc)
-  - [颜色样式](#%e9%a2%9c%e8%89%b2%e6%a0%b7%e5%bc%8f)
-  - [Relative Barmode](#relative-barmode)
-  - [排序](#%e6%8e%92%e5%ba%8f)
 
 ## 简介
 
 Plotly 中条形图用 [`plotly.graph_objects.Bar`](https://plot.ly/python/reference/#bar) 表示。
 
-### `data[type=bar]` 参数
-
-1. `orientation`
-    - 'v' 垂直条形图，默认值
-    - 'h' 水平条形图
-2. `name`
-
-trace 名称。在legend 以及鼠标在数据上悬停时显示。
-
-3. `visible`
-   - True，绘制 trace
-   - False，不绘制 trace
-   - "legendonly"，不绘制 trace，但 legend 可见
-
-yongyu shehzi  trace 是否可见。
-
-4. `showlegend`
-    - default `True`
-
-该 trace 的 legend 是否可见。
-
-5. `x`
-
-list, numpy array 或 Pandas series of numbers, strings or datetimes.
-
-设置 x 坐标。
-
-### marker
-
-包含下面列出的一个或多个键值的字典。
-
-#### line
-
-parent: `data[type=bar].marker`
-
-#### color
-
-#### cauto
-
-#### cmin
-
-### textangle
-
-parent `data[type=bar]`
-
-### textfont
-
-parent: `data[type=bar]`
-
-### error_x
-
-parent: `data[type=bar]`
-
-### error_y
-
-parent: `data[type=bar]`
-
-### meta
-
-Parent: `data[type=bar]`
-
-Type: number of categorical coordindate string
-
-此 trace 关于文本属性的额外信息。
-
 ## Express API
 
 ### PX 垂直 Bar Chart
 
-使用 `px.bar` 方法，`DataFrame` 的每一行用一个矩形表示。例如：
+使用 `px.bar` 创建条形图，`DataFrame` 的每一行用一个矩形表示。例如：
 
 ```py
 import plotly.express as px
@@ -215,7 +150,7 @@ fig.show()
 
 `plotly.graph_objects` 中的 `go.Bar` 函数更为通用，[API 参考](https://plot.ly/python/reference/#bar)。
 
-### GO 垂直 Bar Chart
+### go 垂直 Bar Chart
 
 ```py
 import plotly.graph_objects as go
@@ -227,7 +162,7 @@ fig.show()
 
 ![bar](images/2020-03-13-21-28-04.png)
 
-### GO 水平 Bar Chart
+### go 水平 Bar Chart
 
 ```py
 import plotly.graph_objects as go
@@ -242,9 +177,24 @@ fig.show()
 
 ![bar](images/2020-03-14-09-52-05.png)
 
+## barmode
+
+Parent: `layout`
+
+Type: ("stack" | "group" | "overlay" | "relative")
+
+默认："group"
+
+设置在相同位置的 bars 显示方式。
+
+- `"stack"`，bars 堆叠在一起。
+- `"relative"`, bars 堆叠在一起，但负值放在下面，正值放在上面。
+- `"group"`，bars 以显示位置为中心并排显示。
+- `"overlay"`，bars 重叠显示，对该情况，为了看到后面的 bars，需要设置透明度。
+
 ### Grouped Bar Chart
 
-使用 `fig.update` 自定义 figure。
+将 `barmode` 设置为 "group" 实现分组 bar chart。例如：
 
 ```py
 import plotly.graph_objects as go
@@ -262,9 +212,9 @@ fig.show()
 
 ![group bar](images/2020-03-13-21-32-53.png)
 
-### GO Stacked Bar Chart
+### Stacked Bar Chart
 
-#### 垂直 Stacked Bar Chart
+将 `barmode` 设置为 "stack" 实现堆叠 bar chart。
 
 ```py
 import plotly.graph_objects as go
@@ -282,13 +232,9 @@ fig.show()
 
 ![stacked barchart](images/2020-03-13-21-34-51.png)
 
-#### 水平 Stacked Bar Chart
+## Hover Text
 
-
-
-## Bar Chart with Hover Text
-
-即将鼠标放在图上弹出来的提示文字。
+将鼠标放在图上弹出来的提示文字称为 hover text。
 
 ```py
 import plotly.graph_objects as go
@@ -308,7 +254,7 @@ fig.show()
 
 ![hover text](images/2020-03-13-21-41-49.png)
 
-## Bar Chart with Direct Labels
+## Direct Labels
 
 即在条形图上显示标签。
 
@@ -565,3 +511,70 @@ fig.show()
 ```
 
 ![descending](images/2020-03-14-09-39-40.png)
+
+## 参考
+
+### `data[type=bar]` 参数
+
+1. `orientation`
+    - 'v' 垂直条形图，默认值
+    - 'h' 水平条形图
+2. `name`
+
+trace 名称。在legend 以及鼠标在数据上悬停时显示。
+
+3. `visible`
+   - True，绘制 trace
+   - False，不绘制 trace
+   - "legendonly"，不绘制 trace，但 legend 可见
+
+yongyu shehzi  trace 是否可见。
+
+4. `showlegend`
+    - default `True`
+
+该 trace 的 legend 是否可见。
+
+5. `x`
+
+list, numpy array 或 Pandas series of numbers, strings or datetimes.
+
+设置 x 坐标。
+
+### marker
+
+包含下面列出的一个或多个键值的字典。
+
+#### line
+
+parent: `data[type=bar].marker`
+
+#### color
+
+#### cauto
+
+#### cmin
+
+### textangle
+
+parent `data[type=bar]`
+
+### textfont
+
+parent: `data[type=bar]`
+
+### error_x
+
+parent: `data[type=bar]`
+
+### error_y
+
+parent: `data[type=bar]`
+
+### meta
+
+Parent: `data[type=bar]`
+
+Type: number of categorical coordindate string
+
+此 trace 关于文本属性的额外信息。

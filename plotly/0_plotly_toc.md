@@ -11,7 +11,9 @@
   - [Legend](13_legend.md)
 - 图表
   - [Bar Chart](chart_bar.md)
+  - [Scatter](chart_scatter.md)
 
 ## References
 
 - [plotly](https://plot.ly/python/getting-started/)
+- [plotly python](https://plotly.com/python/)
