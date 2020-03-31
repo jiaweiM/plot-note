@@ -514,6 +514,42 @@ fig.show()
 
 ## 参考
 
+- textposition
+
+`data[type=bar]`
+
+{"inside", "outside", "auto", "none"}
+
+默认 "none"。
+
+指定 `text` 的位置。
+
+"inside" 将 `text` 放在 bar 里面，和 bar 的末端挨着，如果需要，对文本进行旋转和缩放。
+
+"outside" 将 `text` 放在 bar 外面，和 bar 末端挨着，如果需要，对文本其进行缩放。如果有其它的 bar 堆叠在上面， `text` 会被压入 "inside"。
+
+"auto" 首先尝试将 `text` 放在里面，如果里面位置太小，外面也没有其它的 bar 堆叠，则将 `text` 移到外面。
+
+- texttemplate
+
+`data[type=bar]`
+
+Type: string or array of string.
+
+Default: "".
+
+template 字符串用于渲染数据点上的注释文本信息。
+
+**该参数会覆盖 `textinfo`**。
+
+通过 `%{variable}` 插入变量。例如 `y: %{y}`。
+
+数值通过 d3 格式化语法进行格式化，`%{variable:d3-format}`，例如 `Price: %{y:$.2f}`，详细信息可以参考 [d3 文档](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format)。
+
+日期通过 d3-time-format 语法 `%{variable|d3-time-format}`，例如 `Day: %{2019-01-01|%A}`，详细参考 [d3 文档](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format)
+
+
+
 ### `data[type=bar]` 参数
 
 1. `orientation`

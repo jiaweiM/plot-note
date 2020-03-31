@@ -13,7 +13,9 @@
 | [The Python Graph Gallery](https://python-graph-gallery.com/) | Python 绘图集合                  |
 | [Seaborn](http://seaborn.pydata.org/index.html)               | Python 绘图工具包                |
 | [The R Graph Gallery](https://www.r-graph-gallery.com)        | R绘图集合                        |
+| [from Data to Viz](https://www.data-to-viz.com/)              | 数据和绘图类型总结               |
 | [pyEcharts](https://pyecharts.org/#/zh-cn/intro)              | 百度开源的 Echarts 的Python 版本 |
+| [dtavizcatalogue](https://datavizcatalogue.com/ZH/)           | 各种可视化总结                   |
 
 ## 软件包
 

@@ -334,6 +334,16 @@ Default: ""
 
 如果 `hoverinfo` 包含一个 `text` flag，并且没有设置 "hovertext"，则这些文本会出现在 hover 标签中。
 
+- textposition
+
+`data[type=scatter]`
+
+设置 `text` 相对数据点的位置。
+
+{"top left", "top center", "top right", "middle left", "middle center", "middle right", "bottom left", "bottom center", "bottom right"}
+
+默认 "middle center".
+
 - x
 
 `data[type=scatter]`
