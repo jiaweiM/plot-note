@@ -15,3 +15,8 @@
 条形图和[直方图](histogram.md)不同，条形图不会显示连续变化，而是显示各个类别有多少值。
 
 条形图的一个缺点是，当有大量的类别时，拥挤在一起难以标记数据。
+
+## 工具
+
+- [d3](http://bl.ocks.org/mbostock/3885304)
+- [matplotlib](https://python-graph-gallery.com/barplot/)

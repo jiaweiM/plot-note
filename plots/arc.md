@@ -26,8 +26,6 @@
 
 弧线图一个变体是，如果连接强烈（如权重高，连接数目多），连线越粗。即 `weighted network`。
 
-
-
 ## 绘制工具
 
 - [d3.js](http://bl.ocks.org/sjengle/5431779)
