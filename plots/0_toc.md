@@ -9,7 +9,8 @@
 - [散点图 - Scatter Plot](scatter_plot.md)
 - [烛台图 - Candlestick Chart](candlestick.md)
 - [密度图 - Density Plot](density_plot.md)
-
+- [误差线 - Error Bars](error_bar.md)
+- [直方图 - Histogram](histogram.md)
 
 
 
@@ -24,7 +25,7 @@
 
 ## Distribution
 
-
+- [小提琴](violin.md)
 
 ## Numeric
 

@@ -4,6 +4,7 @@
   - [简介](#%e7%ae%80%e4%bb%8b)
   - [A single import, with built-in datasets](#a-single-import-with-built-in-datasets)
   - [Scatter and Line plots](#scatter-and-line-plots)
+  - [设置样式](#%e8%ae%be%e7%bd%ae%e6%a0%b7%e5%bc%8f)
 
 ## 简介
 
@@ -199,3 +200,5 @@ fig.show()
 ```
 
 ![area](images/2020-03-12-11-42-56.png)
+
+## 设置样式
