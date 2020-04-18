@@ -8,6 +8,7 @@
 - [主题和模板](6_theme_template.md)
 - 自定义选项
   - [标题](11_title.md)
+  - [坐标轴](12_axes.md)
   - [Legend](13_legend.md)
 - 图表
   - [Bar Chart](chart_bar.md)

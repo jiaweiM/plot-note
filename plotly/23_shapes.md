@@ -11,6 +11,9 @@
   - [SVG Paths](#svg-paths)
   - [API 参考](#api-%e5%8f%82%e8%80%83)
 
+2020-04-18, 15:55
+***
+
 ## 简介
 
 下面演示如何使用 plotly python 创建 SVG 形状。
@@ -19,21 +22,21 @@
 
 创建填充图的方法有两种：scatter traces 和 `layout.shapes`。
 
-`layout.shapes` 对创建 2d 图形很有用，它可用于创建各种形状，包括矩形、萧条、圆形以及自定义 SVG 路径等。
+`layout.shapes` 用于创建 2d 图形，支持的形状包括矩形、线条、圆形以及自定义 SVG 路径等。
 
-也可以使用 `scatterpolar`, `scattergeo`, `scattermapbox` 在任意子图上绘制填充图。
+也可以使用 `scatterpolar`, `scattergeo`, `scattermapbox` 在任意subplot上绘制填充图。
 
 - 设置 scatter 的颜色，需要设置 `scatter.fill="toself"`，以将 trace 连接为闭合形状。
 
-如果 `mode=line`（默认值），则需要重复形状数据的初始值以闭合形状。例如：
+如果 `mode=line`（默认值），则需要在末尾添加状数据的初始值以闭合形状。例如：
 
 ```py
 import plotly.graph_objects as go
 
 fig = go.Figure(
     go.Scatter(
-        x=[0, 1, 2, 0],
-        y=[0, 2, 0, 0],
+        x=[0, 1, 2, 0], # 最后一个数据和第一个相同
+        y=[0, 2, 0, 0], # 最后一个数据和第一个相同
         fill='toself'
     )
 )
@@ -42,7 +45,7 @@ fig.show()
 
 ![scatter](images/2020-03-26-16-09-28.png)
 
-上面重复的初始值，所以三角形下面也有条线。
+上面重复了初始值，所以三角形下面有条线。
 
 - 添加多个形状，除了添加更多 traces，还可以通过 `None` 分隔两个形状的数据
 
@@ -72,8 +75,6 @@ fig.show()
 ![line](images/2020-03-26-16-21-41.png)
 
 ## 圆圈突出显示散点集
-
-
 
 ## Venn Diagram
 

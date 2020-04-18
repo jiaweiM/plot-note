@@ -3,6 +3,7 @@
 - [Venn diagram](#venn-diagram)
   - [简介](#%e7%ae%80%e4%bb%8b)
   - [matplotlib-venn](#matplotlib-venn)
+  - [References](#references)
 
 ## 简介
 
@@ -31,3 +32,9 @@ venn2([set(['A', 'B', 'C', 'D']), set(['D', 'E', 'F'])])
 类似的，`venn3` 和 `venn3_circles` 的 `subsets` 对应 7 个子集的大小 `(Abc, aBc, ABc, abC, AbC, aBC, ABC)`，绘制三个圆，面积和数目等比。类似的，也可以提供 `set` 对象作为参数。
 
 `venn2_circles` 和 `venn3_circles` 只绘制圆圈，`venn2` 和 `venn3` 则绘制带颜色和文本标签的图形。
+
+## References
+
+- [维恩图和花瓣图](http://wap.sciencenet.cn/blog-3406804-1159241.html)
+- [VennDiagram](https://www.jianshu.com/p/285b4ac66768)
+- [python-graph-gallery](https://python-graph-gallery.com/venn-diagram/)
