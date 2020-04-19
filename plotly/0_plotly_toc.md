@@ -1,5 +1,10 @@
 # plotly
 
+2020-04-18, 21:18
+***
+
+## 学习笔记
+
 - [简介](1_intro.md)
 - [图形显示](2_display.md)
 - [创建图表](3_create.md)
@@ -14,6 +19,8 @@
   - [Bar Chart](chart_bar.md)
   - [Scatter](chart_scatter.md)
   - [Line Chart](chart_line.md)
+- 属性参考
+  - [Layout](layout_ref.md)
 
 ## References
 

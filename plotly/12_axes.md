@@ -33,6 +33,8 @@
   - [坐标轴尺寸](#%e5%9d%90%e6%a0%87%e8%bd%b4%e5%b0%ba%e5%af%b8)
     - [坐标轴范围](#%e5%9d%90%e6%a0%87%e8%bd%b4%e8%8c%83%e5%9b%b4)
     - [固定比例](#%e5%9b%ba%e5%ae%9a%e6%af%94%e4%be%8b)
+  - [xaxis](#xaxis)
+    - [visible](#visible)
   - [References](#references)
 
 2020-04-18, 16:18
@@ -638,6 +640,20 @@ fig.show()
 ```
 
 ![scatter](images/2020-04-18-20-02-18.png)
+
+## xaxis
+
+`layout`
+
+### visible
+
+`layout.xaxis`
+
+Type: boolean
+
+隐藏坐标轴。
+
+当 axis 上有 cheater plot，默认为 True，否则默认为 False。
 
 ## References
 

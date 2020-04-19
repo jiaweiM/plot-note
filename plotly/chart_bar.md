@@ -37,6 +37,9 @@
     - [error_y](#errory)
     - [meta](#meta)
 
+2020-04-19, 09:43
+***
+
 ## 简介
 
 Plotly 中条形图用 [`plotly.graph_objects.Bar`](https://plot.ly/python/reference/#bar) 表示。
@@ -579,11 +582,21 @@ list, numpy array 或 Pandas series of numbers, strings or datetimes.
 
 ### marker
 
+`data[type=bar].marker`
+
 包含下面列出的一个或多个键值的字典。
 
 #### line
 
-parent: `data[type=bar].marker`
+`data[type=bar].marker.line`
+
+- coloraxis
+
+Type: subplotid.
+
+对共享颜色轴的引用。如 "coloraxis", "coloraxis2", "coloraxis3"等。
+
+在 layout 中设置对共享颜色轴，如 `layout.coloraxis`, `layout.coloraxis2`等。
 
 #### color
 
