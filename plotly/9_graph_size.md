@@ -6,7 +6,7 @@
   - [自动调整边距](#%e8%87%aa%e5%8a%a8%e8%b0%83%e6%95%b4%e8%be%b9%e8%b7%9d)
 
 2020-04-18, 20:12
-*** *
+*** **
 
 ## Height, Width, Margin with Express
 
@@ -19,7 +19,7 @@ fig = px.scatter(df, x="total_bill", y="tip", facet_col="sex",
 
 fig.update_layout(
     margin=dict(l=20, r=20, t=20, b=20),
-    paper_bgcolor="LightSteelBlue",
+    paper_bgcolor="LightSteelBlue", # 纸张颜色，即整个绘图面板颜色
 )
 
 fig.show()
@@ -60,7 +60,7 @@ fig.show()
 
 ## 自动调整边距
 
-设置 `automargin=True` 可以自动调整边距，以避免刻度标签截断或和轴标题重叠。
+设置 `automargin=True` 可以自动调整边距，以避免刻度标签被截断或与轴标题重叠。
 
 ```py
 import plotly.graph_objects as go

@@ -13,6 +13,11 @@
     - [autosize](#autosize)
     - [width](#width)
     - [height](#height)
+  - [Color](#color)
+    - [paper_bgcolor](#paperbgcolor)
+    - [plot_bgcolor](#plotbgcolor)
+    - [colorscale](#colorscale)
+      - [sequential](#sequential)
 
 2020-04-18, 20:17
 ***
@@ -33,11 +38,17 @@ Type: boolean
 
 `layout.title`
 
-标题相关属性。
+标题相关属性 dict。
 
 | 属性   | 类型   | 说明     |
 | ------ | ------ | -------- |
 | `text` | string | 标题文本 |
+
+例如：
+
+```py
+layout=dict(title=dict(text="A Bar Chart"))
+```
 
 ### font
 
@@ -85,14 +96,34 @@ Type: boolean
 
 `layout.margin`
 
-| 键    | 默认值 | 说明                     |
-| ----- | ------ | ------------------------ |
-| `l`   | 80 px  | 左边距                   |
-| `r`   | 80 px  | 右边距                   |
-| `t`   | 100 px | 上边距                   |
-| `b`   | 80 px  | 下边距                   |
-| `pad` | 0 px   | 绘图区域和轴线之间的距离 |
-|`autoexpand`|True|开启边距扩展计算。legend, colorbar, updatemenus, slider, axis rangeselector and rangeslider 默认运行增加边距|
+margin 是外边距，即轴线到页面边框之间的距离。
+
+| 键  | 默认值 | 说明   |
+| --- | ------ | ------ |
+| `l` | 80 px  | 左边距 |
+| `r` | 80 px  | 右边距 |
+| `t` | 100 px | 上边距 |
+| `b` | 80 px  | 下边距 |
+
+- `pad`
+
+绘图区域和轴线之间的距离。默认 0px。
+
+下图是 margin 均为 50px，关闭 `autoexpand`，不同 pad 的效果。
+
+|0|45|50|
+|---|---|---|
+|![pad0](images/2020-04-19-22-34-02.png)|![pad45](images/2020-04-19-22-38-40.png)|![pad50](images/2020-04-19-22-35-34.png)|
+
+`pad=50` 时，由于 pad 值和 margin 相同，所以绘图区域扩展到整个绘图纸张。
+
+`pad=45` 时，绘图区域外剩余 5px，不足以容纳刻度标签，左侧可以看到部分刻度标签。
+
+- `autoexpand`
+
+默认 True.
+
+开启边距扩展计算。legend, colorbar, updatemenus, slider, axis rangeselector and rangeslider 默认运行增加边距
 
 ## Size
 
@@ -121,3 +152,28 @@ plot 宽度，默认 700 px。
 plot 高度，默认 450 px.
 
 至少为 10 px。
+
+## Color
+
+### paper_bgcolor
+
+`layout`
+
+默认 "#fff"
+
+设置绘制图形纸张的背景颜色。
+
+### plot_bgcolor
+
+`layout`
+
+默认 "#fff"
+
+x 和 y 轴之间绘图区域的背景色。
+
+### colorscale
+
+`layout`
+
+#### sequential
+

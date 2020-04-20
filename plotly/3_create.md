@@ -1,7 +1,7 @@
 # Creating and Updating Figures
 
 - [Creating and Updating Figures](#creating-and-updating-figures)
-  - [图的表示方式](#%e5%9b%be%e7%9a%84%e8%a1%a8%e7%a4%ba%e6%96%b9%e5%bc%8f)
+  - [图的表达方式](#%e5%9b%be%e7%9a%84%e8%a1%a8%e8%be%be%e6%96%b9%e5%bc%8f)
     - [字典](#%e5%ad%97%e5%85%b8)
     - [图形对象](#%e5%9b%be%e5%bd%a2%e5%af%b9%e8%b1%a1)
   - [创建图形](#%e5%88%9b%e5%bb%ba%e5%9b%be%e5%bd%a2)
@@ -23,7 +23,12 @@
     - [链式操作（Chaining figure operations）](#%e9%93%be%e5%bc%8f%e6%93%8d%e4%bd%9cchaining-figure-operations)
     - [属性赋值（Property assignment）](#%e5%b1%9e%e6%80%a7%e8%b5%8b%e5%80%bcproperty-assignment)
 
-## 图的表示方式
+2020-04-19, 22:51
+*** *
+
+## 图的表达方式
+
+plotly.py 主要用于为 plotly.js JavaScript 库提供Python接口。在 Plotly.js 中，图形是由声明式的 JSON 数据结构指定，所以 plotly.py 需要提供 Python 字典形式的数据，以方便序列化为 JSON 数据结构。
 
 NOTE: plotly 将单个图形，如条形图、散点图等，称为 trace。
 
@@ -33,8 +38,6 @@ NOTE: plotly 将单个图形，如条形图、散点图等，称为 trace。
 - layout, 描述 figure 中余下的属性，如 title, xaxis, annotations 等。
 
 ### 字典
-
-plotly.py 主要用于为 plotly.js JavaScript 库提供Python接口。在 Plotly.js 中，图形是由声明式的 JSON 数据结构指定，所以 plotly.py 需要提供 Python 字典形式的数据，以方便序列化为 JSON 数据结构。
 
 下面是一个简单的例子，[用包含一个 bar 和标题的字典表示图](../src/plotly_test/create_dict_data.py)：
 
@@ -51,16 +54,23 @@ import plotly.io as pio
 pio.show(fig)
 ```
 
-可以发现，整个字典都是按照类似于 JSON 的数据结构进行组织。效果：
+可以发现，整个字典都是按照类似 JSON 的数据结构进行组织。效果：
 
 ![json plot](images/2020-03-11-18-27-49.png)
 
-顶层 "data" 包含图数据值的列表：
+1. `"data"`
 
-- `type` 指定图类型，如 "bar", "scatter", "contour" 等
+顶层 "data" 包含 figure 对应 trace 的数据值列表，如何所示，即使只有一个 trace 也是列表：
+
+- `'data'` 中的每个元素对应一个 dict
+- `type` 指定图表类型，如 "bar", "scatter", "contour" 等
 - 余下用于各种配置
 
-顶层 "layout" 用于指定图布局的字典，相对于 trace 配置应用于特定图，layout 配置作用于整个 figure，用于自定义坐标轴、注释、形状、图例等。
+2. `layout`
+
+顶层 "layout" 用于指定图布局的dict，相对于 trace 配置应用于特定图，layout 配置作用于整个 figure，用于自定义坐标轴、注释、形状、图例等。
+
+使用 dict 构建 figure 是一种完全有效的方法。
 
 ### 图形对象
 
@@ -68,8 +78,8 @@ pio.show(fig)
 
 - Graph 对象提供了数据验证功能。如果提供了无效的属性名称或值，可以看到有用的错误信息。
 - Graph 对象的 Python 文档包含对每个属性的说明。可以参看这些文档而不用专门去 plotly 官网查询参考。
-- Graph 对象属性可以通过键查找（如 `fig["layout"]`），或者访问对象式的方式（`fig.layout`）。
-- Graph 对象的高级API可以方便的已创建的图。
+- Graph 对象属性可以通过键查找（如 `fig["layout"]`），也可以通过访问对象式的方式（`fig.layout`）。
+- Graph 对象的高级API可以方便的更新已创建的图。
 
 Graph 对象以树形结构保存在 `plotly.graph_objects` 包中。下面用对象方式创建上例的图：
 
@@ -110,7 +120,7 @@ fig.show()
 
 ### 构造函数
 
-如上所示，可以将图形所需的数据和配置传递给 `plotly.graph_objects.Figure` 构造函数创建图形。
+如上所示，可以将图形所需的数据和 layout 配置传递给 `plotly.graph_objects.Figure` 构造函数创建图形。
 
 其中 trace 和 layout 可以是字典或 graph 对象。上面采用字典，这里采用图形对象指定 trace，layout 依然用字典：
 
@@ -179,7 +189,7 @@ fig.show()
 
 ### 添加 trace（Adding trace）
 
-可以使用 `add_trace` 方法添加 trace 到 figure 中。该方法接受graph 对象作为参数，如 `go.Scatter`, `go.Bar` 等的实例。
+可以使用 `add_trace` 方法添加 trace 到 figure 中。该方法接受 graph 对象作为参数，如 `go.Scatter`, `go.Bar` 等实例。
 
 例如，下面先创建一个空的 figure，然后添加 trace：
 
@@ -192,10 +202,9 @@ fig.show()
 
 ![add trace](images/2020-03-11-19-52-03.png)
 
-或者添加 trace 到 figure 工厂或 plotly express 创建的 figure：
+也添加 trace 到 figure 工厂或 plotly express 创建的 figure：
 
 ```py
-iris = px.data.iris()
 fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species")
 fig.add_trace(
     go.Scatter(
@@ -212,7 +221,7 @@ fig.show()
 
 ### 添加 trace 到 subplots
 
-如果 figure 是使用 `plotly.subplots.make_subplots` 创建的，则调用 `add_trace` 时可以指定 `row` 和 `col` 参数。
+如果使用 `plotly.subplots.make_subplots` 创建 figure，则调用 `add_trace` 时需要指定 `row` 和 `col` 参数。
 
 ```py
 from plotly.subplots import make_subplots

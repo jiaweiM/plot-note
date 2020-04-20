@@ -26,6 +26,8 @@
   - [排序](#%e6%8e%92%e5%ba%8f)
   - [参考](#%e5%8f%82%e8%80%83)
     - [`data[type=bar]` 参数](#datatypebar-%e5%8f%82%e6%95%b0)
+    - [`x`](#x)
+    - [`y`](#y)
     - [marker](#marker)
       - [line](#line)
       - [color](#color)
@@ -551,8 +553,6 @@ template 字符串用于渲染数据点上的注释文本信息。
 
 日期通过 d3-time-format 语法 `%{variable|d3-time-format}`，例如 `Day: %{2019-01-01|%A}`，详细参考 [d3 文档](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format)
 
-
-
 ### `data[type=bar]` 参数
 
 1. `orientation`
@@ -574,11 +574,33 @@ yongyu shehzi  trace 是否可见。
 
 该 trace 的 legend 是否可见。
 
-5. `x`
+### `x`
+
+`data[type=bar]`
 
 list, numpy array 或 Pandas series of numbers, strings or datetimes.
 
 设置 x 坐标。
+
+例如：
+
+```py
+go.Bar(x=[1, 2, 3], y=[1, 3, 2])
+```
+
+或者：
+
+```json
+'data': [{'x': [1, 2, 3], 'y': [1, 3, 2], 'type': 'bar'}]
+```
+
+### `y`
+
+`data[type=bar]`
+
+设置 y 坐标。
+
+使用方式同 x。
 
 ### marker
 

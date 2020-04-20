@@ -35,6 +35,8 @@
     - [固定比例](#%e5%9b%ba%e5%ae%9a%e6%af%94%e4%be%8b)
   - [xaxis](#xaxis)
     - [visible](#visible)
+  - [yaxis](#yaxis)
+    - [`automargin`](#automargin)
   - [References](#references)
 
 2020-04-18, 16:18
@@ -654,6 +656,18 @@ Type: boolean
 隐藏坐标轴。
 
 当 axis 上有 cheater plot，默认为 True，否则默认为 False。
+
+## yaxis
+
+### `automargin`
+
+`layout.yaxis`
+
+Type: boolean
+
+刻度标签很长时，是否自动增加 margins 以容纳标签。
+
+这间接说明刻度标签放在 margin 区域。
 
 ## References
 

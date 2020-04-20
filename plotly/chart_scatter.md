@@ -23,9 +23,16 @@
     - [selected](#selected)
     - [unselected](#unselected)
     - [fill](#fill)
-    - [mode](#mode)
-    - [line](#line)
+    - [`mode`](#mode)
+    - [`line`](#line)
+      - [color](#color)
+      - [width](#width)
+      - [dash](#dash)
+      - [shape](#shape)
+      - [smoothing](#smoothing)
+      - [simplify](#simplify)
 
+2020-04-20, 09:38
 ***
 
 ## Scatter plot with PX
@@ -423,13 +430,19 @@ fill between the endpoints of this trace and the endpoints of the trace before i
 如果一个 trace 没有包含另一个 trace，不要用 "tonext"。
 Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order.
 
-### mode
+### `mode`
+
+`data[type=scatter]`
 
 设置 scatter trace 的绘制模式。
 
-Parent: `data[type=scatter]`
+可用模式类型:
 
-Type: "lines", "markers", "text" 用 `"+"` 进行任意组合，或者为 "none"。
+- "lines"
+- "markers"
+- "text"
+
+这三种模式可以用 `"+"` 进行任意组合，或者为 "none"。
 
 例如 "lines", "markers", "lines+markers", "lines+markers+text", "none"。
 
@@ -437,23 +450,42 @@ Type: "lines", "markers", "text" 用 `"+"` 进行任意组合，或者为 "none"
 - 如果数据点小于20，trace 没有堆叠，则默认为 "lines+markers"
 - 否则为 "lines".
 
-### line
+例如：
+
+```py
+go.Scatter(
+    x=[2, 4],
+    y=[4, 8],
+    mode="lines",
+    line=go.scatter.Line(color="gray"),
+    showlegend=False)
+```
+
+### `line`
+
+***
 
 `data[type=scatter]`
 
-包含如下键值属性的字典。
+包含如下键值属性的dict。当 scatter 的 `mode="lines"` 时，用于设置 scatter 的线条属性。
 
-- color
+#### color
+
+`data[type=scatter].line`
 
 线条颜色。
 
-- width
+#### width
+
+`data[type=scatter].line`
 
 Type: >=0 的数值。
 
-线条宽度（px），默认 2。
+线条宽度（px），默认 2px。
 
-- dash
+#### dash
+
+`data[type=scatter].line`
 
 设置线条的虚线样式。默认 "solid"，即实线。
 
@@ -463,7 +495,9 @@ Type: >=0 的数值。
 
 或者 dash 长度列表，如 "5px,10px,2px,2px"。
 
-- shape
+#### shape
+
+`data[type=scatter].line`
 
 {"linear", "spline", "hv", "vh", "hvh", "vhv"}
 
@@ -472,3 +506,21 @@ Type: >=0 的数值。
 "spline" 表示样条线；"hv" 表示水平垂直线；"hvh" 水平、垂直、水平线。
 
 ![line](images/2020-03-28-15-04-52.png)
+
+#### smoothing
+
+`data[type=scatter].line`
+
+[0,1.3] 范围内的数字，默认 1.
+
+`shape` 设置为 "spline" 才有效，设置平滑量。
+
+- 0 表示无平滑，等效为 "linear"。
+
+#### simplify
+
+`data[type=scatter].line`
+
+通过删除重合线的点来简化线。默认 True。
+
+在过渡线中，可能需要禁用此功能，以免 SVG 路径受影响。

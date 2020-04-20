@@ -20,6 +20,7 @@
   - [Scatter](chart_scatter.md)
   - [Line Chart](chart_line.md)
 - [多图 Figure](15_subplot.md)
+- [图大小](9_graph_size.md)
 - [形状](23_shapes.md)
 - 属性参考
   - [Layout](layout_ref.md)
