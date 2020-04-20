@@ -13,8 +13,8 @@
   - [数据注释](#%e6%95%b0%e6%8d%ae%e6%b3%a8%e9%87%8a)
   - [填充线图](#%e5%a1%ab%e5%85%85%e7%ba%bf%e5%9b%be)
 
-***
 2020-04-20, 15:23
+*** *
 
 ## 简介
 
@@ -153,7 +153,7 @@ fig.show()
 
 ## Connect Data Gaps
 
-`connectgaps` 属性用于处理数据中的缺失值。
+`connectgaps` 用于设置数据中的缺失值是否以 gap 的形式显示出来。
 
 ```py
 import plotly.graph_objects as go
@@ -333,7 +333,6 @@ fig.show()
 
 ```py
 import plotly.graph_objects as go
-import numpy as np
 
 x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 x_rev = x[::-1]
