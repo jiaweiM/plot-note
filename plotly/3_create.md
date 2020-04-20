@@ -337,7 +337,7 @@ fig.update_layout(
 
 ### update trace
 
-- `update_traces` 方法可以设置 figure 的一个或多个 traces 的多个属性。
+`update_traces` 方法可以设置 figure 的一个或多个 traces 的多个属性。
 
 为了演示该方法，下面使用两个各自包含 bar 和 scatter traces 的两个 subplots 作为例子：
 
@@ -366,7 +366,7 @@ fig.show()
 
 ![update trace](images/2020-03-11-20-08-45.png)
 
-`scatter` 和 `bar` traces 都有 `marker.color` 属性，下面使用 `update_traces` 修改所有 traces 的颜色：
+`scatter` 和 `bar` 都有 `marker.color` 属性，下面使用 `update_traces` 修改所有 traces 的颜色：
 
 ```py
 from plotly.subplots import make_subplots
@@ -388,7 +388,7 @@ fig.add_bar(y=[1, 3, 2],
             marker=dict(color="LightSeaGreen"),
             name="d", row=1, col=2)
 
-fig.update_traces(marker=dict(color="RoyalBlue"))
+fig.update_traces(marker=dict(color="RoyalBlue")) # 修改 marker 颜色
 
 fig.show()
 ```

@@ -19,11 +19,13 @@
   - [Bar Chart](chart_bar.md)
   - [Scatter](chart_scatter.md)
   - [Line Chart](chart_line.md)
+- [WebGL-大规模数据绘图](webgl.md)
 - [多图 Figure](15_subplot.md)
 - [图大小](9_graph_size.md)
 - [形状](23_shapes.md)
 - 属性参考
   - [Layout](layout_ref.md)
+  - [Scatter](ref_scatter.md)
 
 ## References
 

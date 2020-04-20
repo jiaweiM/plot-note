@@ -9,37 +9,18 @@
   - [Line and Scatter Plots](#line-and-scatter-plots)
   - [Bubble Scatter Plots](#bubble-scatter-plots)
   - [个性化设置](#%e4%b8%aa%e6%80%a7%e5%8c%96%e8%ae%be%e7%bd%ae)
-  - [Data Labels on Hover](#data-labels-on-hover)
+  - [悬停文本](#%e6%82%ac%e5%81%9c%e6%96%87%e6%9c%ac)
   - [Color Dimension](#color-dimension)
   - [Large Data Sets](#large-data-sets)
-  - [参考](#%e5%8f%82%e8%80%83)
-    - [marker](#marker)
-      - [cmin](#cmin)
-      - [marker.line](#markerline)
-    - [textfont](#textfont)
-    - [error_x](#errorx)
-    - [error_y](#errory)
-    - [selectedpoints](#selectedpoints)
-    - [selected](#selected)
-    - [unselected](#unselected)
-    - [fill](#fill)
-    - [`mode`](#mode)
-    - [`line`](#line)
-      - [color](#color)
-      - [width](#width)
-      - [dash](#dash)
-      - [shape](#shape)
-      - [smoothing](#smoothing)
-      - [simplify](#simplify)
 
 2020-04-20, 09:38
-***
+*** *
 
 ## Scatter plot with PX
 
 使用 `px.scatter` 绘制散点图，每个数据点由一个标记（marker）表示，位置由 `x`, `y` 确定。
 
-- 通过类数组对象提供数据
+- 数组对象提供数据
 
 ```py
 import plotly.express as px
@@ -53,7 +34,7 @@ fig.show()
 
 ![scatter](images/2020-03-26-16-28-12.png)
 
-- 通过 `DataFrame` 提供数据
+- `DataFrame` 提供数据
 
 ```py
 import plotly.express as px
@@ -222,7 +203,7 @@ fig.show()
 
 ![styled scatter](images/2020-03-28-12-44-14.png)
 
-## Data Labels on Hover
+## 悬停文本
 
 ```py
 import plotly.graph_objects as go
@@ -312,215 +293,3 @@ fig.show()
 ```
 
 ![webgl](images/2020-03-28-13-09-13.png)
-
-## 参考
-
-- connectgaps
-
-`data[type=scatter]`
-
-Type: boolean
-
-是否连接 gaps (如 Nan 值，缺失值)。
-
-如果不连接，确实值会时线图前后断开。
-
-- text
-
-`data[type=scatter]`
-
-Type: string or array of strings
-
-Default: ""
-
-设置和数据点关联的文本。
-
-如果是单个字符串，则所有数据点上出现相同的字符串。
-
-如果是字符串数组，则字符串一一映射到数据点上。
-
-如果 `hoverinfo` 包含一个 `text` flag，并且没有设置 "hovertext"，则这些文本会出现在 hover 标签中。
-
-- textposition
-
-`data[type=scatter]`
-
-设置 `text` 相对数据点的位置。
-
-{"top left", "top center", "top right", "middle left", "middle center", "middle right", "bottom left", "bottom center", "bottom right"}
-
-默认 "middle center".
-
-- x
-
-`data[type=scatter]`
-
-Type: list, numpy array, Pandas series of numbers, strings, or datetimes.
-
-设置 x 坐标。
-
-### marker
-
-- size
-
-`data[type=scatter].marker`
-
-Type: number or array of numbers。
-
-设置 marker 大小（像素），默认 6。
-
-如 `update_traces(marker_size=10)` 将 marker 大小设置为 10 像素。
-
-#### cmin
-
-`data[type=scatter].marker`
-
-#### marker.line
-
-Parent: `data[type=scatter].marker`
-
-- width
-
-`data[type=scatter].marker.line`
-
-设置 marker 边框线宽度（px）。number or array of numbers.
-
-如 `update_traces(marker_line_width=2)` 将 marker 线条宽度设置为 2.
-
-### textfont
-
-### error_x
-
-### error_y
-
-### selectedpoints
-
-### selected
-
-### unselected
-
-### fill
-
-Parent: `data[type=scatter]`
-
-Type: enumerated {"none", "tozeroy", "tozerox", "tonexty", "tonextx", "toself", "tonext"}
-
-设置填充纯色的区域。
-
-- Defaults to "none"
-
-unless this trace is stacked, then it gets "tonexty" ("tonextx") if `orientation` is "v" ("h") Use with `fillcolor` if not "none".
-
-- "tozerox" and "tozeroy"
-
-fill to x=0 and y=0 respectively.
-
-- "tonextx" and "tonexty"
-
-fill between the endpoints of this trace and the endpoints of the trace before it, connecting those endpoints with straight lines (to make a stacked area graph); if there is no trace before it, they behave like "tozerox" and "tozeroy".
-
-- "toself"
-
-将 trace 的端点连接起来，构成一个闭合形状；如果包含 gaps，则连接每个segment。
-
-- "tonext"
-
-如果一个 trace 完全包含另一个 trace，填充两者之间的空间（如 consecutive contour lines）；如果前面没有 trace，其效果和 "toself" 一样。
-
-如果一个 trace 没有包含另一个 trace，不要用 "tonext"。
-Traces in a `stackgroup` will only fill to (or be filled to) other traces in the same group. With multiple `stackgroup`s or some traces stacked and some not, if fill-linked traces are not already consecutive, the later ones will be pushed down in the drawing order.
-
-### `mode`
-
-`data[type=scatter]`
-
-设置 scatter trace 的绘制模式。
-
-可用模式类型:
-
-- "lines"
-- "markers"
-- "text"
-
-这三种模式可以用 `"+"` 进行任意组合，或者为 "none"。
-
-例如 "lines", "markers", "lines+markers", "lines+markers+text", "none"。
-
-- 如果 `mode` 包含 "text"，则 `text` 添加到对应位置，否则以 hover 形式显示。
-- 如果数据点小于20，trace 没有堆叠，则默认为 "lines+markers"
-- 否则为 "lines".
-
-例如：
-
-```py
-go.Scatter(
-    x=[2, 4],
-    y=[4, 8],
-    mode="lines",
-    line=go.scatter.Line(color="gray"),
-    showlegend=False)
-```
-
-### `line`
-
-***
-
-`data[type=scatter]`
-
-包含如下键值属性的dict。当 scatter 的 `mode="lines"` 时，用于设置 scatter 的线条属性。
-
-#### color
-
-`data[type=scatter].line`
-
-线条颜色。
-
-#### width
-
-`data[type=scatter].line`
-
-Type: >=0 的数值。
-
-线条宽度（px），默认 2px。
-
-#### dash
-
-`data[type=scatter].line`
-
-设置线条的虚线样式。默认 "solid"，即实线。
-
-{"solid", "dot", "dash", "longdash", "dashdot", "longdashdot}
-
-"dash" 表示虚线，"dot" 表示点。
-
-或者 dash 长度列表，如 "5px,10px,2px,2px"。
-
-#### shape
-
-`data[type=scatter].line`
-
-{"linear", "spline", "hv", "vh", "hvh", "vhv"}
-
-线条的样式，默认为 "linear"，即直线。
-
-"spline" 表示样条线；"hv" 表示水平垂直线；"hvh" 水平、垂直、水平线。
-
-![line](images/2020-03-28-15-04-52.png)
-
-#### smoothing
-
-`data[type=scatter].line`
-
-[0,1.3] 范围内的数字，默认 1.
-
-`shape` 设置为 "spline" 才有效，设置平滑量。
-
-- 0 表示无平滑，等效为 "linear"。
-
-#### simplify
-
-`data[type=scatter].line`
-
-通过删除重合线的点来简化线。默认 True。
-
-在过渡线中，可能需要禁用此功能，以免 SVG 路径受影响。

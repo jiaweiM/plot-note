@@ -5,15 +5,16 @@
   - [Line Plot with px](#line-plot-with-px)
     - [set color](#set-color)
   - [Line Plot with go](#line-plot-with-go)
-    - [简单线图](#%e7%ae%80%e5%8d%95%e7%ba%bf%e5%9b%be)
+    - [简单线图 - go](#%e7%ae%80%e5%8d%95%e7%ba%bf%e5%9b%be---go)
     - [Line Plot Modes](#line-plot-modes)
-  - [样式](#%e6%a0%b7%e5%bc%8f)
+  - [样式设置](#%e6%a0%b7%e5%bc%8f%e8%ae%be%e7%bd%ae)
   - [Connect Data Gaps](#connect-data-gaps)
   - [线条样式](#%e7%ba%bf%e6%9d%a1%e6%a0%b7%e5%bc%8f)
   - [数据注释](#%e6%95%b0%e6%8d%ae%e6%b3%a8%e9%87%8a)
   - [填充线图](#%e5%a1%ab%e5%85%85%e7%ba%bf%e5%9b%be)
 
 ***
+2020-04-20, 15:23
 
 ## 简介
 
@@ -58,7 +59,7 @@ fig.show()
 
 线条图用 `go.Scatter` 函数，和散点图相同。
 
-### 简单线图
+### 简单线图 - go
 
 ```py
 import plotly.graph_objects as go
@@ -66,7 +67,7 @@ import numpy as np
 
 x = np.arange(10)
 
-fig = go.Figure(data=go.Scatter(x=x, y=x**2))
+fig = go.Figure(data=go.Scatter(x=x, y=x**2)) # 数据点小于20，默认点和线
 fig.show()
 ```
 
@@ -105,7 +106,9 @@ fig.show()
 
 ![mode](images/2020-03-28-14-40-28.png)
 
-## 样式
+## 样式设置
+
+下面设置线图的颜色和虚线、线条宽度等。
 
 ```py
 import plotly.graph_objects as go
