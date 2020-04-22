@@ -22,10 +22,12 @@
 - [WebGL-大规模数据绘图](webgl.md)
 - [多图 Figure](15_subplot.md)
 - [图大小](9_graph_size.md)
+- [注释](20_annotation.md)
 - [形状](23_shapes.md)
 - 属性参考
-  - [Layout](layout_ref.md)
+  - [Layout](ref_layout.md)
   - [Scatter](ref_scatter.md)
+  - [Bar](ref_bar.md)
 
 ## References
 

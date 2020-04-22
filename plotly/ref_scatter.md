@@ -7,9 +7,11 @@
     - [x](#x)
     - [y](#y)
   - [注释](#%e6%b3%a8%e9%87%8a)
-    - [悬停文本参考](#%e6%82%ac%e5%81%9c%e6%96%87%e6%9c%ac%e5%8f%82%e8%80%83)
-    - [marker](#marker)
-      - [marker 颜色](#marker-%e9%a2%9c%e8%89%b2)
+    - [`data[type=scatter].text`](#datatypescattertext)
+    - [`data[type=scatter].textposition`](#datatypescattertextposition)
+    - [悬停文本](#%e6%82%ac%e5%81%9c%e6%96%87%e6%9c%ac)
+  - [marker](#marker)
+    - [marker 颜色](#marker-%e9%a2%9c%e8%89%b2)
       - [`symbol`](#symbol)
       - [size](#size)
       - [marker.line](#markerline)
@@ -28,6 +30,7 @@
       - [shape](#shape)
       - [smoothing](#smoothing)
       - [simplify](#simplify)
+  - [px.scatter](#pxscatter)
 
 2020-04-20, 15:31
 ***
@@ -120,7 +123,7 @@ Type: boolean
 
 ## 注释
 
-- `data[type=scatter].text`
+### `data[type=scatter].text`
 
 Type: string or array of strings
 
@@ -133,17 +136,15 @@ Default: ""
 
 如果 `hoverinfo` 包含一个 `text` flag，并且没有设置 "hovertext"，则这些文本会出现在 hover 标签中。
 
-- textposition
+### `data[type=scatter].textposition`
 
-`data[type=scatter]`
-
-设置 `text` 相对数据点的位置。
+设置 `text` 相对数据点 (x,y) 的位置。
 
 {"top left", "top center", "top right", "middle left", "middle center", "middle right", "bottom left", "bottom center", "bottom right"}
 
 默认 "middle center".
 
-### 悬停文本参考
+### 悬停文本
 
 - `data[type=scatter].hovertext`
 
@@ -170,15 +171,13 @@ Type: 标签组合。
 
 设置悬停时显示的信息。如果设置为 `none` 或 `skip`，悬停不显示信息。不过设置为 `none` 时，点击时会触发悬停事件。
 
-
-
-### marker
+## marker
 
 `data[type=scatter].marker`
 
 包含如下特征的 dict。
 
-#### marker 颜色
+### marker 颜色
 
 - `data[type=scatter].marker.color`
 
@@ -395,3 +394,6 @@ Type: >=0 的数值。
 通过删除重合线的点来简化线。默认 True。
 
 在过渡线中，可能需要禁用此功能，以免 SVG 路径受影响。
+
+## px.scatter
+

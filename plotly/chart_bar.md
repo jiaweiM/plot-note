@@ -3,15 +3,16 @@
 - [Bar chart](#bar-chart)
   - [简介](#%e7%ae%80%e4%bb%8b)
   - [Express API](#express-api)
-    - [PX 垂直 Bar Chart](#px-%e5%9e%82%e7%9b%b4-bar-chart)
-    - [PX 水平 Bar Chart](#px-%e6%b0%b4%e5%b9%b3-bar-chart)
     - [个性化](#%e4%b8%aa%e6%80%a7%e5%8c%96)
+    - [堆叠条形图](#%e5%a0%86%e5%8f%a0%e6%9d%a1%e5%bd%a2%e5%9b%be)
     - [Facetted subplots](#facetted-subplots)
     - [配置水平 bar chart](#%e9%85%8d%e7%bd%ae%e6%b0%b4%e5%b9%b3-bar-chart)
-  - [plotly.graph_objects API](#plotlygraphobjects-api)
-    - [go 垂直 Bar Chart](#go-%e5%9e%82%e7%9b%b4-bar-chart)
-    - [go 水平 Bar Chart](#go-%e6%b0%b4%e5%b9%b3-bar-chart)
-  - [barmode](#barmode)
+  - [水平或者垂直](#%e6%b0%b4%e5%b9%b3%e6%88%96%e8%80%85%e5%9e%82%e7%9b%b4)
+    - [垂直 Bar - go](#%e5%9e%82%e7%9b%b4-bar---go)
+    - [垂直 Bar - px](#%e5%9e%82%e7%9b%b4-bar---px)
+    - [水平条形图 - go](#%e6%b0%b4%e5%b9%b3%e6%9d%a1%e5%bd%a2%e5%9b%be---go)
+    - [水平 Bar - px](#%e6%b0%b4%e5%b9%b3-bar---px)
+  - [`layout.barmode`](#layoutbarmode)
     - [Grouped Bar Chart](#grouped-bar-chart)
     - [Stacked Bar Chart](#stacked-bar-chart)
   - [Hover Text](#hover-text)
@@ -24,20 +25,6 @@
   - [颜色样式](#%e9%a2%9c%e8%89%b2%e6%a0%b7%e5%bc%8f)
   - [Relative Barmode](#relative-barmode)
   - [排序](#%e6%8e%92%e5%ba%8f)
-  - [参考](#%e5%8f%82%e8%80%83)
-    - [`data[type=bar]` 参数](#datatypebar-%e5%8f%82%e6%95%b0)
-    - [`x`](#x)
-    - [`y`](#y)
-    - [marker](#marker)
-      - [line](#line)
-      - [color](#color)
-      - [cauto](#cauto)
-      - [cmin](#cmin)
-    - [textangle](#textangle)
-    - [textfont](#textfont)
-    - [error_x](#errorx)
-    - [error_y](#errory)
-    - [meta](#meta)
 
 2020-04-19, 09:43
 ***
@@ -46,35 +33,9 @@
 
 Plotly 中条形图用 [`plotly.graph_objects.Bar`](https://plot.ly/python/reference/#bar) 表示。
 
+`plotly.graph_objects` 中的 `go.Bar` 函数更为通用，[API 参考](https://plot.ly/python/reference/#bar)。
+
 ## Express API
-
-### PX 垂直 Bar Chart
-
-使用 `px.bar` 创建条形图，`DataFrame` 的每一行用一个矩形表示。例如：
-
-```py
-import plotly.express as px
-data_canada = px.data.gapminder().query("country == 'Canada'")
-fig = px.bar(data_canada, x='year', y='pop')
-fig.show()
-```
-
-![bar](images/2020-03-12-17-27-05.png)
-
-### PX 水平 Bar Chart
-
-设置 `orientation='h'`
-
-```py
-import plotly.express as px
-df = px.data.tips()
-fig = px.bar(df, x="total_bill", y="day", orientation='h')
-fig.show()
-```
-
-![horizontal](images/2020-03-14-09-42-47.png)
-
-> 这里 x,y 位置不变
 
 ### 个性化
 
@@ -95,7 +56,9 @@ fig.show()
 
 ![custom bar](images/2020-03-13-21-08-32.png)
 
-- 当多行使用相同的 `x` 值，矩形默认互相叠加：
+### 堆叠条形图
+
+当多行使用相同的 `x` 值，矩形默认互相叠加：
 
 ```py
 import plotly.express as px
@@ -151,11 +114,14 @@ fig.show()
 
 ![colored](images/2020-03-14-09-47-45.png)
 
-## plotly.graph_objects API
+## 水平或者垂直
 
-`plotly.graph_objects` 中的 `go.Bar` 函数更为通用，[API 参考](https://plot.ly/python/reference/#bar)。
+`orientation` 设置条形图的方向。
 
-### go 垂直 Bar Chart
+- 如果 `orientation` 设置为 "v"，`y` 对应数据，`x` 对应标签，默认值
+- 如果 `orientation` 设置为 "h"，`x` 对应数据，`y` 对应标签
+
+### 垂直 Bar - go
 
 ```py
 import plotly.graph_objects as go
@@ -167,7 +133,20 @@ fig.show()
 
 ![bar](images/2020-03-13-21-28-04.png)
 
-### go 水平 Bar Chart
+### 垂直 Bar - px
+
+使用 `px.bar` 创建条形图，`DataFrame` 的每一行用一个矩形表示。例如：
+
+```py
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.show()
+```
+
+![bar](images/2020-03-12-17-27-05.png)
+
+### 水平条形图 - go
 
 ```py
 import plotly.graph_objects as go
@@ -182,11 +161,24 @@ fig.show()
 
 ![bar](images/2020-03-14-09-52-05.png)
 
-## barmode
+### 水平 Bar - px
 
-Parent: `layout`
+设置 `orientation='h'`
 
-Type: ("stack" | "group" | "overlay" | "relative")
+```py
+import plotly.express as px
+df = px.data.tips()
+fig = px.bar(df, x="total_bill", y="day", orientation='h')
+fig.show()
+```
+
+![horizontal](images/2020-03-14-09-42-47.png)
+
+## `layout.barmode`
+
+设置条形图的显示模式。
+
+enum: ("stack" | "group" | "overlay" | "relative")
 
 默认："group"
 
@@ -516,136 +508,3 @@ fig.show()
 ```
 
 ![descending](images/2020-03-14-09-39-40.png)
-
-## 参考
-
-- textposition
-
-`data[type=bar]`
-
-{"inside", "outside", "auto", "none"}
-
-默认 "none"。
-
-指定 `text` 的位置。
-
-"inside" 将 `text` 放在 bar 里面，和 bar 的末端挨着，如果需要，对文本进行旋转和缩放。
-
-"outside" 将 `text` 放在 bar 外面，和 bar 末端挨着，如果需要，对文本其进行缩放。如果有其它的 bar 堆叠在上面， `text` 会被压入 "inside"。
-
-"auto" 首先尝试将 `text` 放在里面，如果里面位置太小，外面也没有其它的 bar 堆叠，则将 `text` 移到外面。
-
-- texttemplate
-
-`data[type=bar]`
-
-Type: string or array of string.
-
-Default: "".
-
-template 字符串用于渲染数据点上的注释文本信息。
-
-**该参数会覆盖 `textinfo`**。
-
-通过 `%{variable}` 插入变量。例如 `y: %{y}`。
-
-数值通过 d3 格式化语法进行格式化，`%{variable:d3-format}`，例如 `Price: %{y:$.2f}`，详细信息可以参考 [d3 文档](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format)。
-
-日期通过 d3-time-format 语法 `%{variable|d3-time-format}`，例如 `Day: %{2019-01-01|%A}`，详细参考 [d3 文档](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format)
-
-### `data[type=bar]` 参数
-
-1. `orientation`
-    - 'v' 垂直条形图，默认值
-    - 'h' 水平条形图
-2. `name`
-
-trace 名称。在legend 以及鼠标在数据上悬停时显示。
-
-3. `visible`
-   - True，绘制 trace
-   - False，不绘制 trace
-   - "legendonly"，不绘制 trace，但 legend 可见
-
-yongyu shehzi  trace 是否可见。
-
-4. `showlegend`
-    - default `True`
-
-该 trace 的 legend 是否可见。
-
-### `x`
-
-`data[type=bar]`
-
-list, numpy array 或 Pandas series of numbers, strings or datetimes.
-
-设置 x 坐标。
-
-例如：
-
-```py
-go.Bar(x=[1, 2, 3], y=[1, 3, 2])
-```
-
-或者：
-
-```json
-'data': [{'x': [1, 2, 3], 'y': [1, 3, 2], 'type': 'bar'}]
-```
-
-### `y`
-
-`data[type=bar]`
-
-设置 y 坐标。
-
-使用方式同 x。
-
-### marker
-
-`data[type=bar].marker`
-
-包含下面列出的一个或多个键值的字典。
-
-#### line
-
-`data[type=bar].marker.line`
-
-- coloraxis
-
-Type: subplotid.
-
-对共享颜色轴的引用。如 "coloraxis", "coloraxis2", "coloraxis3"等。
-
-在 layout 中设置对共享颜色轴，如 `layout.coloraxis`, `layout.coloraxis2`等。
-
-#### color
-
-#### cauto
-
-#### cmin
-
-### textangle
-
-parent `data[type=bar]`
-
-### textfont
-
-parent: `data[type=bar]`
-
-### error_x
-
-parent: `data[type=bar]`
-
-### error_y
-
-parent: `data[type=bar]`
-
-### meta
-
-Parent: `data[type=bar]`
-
-Type: number of categorical coordindate string
-
-此 trace 关于文本属性的额外信息。

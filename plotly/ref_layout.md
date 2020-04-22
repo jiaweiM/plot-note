@@ -6,7 +6,6 @@
   - [Title](#title)
     - [font](#font)
       - [family](#family)
-  - [uniformtext](#uniformtext)
     - [showlegend](#showlegend-1)
   - [Margins](#margins)
   - [Size](#size)
@@ -18,6 +17,8 @@
     - [plot_bgcolor](#plotbgcolor)
     - [colorscale](#colorscale)
       - [sequential](#sequential)
+  - [Font](#font-1)
+    - [uniformtext](#uniformtext)
 
 2020-04-18, 20:17
 ***
@@ -58,27 +59,7 @@ layout=dict(title=dict(text="A Bar Chart"))
 
 HTML 字体 family，
 
-## uniformtext
 
-包含下面参数的 dict.
-
-- mode
-
-Type: {False, "hide", "show"}
-
-如果计算的文本尺寸小于 `uniformtext.minsize` 设置的最小尺寸的处理方式。
-
-"hide" 表示隐藏文本。
-
-"show" 显示文本，但不进一步缩小文本。
-
-如果 `minsize` 大于 trace 定义的字体大小，使用 `minsize`。
-
-- minsize
-
-默认 0。
-
-最小文本大小。
 
 ### showlegend
 
@@ -177,3 +158,27 @@ x 和 y 轴之间绘图区域的背景色。
 
 #### sequential
 
+## Font
+
+### uniformtext
+
+- `layout.uniformtext`
+
+设置所有文本标签的字体大小，包含下面参数的 dict.
+
+- `layout.uniformtext.mode`
+
+Type: {False, "hide", "show"}
+
+如果计算的文本尺寸小于 `uniformtext.minsize` 设置的最小尺寸的处理方式。
+
+- "hide" 表示隐藏文本。
+- "show" 显示文本，但不进一步缩小文本。
+
+如果 `minsize` 大于 trace 定义的字体大小，使用 `minsize`。
+
+- `layout.uniformtext.minsize`
+
+默认 0。
+
+最小文本大小。
