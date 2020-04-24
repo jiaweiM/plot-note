@@ -5,7 +5,7 @@
   - [对数坐标轴（Logaritmic Axes）](#%e5%af%b9%e6%95%b0%e5%9d%90%e6%a0%87%e8%bd%b4logaritmic-axes)
     - [log in px](#log-in-px)
     - [log in go](#log-in-go)
-  - [坐标轴转换为 categorical 类型](#%e5%9d%90%e6%a0%87%e8%bd%b4%e8%bd%ac%e6%8d%a2%e4%b8%ba-categorical-%e7%b1%bb%e5%9e%8b)
+  - [categorical 类型转换](#categorical-%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2)
     - [Subcategory (Multicategory) Axes](#subcategory-multicategory-axes)
   - [坐标轴属性](#%e5%9d%90%e6%a0%87%e8%bd%b4%e5%b1%9e%e6%80%a7)
   - [刻度](#%e5%88%bb%e5%ba%a6)
@@ -100,7 +100,7 @@ fig.show()
 
 ![log](images/2020-04-18-16-31-58.png)
 
-## 坐标轴转换为 categorical 类型
+## categorical 类型转换
 
 如果 `x` 和 `y` 参数值为字符串，plotly 会自动将对应轴设置为 category 类型，但是不能是数字字符串，此时坐标轴为 `linear` 类型。
 

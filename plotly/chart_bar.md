@@ -3,18 +3,19 @@
 - [Bar chart](#bar-chart)
   - [简介](#%e7%ae%80%e4%bb%8b)
   - [Express API](#express-api)
+    - [垂直 Bar - px](#%e5%9e%82%e7%9b%b4-bar---px)
+    - [水平 Bar - px](#%e6%b0%b4%e5%b9%b3-bar---px)
     - [个性化](#%e4%b8%aa%e6%80%a7%e5%8c%96)
     - [堆叠条形图](#%e5%a0%86%e5%8f%a0%e6%9d%a1%e5%bd%a2%e5%9b%be)
-    - [Facetted subplots](#facetted-subplots)
+    - [Facetted subplots - 分类子图](#facetted-subplots---%e5%88%86%e7%b1%bb%e5%ad%90%e5%9b%be)
     - [配置水平 bar chart](#%e9%85%8d%e7%bd%ae%e6%b0%b4%e5%b9%b3-bar-chart)
   - [水平或者垂直](#%e6%b0%b4%e5%b9%b3%e6%88%96%e8%80%85%e5%9e%82%e7%9b%b4)
     - [垂直 Bar - go](#%e5%9e%82%e7%9b%b4-bar---go)
-    - [垂直 Bar - px](#%e5%9e%82%e7%9b%b4-bar---px)
     - [水平条形图 - go](#%e6%b0%b4%e5%b9%b3%e6%9d%a1%e5%bd%a2%e5%9b%be---go)
-    - [水平 Bar - px](#%e6%b0%b4%e5%b9%b3-bar---px)
   - [`layout.barmode`](#layoutbarmode)
     - [Grouped Bar Chart](#grouped-bar-chart)
     - [Stacked Bar Chart](#stacked-bar-chart)
+    - [Relative](#relative)
   - [Hover Text](#hover-text)
   - [Direct Labels](#direct-labels)
   - [uniformtext](#uniformtext)
@@ -22,12 +23,12 @@
   - [设置单个 Bar 颜色](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e9%a2%9c%e8%89%b2)
   - [设置单个 bar 宽度](#%e8%ae%be%e7%bd%ae%e5%8d%95%e4%b8%aa-bar-%e5%ae%bd%e5%ba%a6)
   - [设置初始值](#%e8%ae%be%e7%bd%ae%e5%88%9d%e5%a7%8b%e5%80%bc)
+    - [对映](#%e5%af%b9%e6%98%a0)
   - [颜色样式](#%e9%a2%9c%e8%89%b2%e6%a0%b7%e5%bc%8f)
-  - [Relative Barmode](#relative-barmode)
   - [排序](#%e6%8e%92%e5%ba%8f)
 
 2020-04-19, 09:43
-***
+*** *
 
 ## 简介
 
@@ -36,6 +37,58 @@ Plotly 中条形图用 [`plotly.graph_objects.Bar`](https://plot.ly/python/refer
 `plotly.graph_objects` 中的 `go.Bar` 函数更为通用，[API 参考](https://plot.ly/python/reference/#bar)。
 
 ## Express API
+
+```py
+plotly.express.bar(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, hover_name=None, hover_data=None, custom_data=None, text=None, error_x=None, error_x_minus=None, error_y=None, error_y_minus=None, animation_frame=None, animation_group=None, category_orders={}, labels={}, color_discrete_sequence=None, color_discrete_map={}, color_continuous_scale=None, range_color=None, color_continuous_midpoint=None, opacity=None, orientation='v', barmode='relative', log_x=False, log_y=False, range_x=None, range_y=None, title=None, template=None, width=None, height=None)
+```
+
+`data_frame` 的每行对应一个矩形。
+
+2. x
+
+`str`, `int` or `Series` 或 array-like。
+
+对 `str` 和 `int`，表示 `DataFrame` 中的 column label。
+
+4. color
+
+`str`, `int` or `Series` or array-like。
+
+对 `str` 和 `int`，表示 `DataFrame` 中的 column label。
+
+这些值用于给 marks 分配颜色。
+
+- labels
+
+dict: str -> str，默认 `{}`
+
+默认，columns 名称用于 figure 的 axis title,legend 和 hovers。该参数用于覆盖该默认行为，dict 的 key 为 column 名称，value 为期望的 label。
+
+### 垂直 Bar - px
+
+使用 `px.bar` 创建条形图，`DataFrame` 的每一行用一个矩形表示。例如：
+
+```py
+import plotly.express as px
+data_canada = px.data.gapminder().query("country == 'Canada'")
+fig = px.bar(data_canada, x='year', y='pop')
+fig.show()
+```
+
+![bar](images/2020-03-12-17-27-05.png)
+
+### 水平 Bar - px
+
+设置 `orientation='h'`
+
+```py
+import plotly.express as px
+df = px.data.tips()
+fig = px.bar(df, x="total_bill", y="day", orientation='h')
+fig.show()
+```
+
+![horizontal](images/2020-03-14-09-42-47.png)
 
 ### 个性化
 
@@ -54,6 +107,8 @@ fig = px.bar(data_canada, x='year', y='pop',
 fig.show()
 ```
 
+`color='lifeExp'` 根据 'lifeExp' 的值和当前 colorscale 分配颜色。
+
 ![custom bar](images/2020-03-13-21-08-32.png)
 
 ### 堆叠条形图
@@ -67,6 +122,8 @@ fig = px.bar(df, x="sex", y="total_bill", color='time')
 fig.show()
 ```
 
+注意：下面的条形图堆叠在一起，高度相同分类下的加和。
+
 ![multiple](images/2020-03-13-21-10-40.png)
 
 - 通过 `barmode` 修改默认堆叠行为
@@ -79,7 +136,7 @@ fig.show()
 
 ![group](images/2020-03-13-21-16-29.png)
 
-### Facetted subplots
+### Facetted subplots - 分类子图
 
 使用关键字参数 `facet_row` (或 `facet_col`) 创建子图，dataframe 中和 `facet_row` 对应的每个不同值创建不同的子图。例如：
 
@@ -133,19 +190,6 @@ fig.show()
 
 ![bar](images/2020-03-13-21-28-04.png)
 
-### 垂直 Bar - px
-
-使用 `px.bar` 创建条形图，`DataFrame` 的每一行用一个矩形表示。例如：
-
-```py
-import plotly.express as px
-data_canada = px.data.gapminder().query("country == 'Canada'")
-fig = px.bar(data_canada, x='year', y='pop')
-fig.show()
-```
-
-![bar](images/2020-03-12-17-27-05.png)
-
 ### 水平条形图 - go
 
 ```py
@@ -160,19 +204,6 @@ fig.show()
 ```
 
 ![bar](images/2020-03-14-09-52-05.png)
-
-### 水平 Bar - px
-
-设置 `orientation='h'`
-
-```py
-import plotly.express as px
-df = px.data.tips()
-fig = px.bar(df, x="total_bill", y="day", orientation='h')
-fig.show()
-```
-
-![horizontal](images/2020-03-14-09-42-47.png)
 
 ## `layout.barmode`
 
@@ -228,6 +259,26 @@ fig.show()
 ```
 
 ![stacked barchart](images/2020-03-13-21-34-51.png)
+
+### Relative
+
+在 "relative" 模式下，不同 bars 互相堆叠。正值在坐标轴上，负值在坐标轴下。
+
+```py
+import plotly.graph_objects as go
+x = [1, 2, 3, 4]
+
+fig = go.Figure()
+fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
+fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
+fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
+fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
+
+fig.update_layout(barmode='relative', title_text='Relative Barmode')
+fig.show()
+```
+
+![relative barmode](images/2020-03-13-22-05-55.png)
 
 ## Hover Text
 
@@ -360,7 +411,7 @@ fig.show()
 
 ## 设置初始值
 
-bar 的 y 值为在初始值（base）上增加的值。
+`base` 用于设置初始值位置，设置的 `y` 值都是在初始值的基础上进行增加。
 
 ```py
 import plotly.graph_objects as go
@@ -383,9 +434,38 @@ fig.show()
 
 ![base](images/2020-03-13-21-57-33.png)
 
+### 对映
+
+如果设置 `base` 值的同时设置 `barmode='stack'`，可实现上下对映的形式
+
+```py
+import plotly.graph_objects as go
+
+years = ['2016', '2017', '2018']
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=years,
+    y=[500, 600, 700],
+    base=[-500, -600, -700],
+    marker_color='crimson',
+    name='expenses'
+))
+fig.add_trace(go.Bar(
+    x=years,
+    y=[300, 400, 700],
+    base=0,
+    marker_color='lightslategrey',
+    name='revenue'
+))
+fig.update_layout(barmode='stack', xaxis_type='category', )
+fig.show()
+```
+
+![bar](images/2020-04-24-18-30-20.png)
+
 ## 颜色样式
 
-下面自定义参数较多，因此使用 `go.Layout()` 比使用 `fig.update` 更方便。
+自定义样式参数较多，使用 `go.Layout()` 比使用 `fig.update` 更方便。
 
 ```py
 import plotly.graph_objects as go
@@ -429,26 +509,6 @@ fig.show()
 ```
 
 ![colored barchart](images/2020-03-13-22-02-07.png)
-
-## Relative Barmode
-
-在 "relative" 模式下，不同 bars 互相堆叠。正值在坐标轴上，负值在坐标轴下。
-
-```py
-import plotly.graph_objects as go
-x = [1, 2, 3, 4]
-
-fig = go.Figure()
-fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16]))
-fig.add_trace(go.Bar(x=x, y=[6, -8, -4.5, 8]))
-fig.add_trace(go.Bar(x=x, y=[-15, -3, 4.5, -8]))
-fig.add_trace(go.Bar(x=x, y=[-1, 3, -3, -4]))
-
-fig.update_layout(barmode='relative', title_text='Relative Barmode')
-fig.show()
-```
-
-![relative barmode](images/2020-03-13-22-05-55.png)
 
 ## 排序
 
