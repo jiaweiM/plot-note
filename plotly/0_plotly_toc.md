@@ -19,6 +19,7 @@
   - [Bar Chart](chart_bar.md)
   - [Scatter](chart_scatter.md)
   - [Line Chart](chart_line.md)
+  - [Pie Chart](chart_pie.md)
 - [WebGL-大规模数据绘图](webgl.md)
 - [多图 Figure](15_subplot.md)
 - [图大小](9_graph_size.md)
