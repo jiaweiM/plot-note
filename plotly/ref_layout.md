@@ -19,6 +19,9 @@
       - [sequential](#sequential)
   - [Font](#font-1)
     - [uniformtext](#uniformtext)
+  - [`layout.grid`](#layoutgrid)
+    - [`layout.grid.rows`](#layoutgridrows)
+    - [`layout.grid.domain`](#layoutgriddomain)
 
 2020-04-18, 20:17
 ***
@@ -182,3 +185,26 @@ Type: {False, "hide", "show"}
 默认 0。
 
 最小文本大小。
+
+## `layout.grid`
+
+网格相关参数。
+
+### `layout.grid.rows`
+
+Type: integer greater than or equal to 1。
+
+网格中的行数。
+
+对 `subplots` 数组或 `yaxes` 数组，其长度为默认行数。
+
+如果希望添加非笛卡尔 subplot，则 `rows` 也可以和 `subplots` 不同。
+
+### `layout.grid.domain`
+
+`layout.grid.domain.x`
+
+Type: list
+Default: [0, 1]
+
+设置网格 subplot 的水平 domain。

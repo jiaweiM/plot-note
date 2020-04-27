@@ -11,6 +11,7 @@
     - [4 个数值变量](#4-%e4%b8%aa%e6%95%b0%e5%80%bc%e5%8f%98%e9%87%8f)
   - [Categoric](#categoric)
   - [Num & Cat](#num--cat)
+  - [1 cat x 1 num](#1-cat-x-1-num)
   - [Maps](#maps)
   - [Network](#network)
   - [Time series](#time-series)
@@ -29,10 +30,8 @@
 - [密度图 - Density Plot](density_plot.md)
 - [误差线 - Error Bars](error_bar.md)
 - [直方图 - Histogram](histogram.md)
-
-
-
-
+- [饼图 - Pie Chart](pie_chart.md)
+- [朝阳图 - Sunburst](sunburst.md)
 - [弧线图 - Arc Diagram](arc.md)
 - [折线图 - Line Graph](line_graph.md)
 - [脑力激荡图 - Brainstorm](brainstorm.md)
@@ -70,6 +69,11 @@
 ## Categoric
 
 ## Num & Cat
+
+## 1 cat x 1 num
+
+- [Box Plot](box_whisker.md)
+- [Pie Chart](pie_chart.md)
 
 ## Maps
 
