@@ -39,6 +39,7 @@
 ## Other
 
 - [比例面积图 - Proportional Area Chart](proportional_area.md)
+- [配色](color.md)
 
 ## Distribution
 

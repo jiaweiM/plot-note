@@ -21,6 +21,10 @@
   - [Line Chart](chart_line.md)
   - [Pie Chart](chart_pie.md)
   - [Sunburst](chart_sunburst.md)
+- 颜色
+  - [离散颜色](color_discrete.md)
+  - [连续颜色](color_continuous.md)
+  - [内置色阶](color_builtin_color_scale.md)
 - [WebGL-大规模数据绘图](webgl.md)
 - [多图 Figure](15_subplot.md)
 - [图大小](9_graph_size.md)
