@@ -3,7 +3,7 @@
 - [Layout](#layout)
   - [Legend](#legend)
     - [showlegend](#showlegend)
-  - [Title](#title)
+  - [`layout.title`](#layouttitle)
     - [font](#font)
       - [family](#family)
     - [showlegend](#showlegend-1)
@@ -22,6 +22,11 @@
   - [`layout.grid`](#layoutgrid)
     - [`layout.grid.rows`](#layoutgridrows)
     - [`layout.grid.domain`](#layoutgriddomain)
+  - [`layout.xaxis`](#layoutxaxis)
+    - [`layout.xaxis.visible`](#layoutxaxisvisible)
+    - [`layout.xaxis.color`](#layoutxaxiscolor)
+    - [`layout.xaxis.showgrid`](#layoutxaxisshowgrid)
+    - [`layout.xaxis.zeroline`](#layoutxaxiszeroline)
 
 2020-04-18, 20:17
 ***
@@ -38,9 +43,7 @@ Type: boolean
 - 包含 pie trace
 - 某个 trace 的`showlegend`
 
-## Title
-
-`layout.title`
+## `layout.title`
 
 标题相关属性 dict。
 
@@ -208,3 +211,29 @@ Type: list
 Default: [0, 1]
 
 设置网格 subplot 的水平 domain。
+
+## `layout.xaxis`
+
+xaxis 相关属性。
+
+### `layout.xaxis.visible`
+
+设置隐藏 x 坐标轴，同时保留拖动等交互功能。
+
+当轴上有 cheater 时，默认为 True，否则默认为 False。
+
+### `layout.xaxis.color`
+
+设置 x 轴相关元素的颜色：line, font, tick 和 grid。
+
+默认 "#444"
+
+将该颜色和plot北京混合，可以使 Grid 的颜色变淡。
+
+### `layout.xaxis.showgrid`
+
+是否绘制网格线。如果为 `True`，则在每个刻度线处绘制网格线。
+
+### `layout.xaxis.zeroline`
+
+是否沿着该坐标轴的 0 值位置绘制一条线。如果为 `True`，则在网格线上面继续绘制零线。

@@ -68,7 +68,10 @@ fig
 
 ![without show](images/2020-03-11-21-23-59.png)
 
-> 准确地说，当满足以下两个条件图表会在当前默认渲染器中显示：首先，最后一个表达式结果为 figure；然后，在包含 IPython kernel 的环境运行。
+> 准确地说，当满足以下两个条件图表会在当前默认渲染器中显示：
+> 
+> - 首先，最后一个表达式结果为 figure；
+> - 然后，在包含 IPython kernel 的环境运行。
 
 大多情况下，plotly 会自动选择合适的渲染器。如经典的 Jupyter Notebook，JupyterLab（需要安装 jupyterlab-plotly 扩展），Visual Studio code notebooks，Google Colaboratory, Kaggle notebooks，Azure notebooks 以及 Python interactive shell。
 
