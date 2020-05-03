@@ -21,6 +21,8 @@
   - [Line Chart](chart_line.md)
   - [Pie Chart](chart_pie.md)
   - [Sunburst](chart_sunburst.md)
+  - [Violin](chart_violin.md)
+  - [Heatmap](chart_heatmap.md)
 - 颜色
   - [离散颜色](color_discrete.md)
   - [连续颜色](color_continuous.md)
