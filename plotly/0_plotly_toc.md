@@ -23,6 +23,7 @@
   - [Sunburst](chart_sunburst.md)
   - [Violin](chart_violin.md)
   - [Heatmap](chart_heatmap.md)
+  - [等高线图](chart_contour.md)
 - 颜色
   - [离散颜色](color_discrete.md)
   - [连续颜色](color_continuous.md)

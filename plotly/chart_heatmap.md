@@ -15,18 +15,20 @@
       - [`hoverongaps`](#hoverongaps)
 
 2020-04-30, 16:14
-*** *
+*** **
 
 ## 简介
 
-热图中值到颜色的映射数据通过 `z` 设置。`z` 数据为 2D 或 1D 列表。
+热图中值到颜色的映射通过 `z` 设置。`z` 为二维或一维数据列表。
 
-对 2D 列表，假设 `z` 为 N 行 M 列，则热图在 y 轴有 N 个分区，在 x 轴有 M 个分区。换句话说，`z` 的第 i 行第 j 列对应 y 轴的 i (从下到上) x 轴的 j (从左到右)。
+对二维数据，假设 `z` 为 N 行 M 列，则热图在 y 轴有 N 个分区，在 x 轴有 M 个分区。换句话说，`z` 的第 i 行第 j 列对应 y 轴的 i (从下到上) 、x 轴的 j (从左到右)。
 
 另外，`x` 可以提供 M 或 M + 1 个值：
 
 - 如果提供 M 个值，则和热图 Cell 的中心对应，所有 Cell 具有相同宽度；
 - 如果提供 M + 1 个值，则和热图 cell 的边对应。
+
+同理，`y` 可以提供 N 或 N + 1个值。
 
 ## heatmap with px
 
@@ -68,10 +70,11 @@ fig.show()
 ```py
 import plotly.graph_objects as go
 
-fig = go.Figure(data=go.Heatmap(
-                    z=[[1, 20, 30],
-                      [20, 1, 60],
-                      [30, 60, 1]]))
+fig = go.Figure(go.Heatmap(
+    z=[[1, 20, 30],
+       [20, 1, 60],
+       [30, 60, 1]])
+)
 fig.show()
 ```
 
@@ -86,8 +89,8 @@ fig = go.Figure(go.Heatmap(
     z=[[1, None, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
     x=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     y=['Morning', 'Afternoon', 'Evening'],
-    hoverongaps=False
-))
+    hoverongaps=False)
+)
 fig.show()
 ```
 
