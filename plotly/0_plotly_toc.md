@@ -24,6 +24,9 @@
   - [Violin](chart_violin.md)
   - [Heatmap](chart_heatmap.md)
   - [等高线图](chart_contour.md)
+  - [Network](chart_network.md)
+- 三维图
+  - [三维坐标](3D_axes.md)
 - 颜色
   - [离散颜色](color_discrete.md)
   - [连续颜色](color_continuous.md)
@@ -37,6 +40,12 @@
   - [Layout](ref_layout.md)
   - [Scatter](ref_scatter.md)
   - [Bar](ref_bar.md)
+
+三维数据图表
+
+- [等高线图 - Z多维](chart_contour.md)
+- [热图 - Z多维](chart_heatmap.md)
+
 
 ## References
 
