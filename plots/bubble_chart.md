@@ -1,5 +1,12 @@
 # Bubble Chart
 
+- [Bubble Chart](#bubble-chart)
+  - [简介](#%e7%ae%80%e4%bb%8b)
+  - [工具](#%e5%b7%a5%e5%85%b7)
+
+2020-05-15, 13:51
+***
+
 ## 简介
 
 ![bubble chart](images/2020-03-31-18-21-04.png)

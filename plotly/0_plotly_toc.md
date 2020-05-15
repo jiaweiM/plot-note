@@ -25,6 +25,7 @@
   - [Heatmap](chart_heatmap.md)
   - [等高线图](chart_contour.md)
   - [Network](chart_network.md)
+  - [风向图](chart_polarbar.md)
 - 三维图
   - [三维坐标](3D_axes.md)
 - 颜色

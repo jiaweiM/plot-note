@@ -1,10 +1,17 @@
 # Bar Chart
 
+- [Bar Chart](#bar-chart)
+  - [简介](#%e7%ae%80%e4%bb%8b)
+  - [工具](#%e5%b7%a5%e5%85%b7)
+
+2020-05-15, 13:53
+***
+
 ## 简介
 
 ![bar chart](images/2020-03-31-17-25-41.png)
 
-条形图（Bar Chart）也称为柱形图（Column Graph）或棒形图（Bar Graph）。
+条形图（Bar Chart）也称为柱形图（Column Graph）或棒形图（Bar Graph），用于展示分类变量和数值变量之间的关系。
 
 条形图采用水平或垂直的长方形来比较不同类别的离散值。
 
