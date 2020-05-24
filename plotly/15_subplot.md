@@ -1,9 +1,9 @@
 # Subplots
 
 - [Subplots](#subplots)
-  - [生成子图](#%e7%94%9f%e6%88%90%e5%ad%90%e5%9b%be)
-    - [横向 Subplot](#%e6%a8%aa%e5%90%91-subplot)
-    - [纵向 Subplots](#%e7%ba%b5%e5%90%91-subplots)
+  - [创建子图](#%e5%88%9b%e5%bb%ba%e5%ad%90%e5%9b%be)
+    - [横向多图](#%e6%a8%aa%e5%90%91%e5%a4%9a%e5%9b%be)
+    - [纵向多图](#%e7%ba%b5%e5%90%91%e5%a4%9a%e5%9b%be)
     - [多行多列](#%e5%a4%9a%e8%a1%8c%e5%a4%9a%e5%88%97)
   - [子图标题](#%e5%ad%90%e5%9b%be%e6%a0%87%e9%a2%98)
   - [子图注释](#%e5%ad%90%e5%9b%be%e6%b3%a8%e9%87%8a)
@@ -15,7 +15,7 @@
     - [共享颜色轴](#%e5%85%b1%e4%ba%ab%e9%a2%9c%e8%89%b2%e8%bd%b4)
   - [subplot size](#subplot-size)
   - [subplot 文本输出](#subplot-%e6%96%87%e6%9c%ac%e8%be%93%e5%87%ba)
-  - [subplot type](#subplot-type)
+  - [子图坐标系类型](#%e5%ad%90%e5%9b%be%e5%9d%90%e6%a0%87%e7%b3%bb%e7%b1%bb%e5%9e%8b)
   - [low-level API](#low-level-api)
     - [水平 subplots - low](#%e6%b0%b4%e5%b9%b3-subplots---low)
     - [共享坐标轴 - low](#%e5%85%b1%e4%ba%ab%e5%9d%90%e6%a0%87%e8%bd%b4---low)
@@ -42,9 +42,9 @@
 2020-04-18, 21:29
 *** *
 
-## 生成子图
+## 创建子图
 
-### 横向 Subplot
+### 横向多图
 
 使用 `plotly.subplots` 模块中的 `make_subplots` 函数创建带有子图的 figure。
 
@@ -70,9 +70,11 @@ fig.update_layout(height=600, width=800, title_text="Side By Side Subplots")
 fig.show()
 ```
 
+说明：子图编号以 1 开始。
+
 ![subplots](images/2020-04-18-21-32-17.png)
 
-### 纵向 Subplots
+### 纵向多图
 
 下面创建一个三行一列的 figure:
 
@@ -129,11 +131,18 @@ fig.add_trace(go.Scatter(x=[4000, 5000, 6000], y=[7000, 8000, 9000]),
 fig.show()
 ```
 
+`start_cell` 用于设置网格从哪开始计数：
+
+- `top-left`，从左上角开始计数，即左上角的网格为第一个，编号 (1, 1)
+- `bottom-left`，左下角开始计数，即左下角的网格为第一个，编号 (1, 1)
+
+默认为 `top-left`。
+
 ![subplot](images/2020-04-18-21-39-57.png)
 
 ## 子图标题
 
-通过 `make_subplots` 的 `subplot_titles` 可以设置每个 subplot 的标题。
+通过 `make_subplots` 的 `subplot_titles` 设置 subplot 的标题。
 
 例如：
 
@@ -440,19 +449,23 @@ This is the format of your plot grid:
 
 ![scatter](images/2020-04-19-10-18-54.png)
 
-## subplot type
+## 子图坐标系类型
 
-`make_subplots` 默认所有的 subplots 是 2D 笛卡尔坐标图。对其它类型的 subplot 类型（如 scatterpolar, scattergeo等），可以通过 `specs` 参数的 `type` 选项设置。
+2020-05-24, 17:11
+
+`make_subplots` 默认所有的 subplots 的坐标系是 2D 笛卡尔坐标系。对其它类型的 subplot 类型（如 scatterpolar, scattergeo等），可以通过 `specs` 参数的 `type` 设置坐标系类型。
 
 `type` 可用选项：
 
-- 'xy', 2D 笛卡尔 subplot，默认类型
-- 'scene', 3D 笛卡尔 subplot
-- 'polar', 极坐标 subplot
-- 'ternary', scatterternary 的三元子图
-- 'mapbox', scattermapbox 的 Mapbox
-- 'domain', 单独定位的子图类型，如 pie, parcoords, parcats 等
-- trace type: 根据 trace type 名称（如 "bar", "scattergeo", "carpet" 等）确定合适的 subplot 类型。
+| 选项       | 类型                                                       |
+| ---------- | ---------------------------------------------------------- |
+| 'xy'       | 二维笛卡尔坐标系，默认类型                                 |
+| 'scene'    | 三维笛卡尔坐标系                                           |
+| 'polar'    | 极坐标系                                                   |
+| 'ternary'  | scatterternary 的三元子图                                  |
+| 'mapbox'   | scattermapbox 的 Mapbox                                    |
+| 'domain'   | 独立的子图类型，如 pie, parcoords, parcats 等              |
+| trace type | 根据图形名称（如 "bar", "scattergeo"等）自定确定坐标系类型 |
 
 例如：
 
@@ -483,6 +496,8 @@ fig.update_layout(height=700, showlegend=False)
 
 fig.show()
 ```
+
+该例包含了四种坐标系类型。
 
 ![type](images/2020-04-19-10-26-35.png)
 

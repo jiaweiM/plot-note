@@ -21,7 +21,7 @@
 
 ## 简介
 
-Sunburst （太阳图？）用于可视化分层数据，从内到外可视化树形结构树形的从根到叶。 Sunburst 扇区标签由 `labels` (`px.sunburst` 中的 `names`)和 `parent` 设置。
+Sunburst 用于可视化分层数据，从内到外对应树形结构的从根到叶。 Sunburst 扇区标签由 `labels` (`px.sunburst` 中的 `names`)和 `parent` 设置。
 
 主要参数：
 

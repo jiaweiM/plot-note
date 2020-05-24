@@ -16,6 +16,9 @@
   - [API](#api)
     - [title](#title)
 
+2020-05-19, 14:13
+***
+
 ## Show Legend
 
 在包含多个 traces 的 charts 中默认显示 legend。
@@ -200,6 +203,11 @@ fig.update_layout(legend=dict(x=-.1, y=1.2))
 
 fig.show()
 ```
+
+x 范围 [-2, 3]，用于设置 legend 的水平位置。
+
+- 对垂直 legend，默认为 1.02
+- 对水平 legend，默认为 0
 
 ![legend position](images/2020-03-14-14-46-17.png)
 

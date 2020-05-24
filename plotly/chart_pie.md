@@ -10,7 +10,7 @@
   - [颜色设置](#%e9%a2%9c%e8%89%b2%e8%ae%be%e7%bd%ae)
   - [字体大小 - uniformtext](#%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f---uniformtext)
   - [标签方向](#%e6%a0%87%e7%ad%be%e6%96%b9%e5%90%91)
-  - [面窝型（Donut Chart）](#%e9%9d%a2%e7%aa%9d%e5%9e%8bdonut-chart)
+  - [面窝图（Donut Chart）](#%e9%9d%a2%e7%aa%9d%e5%9b%bedonut-chart)
   - [分离扇区](#%e5%88%86%e7%a6%bb%e6%89%87%e5%8c%ba)
   - [多个 pie](#%e5%a4%9a%e4%b8%aa-pie)
   - [面积和数值成比例](#%e9%9d%a2%e7%a7%af%e5%92%8c%e6%95%b0%e5%80%bc%e6%88%90%e6%af%94%e4%be%8b)
@@ -167,7 +167,13 @@ fig.show()
 
 ![pie](images/2020-04-26-17-07-58.png)
 
-## 面窝型（Donut Chart）
+## 面窝图（Donut Chart）
+
+2020-05-24, 15:51
+
+饼图中间空一块，就是面窝图（或者甜甜圈图）。
+
+设置 `PieChart` 的 `hole` 参数，指定空心圆的大小。例如：
 
 ```py
 import plotly.graph_objects as go
@@ -175,10 +181,13 @@ import plotly.graph_objects as go
 labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
 values = [4500, 2500, 1053, 500]
 
-# Use `hole` to create a donut-like pie chart
 fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
 fig.show()
 ```
+
+说明：
+
+- `hole` 是 [0,1] 范围内的数，表示空心圆半径比例
 
 ![pie](images/2020-04-26-17-11-29.png)
 
