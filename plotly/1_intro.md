@@ -1,12 +1,12 @@
 # Introduction
 
 - [Introduction](#introduction)
-  - [简介](#%e7%ae%80%e4%bb%8b)
-  - [安装](#%e5%ae%89%e8%a3%85)
-  - [Jupyter Notebook 支持](#jupyter-notebook-%e6%94%af%e6%8c%81)
-  - [JupyterLab 支持（Python 3.5+）](#jupyterlab-%e6%94%af%e6%8c%81python-35)
-  - [静态图像导出](#%e9%9d%99%e6%80%81%e5%9b%be%e5%83%8f%e5%af%bc%e5%87%ba)
-  - [Geo 扩展](#geo-%e6%89%a9%e5%b1%95)
+  - [简介](#简介)
+  - [安装](#安装)
+  - [Jupyter Notebook 支持](#jupyter-notebook-支持)
+  - [JupyterLab 支持（Python 3.5+）](#jupyterlab-支持python-35)
+  - [静态图像导出](#静态图像导出)
+  - [Geo 扩展](#geo-扩展)
 
 2020-04-19, 19:13
 *** *

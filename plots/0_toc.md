@@ -2,7 +2,8 @@
 
 - [Graph types](#graph-types)
   - [Grahs/Plots](#grahsplots)
-  - [自定义](#%e8%87%aa%e5%ae%9a%e4%b9%89)
+  - [分布图](#分布图)
+  - [自定义](#自定义)
 
 2020-04-20, 15:27
 ***
@@ -25,6 +26,14 @@
 - [弧线图 - Arc Diagram](arc.md)
 - [脑力激荡图 - Brainstorm](brainstorm.md)
 - [小提琴](violin.md)
+
+## 分布图
+
+- [脊线图- Ridge Line Plot](ridgeline.md)
+- [直方图 - Histogram](histogram.md)
+- [小提琴 - Violin](violin.md)
+- [密度图 - Density](density_plot.md)
+- [箱线图 - Boxplot](box_whisker.md)
 
 ## 自定义
 

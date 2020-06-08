@@ -2,18 +2,19 @@
 
 - [Violin Plots](#violin-plots)
   - [Violin with px](#violin-with-px)
-    - [基本 violin](#%e5%9f%ba%e6%9c%ac-violin)
-    - [加入 box 和数据点](#%e5%8a%a0%e5%85%a5-box-%e5%92%8c%e6%95%b0%e6%8d%ae%e7%82%b9)
-    - [多个 violin](#%e5%a4%9a%e4%b8%aa-violin)
+    - [基本 violin](#基本-violin)
+    - [加入 box 和数据点](#加入-box-和数据点)
+    - [多个 violin](#多个-violin)
+    - [重叠小提琴](#重叠小提琴)
   - [go.violin](#goviolin)
-    - [基本 Violin - go](#%e5%9f%ba%e6%9c%ac-violin---go)
-    - [多个小提琴](#%e5%a4%9a%e4%b8%aa%e5%b0%8f%e6%8f%90%e7%90%b4)
-    - [分组 violin](#%e5%88%86%e7%bb%84-violin)
-    - [不对称 violin](#%e4%b8%8d%e5%af%b9%e7%a7%b0-violin)
-    - [高级 violin](#%e9%ab%98%e7%ba%a7-violin)
+    - [基本 Violin - go](#基本-violin---go)
+    - [多个小提琴](#多个小提琴)
+    - [分组 violin](#分组-violin)
+    - [不对称 violin](#不对称-violin)
+    - [高级 violin](#高级-violin)
     - [Ridgeline plot](#ridgeline-plot)
-  - [参考](#%e5%8f%82%e8%80%83)
-    - [violin 属性](#violin-%e5%b1%9e%e6%80%a7)
+  - [参考](#参考)
+    - [violin 属性](#violin-属性)
       - [`name`](#name)
       - [`x`, `y`](#x-y)
       - [`x0`, `y0`](#x0-y0)
@@ -26,13 +27,13 @@
       - [`showlegend`](#showlegend)
       - [`jitter`](#jitter)
     - [`line`](#line)
-    - [箱线图设置](#%e7%ae%b1%e7%ba%bf%e5%9b%be%e8%ae%be%e7%bd%ae)
+    - [箱线图设置](#箱线图设置)
       - [`box.visible`](#boxvisible)
       - [`box.width`](#boxwidth)
       - [`box.fillcolor`](#boxfillcolor)
       - [`box.line`](#boxline)
     - [`meanline`](#meanline)
-    - [颜色](#%e9%a2%9c%e8%89%b2)
+    - [颜色](#颜色)
       - [`fillcolor`](#fillcolor)
       - [`opacity`](#opacity)
     - [`marker`](#marker)
@@ -42,43 +43,17 @@
       - [`marker.size`](#markersize)
       - [`marker.color`](#markercolor)
       - [`marker.line`](#markerline)
-    - [`layout` 属性](#layout-%e5%b1%9e%e6%80%a7)
+    - [`layout` 属性](#layout-属性)
       - [`layout.violinmode`](#layoutviolinmode)
       - [`layout.violingap`](#layoutviolingap)
       - [`layout.violingroupgap`](#layoutviolingroupgap)
 
-2020-04-16, 15:46
+2020-06-08, 15:16
 *** **
 
 ## Violin with px
 
 `plotly.express.violin(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, hover_name=None, hover_data=None, custom_data=None, animation_frame=None, animation_group=None, category_orders={}, labels={}, color_discrete_sequence=None, color_discrete_map={}, orientation='v', violinmode='group', log_x=False, log_y=False, range_x=None, range_y=None, points=None, box=False, title=None, template=None, width=None, height=None)`
-
-1. data_frame
-
-提供数据。
-
-2. x
-
-data_frame 中列的名称，或 pandas Series，或 array_link 对象。
-
-3. y
-
-data_frame 中列的名称，或 pandas Series，或 array_link 对象。该参数值用于确定数据点在 y 轴的位置。
-
-4. color
-
-`data_frame` 中列的名称（str or int），或者 pandas `Series` 或 array-like 对象。
-
-设置颜色。
-
-5. box
-
-boolean, default False。
-
-True 表示在 violins 中绘制 boxes。
-
-hover_data, (list of str or int, or Series or array_link), data_frame 中 columns 名称 ，或 pandas Series 或 array_link 对象，用作额外的悬停提示数据。
 
 ### 基本 violin
 
@@ -142,6 +117,10 @@ fig.show()
 
 ![violins](images/2020-04-29-19-43-24.png)
 
+### 重叠小提琴
+
+`violinmode='overlay'` 将小提琴重叠起来
+
 ```py
 import plotly.express as px
 
@@ -152,8 +131,6 @@ fig = px.violin(df, y="tip", color="sex",
                 hover_data=df.columns)
 fig.show()
 ```
-
-- `violinmode='overlay'` 将小提琴重叠起来
 
 ![violin](images/2020-04-29-19-45-19.png)
 
@@ -344,7 +321,7 @@ fig.show()
 
 ### Ridgeline plot
 
-ridgeline plot（棱线图）用于显示多个数值分布，可用来可视化数据分布在时间或空间上的变化。
+ridgeline plot（脊线图）用于显示多个数值分布，可用来可视化数据分布在时间或空间上的变化。
 
 ```py
 import plotly.graph_objects as go
@@ -387,10 +364,10 @@ trace 名称在 legend 和 hover 中显示。
 
 对垂直 violin，对 `y` 值进行统计:
 
-- 提供 `x` 数组时，对每个不同的 `x` 绘制不同 violine。
+- 提供 `x` 数组时，每个不同的 `x` 对应不同分组，绘制不同 violine。
 - 不提供 `x`，绘制一个 violin。
 
-对水平 violine, 对 `x` 值进行统计：
+对水平 violin, 对 `x` 值进行统计：
 
 - 提供 `y` 数组时，，对每个不同的 `y` 绘制一个 violine。
 - 不提供 `y`时，，就绘制一个 violin。
@@ -455,10 +432,12 @@ enum：`outliers`, `suspectedoutliers`, `all`, 或 `False`。
 
 如果设置了 `marker.outliercolor` 或 `marker.line.outliercolor`，默认为 `suspectedoutliers`，否则默认为 `outliers`。
 
-- `outliers`, 只绘制盒须框外的数据点；
-- `suspectedoutliers`, 显示离阈点，对小于 4Q1-3Q3 或大于 4Q3-3Q1 的数据点用 marker 的 `outliercolor` 高亮；
-- `all`, 显示所有的数据点；
-- `False`, 不显式样本点，盒须图延展到整个区域。
+|值|说明|
+|---|---|
+|`outliers`|只绘制盒须框外的数据点|
+|`suspectedoutliers`|显示离阈点，对小于 4Q1-3Q3 或大于 4Q3-3Q1 的数据点用 marker 的 `outliercolor` 高亮|
+|`all`|显示所有的数据点|
+|`False`|不显式样本点，盒须图延展到整个区域|
 
 #### `pointpos`
 
@@ -603,7 +582,7 @@ enum: ( "0" | "circle" | "100" | "circle-open" | "200" | "circle-dot" | "300" | 
 
 设置 marker 颜色。接收多种类型的值：
 
-- 特定颜色，
+- 特定颜色
 - 数值数组
   - 根据数组的最大值和最小值映射到 colorscale
   - 如果设置了 `marker.cmin` 和 `marker.cmax`，则根据这两值映射到 colorscale。

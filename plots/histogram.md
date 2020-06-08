@@ -1,9 +1,9 @@
 # Histogram
 
 - [Histogram](#histogram)
-  - [简介](#%e7%ae%80%e4%bb%8b)
+  - [简介](#简介)
   - [bin size](#bin-size)
-  - [工具](#%e5%b7%a5%e5%85%b7)
+  - [工具](#工具)
 
 ***
 
@@ -23,10 +23,11 @@
 
 ## bin size
 
-每个 bin 中数据的个数以 bar 的高度表示，所以不同的 bin 宽度，对结果展示很重要。
+每个 bin 中数据的个数以 bar 的高度表示，所以不同的 bin 宽度，对结果展示影响很大。
 
 ## 工具
 
 - [d3](https://observablehq.com/@d3/bar-chart)
 - [R](https://www.r-graph-gallery.com/83-histogram-with-colored-tail)
 - [seaborn](https://python-graph-gallery.com/histogram/)
+- [Data to Viz](https://www.data-to-viz.com/caveat/bin_size.html)
