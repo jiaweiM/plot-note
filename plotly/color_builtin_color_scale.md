@@ -1,11 +1,11 @@
 # Built-in Continuous Color Scales
 
 - [Built-in Continuous Color Scales](#built-in-continuous-color-scales)
-  - [简介](#%e7%ae%80%e4%bb%8b)
-  - [内置命名 Continuous 色阶](#%e5%86%85%e7%bd%ae%e5%91%bd%e5%90%8d-continuous-%e8%89%b2%e9%98%b6)
-  - [内置 Sequential 色阶](#%e5%86%85%e7%bd%ae-sequential-%e8%89%b2%e9%98%b6)
-  - [内置 Diverging 色阶](#%e5%86%85%e7%bd%ae-diverging-%e8%89%b2%e9%98%b6)
-  - [内置 Cyclical 色阶](#%e5%86%85%e7%bd%ae-cyclical-%e8%89%b2%e9%98%b6)
+  - [简介](#简介)
+  - [内置命名 Continuous 色阶](#内置命名-continuous-色阶)
+  - [内置 Sequential 色阶](#内置-sequential-色阶)
+  - [内置 Diverging 色阶](#内置-diverging-色阶)
+  - [内置 Cyclical 色阶](#内置-cyclical-色阶)
 
 2020-04-29, 14:59
 *** *
