@@ -3,7 +3,7 @@
 ## 学习笔记
 
 - [简介](1_intro.md)
-- [Pyplot 教程](02_pyplot.md)
+- [Pyplot 教程](2_pyplot.md)
 - [Artist tutorial](artist_tutorial.md)
 - [Axes](axes.md)
 - [Legend](title_label_legend.md)
