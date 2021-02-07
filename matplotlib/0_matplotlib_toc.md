@@ -6,6 +6,7 @@
 - [Pyplot 教程](2_pyplot.md)
 - [Artist tutorial](artist_tutorial.md)
 - [Axes](axes.md)
+  - [Spine 操作](spines.md)
 - [Legend](title_label_legend.md)
 - [Text](text.md)
 - [输出](output.md)

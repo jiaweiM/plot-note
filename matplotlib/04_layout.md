@@ -1,16 +1,18 @@
-# TOC
-- [TOC](#toc)
-- [GridSpec 使用](#gridspec-%e4%bd%bf%e7%94%a8)
-  - [基础入门](#%e5%9f%ba%e7%a1%80%e5%85%a5%e9%97%a8)
+# GridSpec
+- [GridSpec](#gridspec)
+  - [简介](#简介)
+  - [基础入门](#基础入门)
     - [subplots](#subplots)
-    - [GridSpec](#gridspec)
-    - [Figure.add_gridspec](#figureaddgridspec)
-    - [width_ratios & height_ratios](#widthratios--heightratios)
+    - [GridSpec](#gridspec-1)
+    - [Figure.add_gridspec](#figureadd_gridspec)
+    - [width_ratios & height_ratios](#width_ratios--height_ratios)
     - [subplots & gridspec](#subplots--gridspec)
-  - [精细调整 Gridspec](#%e7%b2%be%e7%bb%86%e8%b0%83%e6%95%b4-gridspec)
+  - [精细调整 Gridspec](#精细调整-gridspec)
   - [GridSpec & SubplotSpec](#gridspec--subplotspec)
-  - [内嵌 GridSpec](#%e5%86%85%e5%b5%8c-gridspec)
-# GridSpec 使用
+  - [内嵌 GridSpec](#内嵌-gridspec)
+
+## 简介
+
 GridSpec 使用网格形式布局多个 `Axes`。
 
 用于创建网格形式的布局：

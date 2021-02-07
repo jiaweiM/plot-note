@@ -1,5 +1,5 @@
-
 # 简介
+
 使用 `Artist` 对象渲染 canvas.
 
 matplotlib API 有三层：

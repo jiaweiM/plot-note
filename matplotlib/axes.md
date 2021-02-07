@@ -1,14 +1,14 @@
 # Content
 
 - [Content](#content)
-- [简介](#%e7%ae%80%e4%bb%8b)
-- [功能说明](#%e5%8a%9f%e8%83%bd%e8%af%b4%e6%98%8e)
+- [简介](#简介)
+- [功能说明](#功能说明)
   - [annotate](#annotate)
-  - [set_yticks](#setyticks)
-  - [set_yticklabels](#setyticklabels)
-  - [set_title](#settitle)
+  - [set_yticks](#set_yticks)
+  - [set_yticklabels](#set_yticklabels)
+  - [set_title](#set_title)
 - [Ticks and tick labels](#ticks-and-tick-labels)
-  - [set_xticks](#setxticks)
+  - [set_xticks](#set_xticks)
 
 # 简介
 `Axes` 包含 `XAxis` 和 `YAxis`，用于处理 ticks, tick labels 和 axis label 的位置和绘制。

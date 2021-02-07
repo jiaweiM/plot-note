@@ -1,15 +1,16 @@
-# TOC
-- [TOC](#toc)
+# matplotlib.figure
 - [matplotlib.figure](#matplotlibfigure)
-- [figure.Figure](#figurefigure)
-	- [add_axes](#addaxes)
-	- [add_gridspec](#addgridspec)
-	- [tight_layout](#tightlayout)
+	- [简介](#简介)
+	- [figure.Figure](#figurefigure)
+	- [add_axes](#add_axes)
+	- [add_gridspec](#add_gridspec)
+	- [tight_layout](#tight_layout)
 	- [suptitle](#suptitle)
 - [SubplotParams](#subplotparams)
 	- [update](#update)
 
-# matplotlib.figure
+## 简介
+
 该模块提供包含所有绘图元素顶层容器 Figure。
 
 该模块包含两个类：
@@ -25,7 +26,8 @@
 
 https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure
 
-# figure.Figure
+## figure.Figure
+
 ```py
 figure.Figure(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=0.0, frameon=None, subplotpars=None, tight_layout=None, constrained_layout=None)[source]
 ```
@@ -44,6 +46,7 @@ figure.Figure(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=
 
 
 ## add_axes
+
 添加 axex 到 figure.
 
 调用方式：
@@ -51,7 +54,6 @@ figure.Figure(figsize=None, dpi=None, facecolor=None, edgecolor=None, linewidth=
 add_axes(rect, projection=None, polar=False, **kwargs)
 add_axes(ax)
 ```
-
 
 添加 axes 到指定位置 rect[left, bottom, width, height]，所有值都是相对 figure 的 width, height 的比例值。
 kwargs 为 Axes 的参数。如果参数完全相同，则创建的坐标系也相同，可以通过 label 属性分开：
