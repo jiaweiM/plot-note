@@ -12,6 +12,7 @@
 - [输出](output.md)
 - [API](api_matplotlib.md)
 - [Layout](04_layout.md)
+- [注释](annotation.md)
 
 ## API
 

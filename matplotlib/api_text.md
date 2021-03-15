@@ -1,6 +1,6 @@
-- [set_fontsize](#setfontsize)
-- [set_fontweight](#setfontweight)
-- [set_size](#setsize)
+- [set_fontsize](#set_fontsize)
+- [set_fontweight](#set_fontweight)
+- [set_size](#set_size)
 
 # set_fontsize
 ```
