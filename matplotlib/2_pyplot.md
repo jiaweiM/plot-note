@@ -6,6 +6,7 @@
   - [关键字字符串绘图](#关键字字符串绘图)
   - [分类变量](#分类变量)
   - [线段属性设置](#线段属性设置)
+  - [](#)
 
 2020-07-01, 20:58
 ***
@@ -14,7 +15,7 @@
 
 `matplotlib.pyplot` 包含一系列类似 MATLAB 的绘图函数。每个 `pyplot` 函数对 figure 进行一些修改，如创建 figure，在 figure 中创建 plot，在 plot 中添加线段，添加标签等。
 
-`matplotlib.pyplot` 在不同函数调用时，状态保持不变，它记录了当前 figure 和 plotting area，以及对当前 axes 作用的绘图函数。
+`matplotlib.pyplot` 在不同函数调用之间维持状态不变，以便记录当前 figure 和 plotting area 等信息，以及对当前 axes 作用的绘图函数。
 
 pyplot 主要用于交互式绘图以及较为简单的绘图，对复杂的绘图，还是建议为面向对象 API。且 `pyplot` 的大部分函数 `Axes` 对象也有。
 
@@ -42,9 +43,7 @@ plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 
 ### 样式设置
 
-对每对 x, y 参数，都有一个可选的格式字符串，用于设置线条类型和颜色。格式字符串来自 MATLAB。默认为 `'b-'`，表示蓝色实线。
-
-例如，下面绘制红色圆圈：
+对每对 x, y 参数，都有第三个可选的格式字符串，用于设置线条类型和颜色。格式字符串来自 MATLAB。默认为 `'b-'`，表示蓝色实线。例如，下面绘制红色圆圈：
 
 ```py
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
@@ -58,7 +57,7 @@ plt.show()
 
 matplotlib 内部使用 numpy 存储数据，提供的其它类型数据在内部也被转换为 ndarray。
 
-下面使用一个命令绘制不同样式的多条线：
+下面使用一个命令绘制不同样式的线条：
 
 ```py
 import numpy as np
@@ -108,12 +107,15 @@ values = [1, 10, 100]
 
 plt.figure(figsize=(9, 3))
 
-plt.subplot(131)
+plt.subplot(131) # 1 行 3 列第一个
 plt.bar(names, values)
-plt.subplot(132)
+
+plt.subplot(132) # 1 行 3 列第二个
 plt.scatter(names, values)
+
 plt.subplot(133)
 plt.plot(names, values)
+
 plt.suptitle('Categorical Plotting')
 plt.show()
 ```
@@ -136,4 +138,72 @@ plt.plot(x, y, linewidth=2.0)
 
 2. 使用 `Line2D` 的 `setter` 方法
 
-`plot()` 函数返回 `Line2D` 对象列表，例如 `line1, line2 = plot(x1, y1, x2, y2)` 
+`plot()` 函数返回 `Line2D` 对象列表，例如 `line1, line2 = plot(x1, y1, x2, y2)`。下面创建一个 `Line2D` 对象：
+
+```py
+line, = plt.plot(x, y, '-')
+line.set_antialiased(False) # turn off antialiasing
+```
+
+3. 使用 `setp`
+
+下面使用 MATLAB 风格函数设置多个线条的多个属性。在其中可以使用关键字参数，也可以使用 string/value 设置。例如：
+
+```py
+lines = plt.plot(x1, y1, x2, y2)
+# 使用关键字参数
+plt.setp(lines, color='r', linewidth=2.0)
+
+# 使用 MATLAB 样式 string value pairs
+plt.setp(lines, 'color', 'r', 'linewidth', 2.0)
+```
+
+`Line2D` 属性如下：
+
+|属性|类型|
+|---|---|
+|alpha|float|
+|animated|`[True | False]`|
+|antialiased or aa|`[True | False]`|
+|clip_box|a matplotlib.transform.Bbox instance|
+|clip_on|`[True | False]`|
+|clip_path|a Path instance and a Transform instance, a Patch|
+|color or c|any matplotlib color|
+|contains|the hit testing function|
+|dash_capstyle|`['butt' | 'round' | 'projecting']`|
+|dash_joinstyle|`['miter' | 'round' | 'bevel']`|
+|dashes|sequence of on/off ink in points|
+|data|(np.array xdata, np.array ydata)|
+|figure|a matplotlib.figure.Figure instance|
+|label|any string|
+|linestyle or ls|`[ '-' | '--' | '-.' | ':' | 'steps' | ...]`|
+|linewidth or lw|float value in points|
+|marker|`[ '+' | ',' | '.' | '1' | '2' | '3' | '4' ]`|
+|markeredgecolor or mec|any matplotlib color|
+|markeredgewidth or mew|float value in points|
+|markerfacecolor or mfc|any matplotlib color|
+|markersize or ms|float|
+|markevery|`[ None | integer | (startind, stride) ]`|
+|picker|used in interactive line selection|
+|pickradius|the line pick selection radius|
+|solid_capstyle|`['butt' | 'round' | 'projecting']`|
+|solid_joinstyle|`['miter' | 'round' | 'bevel']`|
+|transform|a matplotlib.transforms.Transform instance|
+|visible|`[True | False]`|
+|xdata|np.array|
+|ydata|np.array|
+|zorder|any number|
+
+通过 `setp` 函数可以查看线段可以设置的属性：
+
+```py
+In [69]: lines = plt.plot([1, 2, 3])
+
+In [70]: plt.setp(lines)
+alpha: float
+animated: [True | False]
+antialiased or aa: [True | False]
+...snip
+```
+
+## 

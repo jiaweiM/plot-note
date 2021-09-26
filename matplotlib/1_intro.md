@@ -11,7 +11,6 @@
   - [pyplot & pylab](#pyplot--pylab)
   - [代码风格推荐](#代码风格推荐)
   - [后端](#后端)
-    - [后端定义](#后端定义)
     - [设置后端](#设置后端)
     - [内置后端](#内置后端)
   - [交互模式](#交互模式)
@@ -82,9 +81,9 @@ matplotlib API 是分层组织的：
 创建 figure 的最简单方式是使用 `pyplot`：
 
 ```py
-fig = plt.figure()  # an empty figure with no Axes
-fig, ax = plt.subplots()  # a figure with a single Axes
-fig, axs = plt.subplots(2, 2)  # a figure with a 2x2 grid of Axes
+fig = plt.figure()  # 空 figure，没有 Axes
+fig, ax = plt.subplots()  # 包含一个 Axes 的 figure
+fig, axs = plt.subplots(2, 2)  # 包含 2x2 网格布局的 4 个 Axes 的 figure
 ```
 
 可以在创建 figure 时创建 axes，也可以随后添加 axes。
@@ -100,7 +99,7 @@ Axes 是 Axis 的复数，两个坐标轴组成一个二维坐标空间，每个
   - 通过 `Axes` 的 `set_xlim()` 和 `set_ylim()` 也可以设置坐标轴范围。
 - 每个 `Axes` 包含标题 `set_title()`，x 轴标签 `set_xlabel()`和 y 轴标签 `set_ylabel()`、
 
-`Axes` 是 OO 接口的最重要的类。每个 Axes 包含 `XAixs` 和 `YAxis`，它们包括 ticks, tick locations, labels 等。
+`Axes` 是 OO 接口最重要的类。每个 Axes 包含 `XAixs` 和 `YAxis`，它们包括 ticks, tick locations, labels 等。
 
 大部分绘制工作在 `Axes` 对象上进行，包括数据点、ticks、labels等内容。一般通过 subplot 函数设置 `Axes`。`Axes` 和 `Subplot` 含义相同。
 
@@ -108,7 +107,7 @@ Axes 是 Axis 的复数，两个坐标轴组成一个二维坐标空间，每个
 
 坐标轴，**数值-线**对象，用于生成坐标轴、刻度、标签和值范围等。
 
-- 刻度的位置由 `Locator` 确定。
+- 刻度的位置由 `Locator` 设置；
 - 刻度标签由 `Formatter` 格式化。
 
 结合使用 `Locator` 和 `Formatter` 可以精细控制刻度位置和标签。
@@ -121,18 +120,18 @@ Axes 是 Axis 的复数，两个坐标轴组成一个二维坐标空间，每个
 
 ## 输入数据类型
 
-所有的绘图函数支持 `np.array` 或 `np.ma.masked_array`。部分支持其它类似数组的对象，如 pandas 数据对象和 `np.matrix`。
+所有的绘图函数支持 `np.array` 或 `np.ma.masked_array` 类型数据作为输入。部分支持其它类似数组的对象，如 pandas 数据对象和 `np.matrix`。
 
 最好在绘图前将输入类型转换为 `np.array` 对象。
 
-例如，将 `pandas.DataFrame` 转换为 `np.array`:
+- 例如，将 `pandas.DataFrame` 转换为 `np.array`:
 
 ```py
 a = pandas.DataFrame(np.random.rand(4,5), columns = list('abcde'))
 a_asndarray = a.values
 ```
 
-将 `np.matrix` 转换为 `np.array`:
+- 将 `np.matrix` 转换为 `np.array`:
 
 ```py
 b = np.matrix([[1,2],[3,4]])
@@ -143,14 +142,14 @@ b_asarray = np.asarray(b)
 
 使用 Matplotlib 的方式有两种：
 
-- 创建 figures, axes，然后调用对应对象的方式（OO）
-- 使用 pyplot 函数创建和设置
+- 显式创建 figures, axes，然后调用对应对象的方式（OO）；
+- 使用 pyplot 函数创建和设置 figure 和 axes，使用 pyplot 函数绘图。
 
 pyplot 模块具有当前 figure 和 axes 的概念，所有操作都作用于当前对象。`pyplot` 为面向对象 API 提供了状态机接口，状态机隐式的自动创建 figures 和 axes。
 
 例如，`plt.plot` 创建了子图，随后所有的 `plt.plot` 都添加线条到当前子图。
 
-OO 实例：
+- OO 实例：
 
 ```py
 import matplotlib.pyplot as plt
@@ -158,6 +157,7 @@ import numpy as np
 
 x = np.linspace(0, 2, 100)
 
+# OO样式依然是使用 `pyplot.figure` 创建 figure
 fig, ax = plt.subplots()  # 创建 figure 和 axes
 ax.plot(x, x, label='linear')
 ax.plot(x, x ** 2, label='quadratic')
@@ -166,12 +166,13 @@ ax.set_xlabel("x label")
 ax.set_ylabel("y label")
 ax.set_title("Simple Plot")
 ax.legend()
+
 plt.show()
 ```
 
 ![line](images/2020-06-29-22-17-48.png)
 
-pyplot 实例：
+- pyplot 实例
 
 ```py
 import matplotlib.pyplot as plt
@@ -215,8 +216,7 @@ import numpy as np
 ```py
 def my_plotter(ax, data1, data2, param_dict):
     """
-    A helper function to make a graph
-
+    绘图函数
     Parameters
     ----------
     ax : Axes
@@ -258,28 +258,24 @@ my_plotter(ax2, data3, data4, {'marker': 'o'})
 
 ## 后端
 
-### 后端定义
+matplotlib 支持多种输出格式，每一种输出格式称为一个后端（backend），而前端（frontend）是代码。有两种类型的后端：
 
-matplotlib 支持多种输出格式，每一种输出格式称为一个后端（backend）；前端（frontend）是代码。
-
-有两种类型的后端：
-
-- UI 后端（如 pygtk, wxpython, tkinter, qt4, macosx）,也称为交互后端。
+- UI 后端（如 PyQt/PySide, PyGObject, wxpython, tkinter, macosx）,也称为交互后端。
 - 硬拷贝后端，即图片文件（PNG, SVG, PDF, PS）等，也称为无交互后端。
 
 ### 设置后端
 
-有三种配置后端的方法：
+配置后端的方法有三种：
 
-1. `matplotlibrc` 文件的 `rcParams["backend"]` 参数
+1. `matplotlibrc` 文件中的 `rcParams["backend"]` 参数
 2. `MPLBACKEND` 环境变量
 3. `matplotlib.use()` 函数
 
 如果不同配置方法存在冲突，靠后的优先。例如，调用 `matplotlib.use()` 会覆盖 `matplotlibrc`。
 
-如果没有显式设置，Matplotlib 会自动检测可用后端。在 Linux，如果没有设置 `DISPLAY` 环境变量，"event loop" 被识别为 "headless"，从而导致回退到非交互后端（agg）。
+如果没有显式设置，Matplotlib 会自动检测可用后端。在 Linux，如果没有设置 `DISPLAY` 环境变量，"event loop" 被识别为 "headless"，从而导致回退到非交互后端（agg）。在其它情况，都是首选交互式后端。
 
-下面对不同配置方法详细说明。
+下面对不同配置方法进行说明。
 
 1. `matplotlibrc` 文件中的 `backend` 参数
 
@@ -295,7 +291,7 @@ backend: WXAgg
 
 可以在当前 Shell 会脚本中设置环境变量。
 
-对 Unix:
+- 对 Unix，可以在 shell 会单个脚本中设置
 
 ```py
 > export MPLBACKEND=qt5agg
@@ -304,7 +300,7 @@ backend: WXAgg
 > MPLBACKEND=qt5agg python simple_plot.py
 ```
 
-对 Windows，只能使用 Shell:
+- 对 Windows，只能使用 Shell
 
 ```cmd
 > set MPLBACKEND=qt5agg
@@ -313,16 +309,18 @@ backend: WXAgg
 
 设置该环境变量会覆盖 `matplotlibrc` 中的 `backend` 参数，即使 `matplotlibrc` 文件在当前工作目录。
 
-3. 如果你的脚本依赖于特定后端，可以使用 `matplotlib.use()`
+因此不推荐设置全局的 `MPLBACKEND` 环境变量。
+
+3. 如果你的脚本依赖于特定后端，可以使用 `matplotlib.use()` 函数
 
 ```py
 import matplotlib
 matplotlib.use('qt5agg')
 ```
 
-该设置必须在创建 figure 之前，否则 Matplotlib 可能无法切换后端，抛出 `ImportError`。
+必须在创建 figure 之前设置，否则 Matplotlib 可能无法切换后端，抛出 `ImportError`。
 
-如果用户想使用不同的后端，对 `use` 来说必须修改代码，因此，除非必须，否则应当尽量必须调用 `use`。
+如果用户想使用不同的后端，对 `use` 来说必须修改代码，因此，除非必须，否则应当尽量避免调用 `use`。
 
 ### 内置后端
 
@@ -334,7 +332,7 @@ matplotlib.use('qt5agg')
 
 下表是 matplotlib 渲染器，每个渲染器都有一个同名后端，对应非交互后端，可以写入文件。
 
-|Renderer|Filetypes|Description|
+|Renderer|文件类型|说明|
 |---|---|---|
 |AGG|png|raster graphics -- high quality images using the Anti-Grain Geometry engine|
 |PS|ps, eps|vector graphics -- Postscript output|
@@ -367,7 +365,7 @@ matplotlib.use('qt5agg')
 
 是否处于交互模式的默认配置在 `matplotlibrc` 文件，可以和其它参数一样自定义。也可以通过 `matplotlib.interactive()` 设置，使用 `matplotlib.is_interactive()` 查询。
 
-可以使用 `matplotlib.pyplot.ion()` 开启交互模式，使用 `matplotlib.pyplot.ioff()` 关闭。
+使用 `matplotlib.pyplot.ion()` 开启交互模式，使用 `matplotlib.pyplot.ioff()` 关闭。
 
 ### 交互实例
 
@@ -375,13 +373,13 @@ matplotlib.use('qt5agg')
 
 ```py
 import matplotlib.pyplot as plt
-plt.ion()
+plt.ion() # 开启交互模式
 plt.plot([1.6, 2.7])
 ```
 
 ![line](images/2020-06-30-10-38-08.png)
 
-此时会出现一个绘图窗口，然后可以输入额外命令，例如：
+此时会出现一个绘图窗口，然后可以输入绘图命令，例如：
 
 ```py
 plt.title("interactive test")
@@ -401,17 +399,23 @@ ax.plot([3.1, 2.2])
 
 ![line](images/2020-06-30-10-47-20.png)
 
+如果使用 `macosx` 后端，或者使用老版本的 Matplotlib，可能图形窗口没有更新，此时可以显式调用 `draw()` 更新图形：
+
+```py
+plt.draw()
+```
+
 ### 非交互实例
 
 关闭交互模式，绘制相同的图：
 
 ```py
 import matplotlib.pyplot as plt
-plt.ioff()
+plt.ioff() # 关闭交互模式
 plt.plot([1.6, 2.7])
 ```
 
-什么都没发生，或者说没有任何东西在屏幕显示。要显示内容，如要调用：
+什么都没发生，或者说没有任何东西在屏幕显示。要显示内容，需要调用：
 
 ```py
 plt.show()
@@ -419,7 +423,7 @@ plt.show()
 
 此时可以看到该图，但是 python 终端不再响应，`pyplot.show()` 阻止其它输入命令，直到手动终止绘图窗口。
 
-强行阻塞的目的，你为了查看figure。否则脚本直接执行结束，figure显示后马上结束，屏幕上什么都看不见。
+强行阻塞是为了查看figure，否则脚本直接执行结束，figure显示后马上结束，屏幕上什么都看不见。
 
 另外，在非交互模式，所有的绘制操作都延迟到调用 `show()` 执行，这比每次添加内容就重新绘制要高效。
 
@@ -439,9 +443,7 @@ for i in range(3):
 
 ### 总结
 
-在交互模式，pyplot 函数自动渲染到屏幕。
-
-在交互模式，如果使用了面向对象函数，则需要调用 `draw()` 更新 plot。
+在交互模式，pyplot 函数自动渲染到屏幕，如果使用面向对象函数，则需要调用 `draw()` 更新 plot。
 
 如果要生成多个 figures，请使用非交互模式，使用 `show()` 显示 figures。
 
@@ -453,8 +455,8 @@ for i in range(3):
 
 对包含线段的图（如线图，多边形的边框等），其渲染性能可以通过 `matplotlibrc` 文件中的 `path.simplify` 和 `path.simplify_threshold` 参数控制。
 
-- `path.simplify` 为 boolean 类型参数，表示是否简化线段。
-- `path.simplify_threshold` 设置简化线段的程度，值越大，渲染越快。
+- `path.simplify` 为 boolean 类型参数，表示是否简化线段，默认为 True；
+- `path.simplify_threshold` 设置简化线段的程度，值越大，渲染越快，默认 0.111111111111。
 
 如下：第一个不简化，第二个简化
 
@@ -469,11 +471,11 @@ y[50000:] *= 2
 y[np.logspace(1, np.log10(50000), 400).astype(int)] = -1
 mpl.rcParams['path.simplify'] = True
 
-mpl.rcParams['path.simplify_threshold'] = 0.0  # no simplification
+mpl.rcParams['path.simplify_threshold'] = 0.0  # 无简化
 plt.plot(y)
 plt.show()
 
-mpl.rcParams['path.simplify_threshold'] = 1.0  # simplification
+mpl.rcParams['path.simplify_threshold'] = 1.0  # 简化
 plt.plot(y)
 plt.show()
 ```
@@ -482,7 +484,7 @@ Matplotlib 目前默认的简化阈值为 1/9. 如果想修改默认值，修改
 
 另外，可以对交互绘图（最大简化）和发表质量绘图（最小简化）使用不同的风格，在需要时启用。
 
-线段简化通过将相邻的线段合并为单个矢量，之后下一个线段和当前线段的垂直距离大于 `path.simplify_threshold`。
+线段简化是通过将相邻的线段合并为单个矢量，直到下一个线段和当前线段的垂直距离大于 `path.simplify_threshold` 阈值。
 
 ### Marker 简化
 
@@ -492,9 +494,11 @@ Matplotlib 目前默认的简化阈值为 1/9. 如果想修改默认值，修改
 plt.plot(x, y, markevery=10)
 ```
 
+`markevery` 参数允许简单抽样，或者均匀间隔抽样。
+
 ### 线段分段
 
-对 Agg 后端可以使用 `agg.path.chunksize` rc 参数。
+对 Agg 后端可以使用 `agg.path.chunksize` rc 参数，默认为 0.
 
 ### fast 样式
 
@@ -513,4 +517,4 @@ mplstyle.use(['dark_background', 'ggplot', 'fast'])
 
 ## References
 
-- [Usage Guide](https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py)
+- [Usage Guide](https://matplotlib.org/stable/tutorials/introductory/usage.html)

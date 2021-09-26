@@ -22,7 +22,7 @@
 
 ## Reference
 
-- [User's Guide](https://matplotlib.org/users/index.html)
+- [User's Guide](https://matplotlib.org/stable/users/index.html)
 - [Scientific computing with Python](https://github.com/jrjohansson/scientific-python-lectures)
 - [Matplotlib tutorial](https://github.com/rougier/matplotlib-tutorial)
 - [Anatomy of Matplotlib](https://github.com/matplotlib/AnatomyOfMatplotlib)
