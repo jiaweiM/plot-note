@@ -1,27 +1,27 @@
 # 显示 plotly 绘图
 
-- [显示 plotly 绘图](#%e6%98%be%e7%a4%ba-plotly-%e7%bb%98%e5%9b%be)
-  - [简介](#%e7%ae%80%e4%bb%8b)
-  - [渲染框架](#%e6%b8%b2%e6%9f%93%e6%a1%86%e6%9e%b6)
-    - [设置默认渲染器](#%e8%ae%be%e7%bd%ae%e9%bb%98%e8%ae%a4%e6%b8%b2%e6%9f%93%e5%99%a8)
-    - [覆盖默认渲染器](#%e8%a6%86%e7%9b%96%e9%bb%98%e8%ae%a4%e6%b8%b2%e6%9f%93%e5%99%a8)
-  - [内置渲染器](#%e5%86%85%e7%bd%ae%e6%b8%b2%e6%9f%93%e5%99%a8)
-    - [交互渲染器](#%e4%ba%a4%e4%ba%92%e6%b8%b2%e6%9f%93%e5%99%a8)
+- [显示 plotly 绘图](#显示-plotly-绘图)
+  - [简介](#简介)
+  - [渲染框架](#渲染框架)
+    - [设置默认渲染器](#设置默认渲染器)
+    - [覆盖默认渲染器](#覆盖默认渲染器)
+  - [内置渲染器](#内置渲染器)
+    - [交互渲染器](#交互渲染器)
     - [notebook](#notebook)
-    - [notebook_connected](#notebookconnected)
-    - [kaggle 和 azure](#kaggle-%e5%92%8c-azure)
+    - [notebook_connected](#notebook_connected)
+    - [kaggle 和 azure](#kaggle-和-azure)
     - [colab](#colab)
     - [browser](#browser)
     - [firefox, chrome, chromium](#firefox-chrome-chromium)
-    - [iframe 和 iframe_connected](#iframe-%e5%92%8c-iframeconnected)
-    - [plotly_mimetype](#plotlymimetype)
+    - [iframe 和 iframe_connected](#iframe-和-iframe_connected)
+    - [plotly_mimetype](#plotly_mimetype)
     - [jupyterlab, nteract, vscode](#jupyterlab-nteract-vscode)
-  - [静态图像渲染](#%e9%9d%99%e6%80%81%e5%9b%be%e5%83%8f%e6%b8%b2%e6%9f%93)
+  - [静态图像渲染](#静态图像渲染)
     - [png, jpeg, svg](#png-jpeg-svg)
     - [pdf](#pdf)
     - [json](#json)
-  - [多渲染器](#%e5%a4%9a%e6%b8%b2%e6%9f%93%e5%99%a8)
-  - [自定义内置渲染器](#%e8%87%aa%e5%ae%9a%e4%b9%89%e5%86%85%e7%bd%ae%e6%b8%b2%e6%9f%93%e5%99%a8)
+  - [多渲染器](#多渲染器)
+  - [自定义内置渲染器](#自定义内置渲染器)
   - [Dash](#dash)
   - [ipywidgets](#ipywidgets)
 
@@ -69,7 +69,7 @@ fig
 ![without show](images/2020-03-11-21-23-59.png)
 
 > 准确地说，当满足以下两个条件图表会在当前默认渲染器中显示：
-> 
+>
 > - 首先，最后一个表达式结果为 figure；
 > - 然后，在包含 IPython kernel 的环境运行。
 

@@ -2,11 +2,11 @@
 
 - [Annotation](#annotation)
   - [Text scatter plot with PX](#text-scatter-plot-with-px)
-  - [Scatter 数据注释](#scatter-%e6%95%b0%e6%8d%ae%e6%b3%a8%e9%87%8a)
-  - [设置字体大小 - uniformtext](#%e8%ae%be%e7%bd%ae%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f---uniformtext)
-  - [设置字体大小 - fontsize](#%e8%ae%be%e7%bd%ae%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f---fontsize)
+  - [Scatter 数据注释](#scatter-数据注释)
+  - [设置字体大小 - uniformtext](#设置字体大小---uniformtext)
+  - [设置字体大小 - fontsize](#设置字体大小---fontsize)
     - [`data[type=pie].textfont`](#datatypepietextfont)
-  - [Text 格式化](#text-%e6%a0%bc%e5%bc%8f%e5%8c%96)
+  - [Text 格式化](#text-格式化)
     - [precision](#precision)
     - [type](#type)
 

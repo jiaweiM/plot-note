@@ -1,26 +1,30 @@
 # Scatter Plot
 
 - [Scatter Plot](#scatter-plot)
-  - [Scatter plot with PX](#scatter-plot-with-px)
-    - [通过 column 名称设置 color 和 size](#%e9%80%9a%e8%bf%87-column-%e5%90%8d%e7%a7%b0%e8%ae%be%e7%bd%ae-color-%e5%92%8c-size)
+  - [PX API](#px-api)
+    - [通过 column 名称设置 color 和 size](#通过-column-名称设置-color-和-size)
+    - [通过 column 名称设置 symbol](#通过-column-名称设置-symbol)
     - [Line plot with px](#line-plot-with-px)
   - [Scatter with go](#scatter-with-go)
-  - [简单散点图](#%e7%ae%80%e5%8d%95%e6%95%a3%e7%82%b9%e5%9b%be)
+  - [简单散点图](#简单散点图)
   - [Line and Scatter Plots](#line-and-scatter-plots)
   - [Bubble Scatter Plots](#bubble-scatter-plots)
-  - [个性化设置](#%e4%b8%aa%e6%80%a7%e5%8c%96%e8%ae%be%e7%bd%ae)
-  - [悬停文本](#%e6%82%ac%e5%81%9c%e6%96%87%e6%9c%ac)
+  - [个性化设置](#个性化设置)
+  - [悬停文本](#悬停文本)
   - [Color Dimension](#color-dimension)
   - [Large Data Sets](#large-data-sets)
+  - [参考](#参考)
 
 2020-04-20, 09:38
 *** *
 
-## Scatter plot with PX
+## PX API
 
-使用 `px.scatter` 绘制散点图，每个数据点由一个标记（marker）表示，位置由 `x`, `y` 确定。
+Plotly Express 高级 API，可用于操作各种类型的数据，生成 figure 简单。
 
-- 数组对象提供数据
+使用 `px.scatter` 绘制散点图，数据点由标记（marker）表示，位置由 `x`, `y` 确定。
+
+- 数组作为数据源
 
 ```py
 import plotly.express as px
@@ -34,7 +38,7 @@ fig.show()
 
 ![scatter](images/2020-03-26-16-28-12.png)
 
-- `DataFrame` 提供数据
+- `DataFrame` 作为数据源
 
 ```py
 import plotly.express as px
@@ -46,9 +50,13 @@ fig.show()
 
 ![scatter](images/2020-03-26-16-31-04.png)
 
+> 该 API 和 pandas 结合使用比较方便。
+
 ### 通过 column 名称设置 color 和 size
 
-> `color` 和 `size` 已添加到 hover 信息中，还可以通过 `px.scatter` 的 `hover_data` 参数添加额外的 column 到 hover 中。
+带有可变大小圆形编辑的散点图也称为气泡图（bubble chart）。
+
+> `color` 和 `size` 已添加到 hover 信息中，可以通过 `px.scatter` 的 `hover_data` 参数添加额外的 column 到 hover 中。
 
 ```py
 import plotly.express as px
@@ -59,7 +67,36 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length",
 fig.show()
 ```
 
+> 这里将 `species` 列作为颜色信息，
+
 ![scatter](images/2020-03-26-17-06-33.png)
+
+- 可以和上面一样使用离散值 `species` 作为颜色，也可以将连续值作为颜色，如下
+
+```py
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x='sepal_width', y='sepal_length', color='petal_length')
+fig.show()
+```
+
+![scatter](images/2021-11-23-14-38-29.png)
+
+### 通过 column 名称设置 symbol
+
+可以将 column 值映射到 symbol，这样不同的值对应不同的 symbol。
+
+```py
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol="species")
+fig.show()
+```
+
+![](images/2021-11-23-14-49-26.png)
+
+
 
 ### Line plot with px
 
@@ -293,3 +330,7 @@ fig.show()
 ```
 
 ![webgl](images/2020-03-28-13-09-13.png)
+
+## 参考
+
+- https://plotly.com/python/line-and-scatter/

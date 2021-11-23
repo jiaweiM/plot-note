@@ -3,7 +3,7 @@
 - [Graph size](#graph-size)
   - [Height, Width, Margin with Express](#height-width-margin-with-express)
   - [Height, Width, Margin with go](#height-width-margin-with-go)
-  - [自动调整边距](#%e8%87%aa%e5%8a%a8%e8%b0%83%e6%95%b4%e8%be%b9%e8%b7%9d)
+  - [自动调整边距](#自动调整边距)
 
 2020-04-18, 20:12
 *** **

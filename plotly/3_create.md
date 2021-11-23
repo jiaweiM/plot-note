@@ -1,36 +1,36 @@
-# Creating and Updating Figures
+# Figures 的创建和更新
 
-- [Creating and Updating Figures](#creating-and-updating-figures)
-  - [图的表达方式](#%e5%9b%be%e7%9a%84%e8%a1%a8%e8%be%be%e6%96%b9%e5%bc%8f)
-    - [字典](#%e5%ad%97%e5%85%b8)
-    - [图形对象](#%e5%9b%be%e5%bd%a2%e5%af%b9%e8%b1%a1)
-  - [创建图形](#%e5%88%9b%e5%bb%ba%e5%9b%be%e5%bd%a2)
-    - [构造函数](#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0)
+- [Figures 的创建和更新](#figures-的创建和更新)
+  - [Figure 的表达方式](#figure-的表达方式)
+    - [字典](#字典)
+    - [图形对象](#图形对象)
+  - [创建图形](#创建图形)
+    - [构造函数](#构造函数)
     - [Plotly express](#plotly-express)
     - [Figure factories](#figure-factories)
-    - [子图](#%e5%ad%90%e5%9b%be)
-  - [更新图](#%e6%9b%b4%e6%96%b0%e5%9b%be)
-    - [添加 trace（Adding trace）](#%e6%b7%bb%e5%8a%a0-traceadding-trace)
-    - [添加 trace 到 subplots](#%e6%b7%bb%e5%8a%a0-trace-%e5%88%b0-subplots)
-    - [Add trace 的简易方法](#add-trace-%e7%9a%84%e7%ae%80%e6%98%93%e6%96%b9%e6%b3%95)
-    - [下划线](#%e4%b8%8b%e5%88%92%e7%ba%bf)
+    - [子图](#子图)
+  - [更新图](#更新图)
+    - [添加 trace（Adding trace）](#添加-traceadding-trace)
+    - [添加 trace 到 subplots](#添加-trace-到-subplots)
+    - [Add trace 的简易方法](#add-trace-的简易方法)
+    - [下划线](#下划线)
     - [update layout](#update-layout)
     - [update trace](#update-trace)
-    - [参数覆盖](#%e5%8f%82%e6%95%b0%e8%a6%86%e7%9b%96)
+    - [参数覆盖](#参数覆盖)
     - [for each trace](#for-each-trace)
     - [update axis](#update-axis)
-  - [其它更新方法](#%e5%85%b6%e5%ae%83%e6%9b%b4%e6%96%b0%e6%96%b9%e6%b3%95)
-    - [链式操作（Chaining figure operations）](#%e9%93%be%e5%bc%8f%e6%93%8d%e4%bd%9cchaining-figure-operations)
-    - [属性赋值（Property assignment）](#%e5%b1%9e%e6%80%a7%e8%b5%8b%e5%80%bcproperty-assignment)
+  - [其它更新方法](#其它更新方法)
+    - [链式操作（Chaining figure operations）](#链式操作chaining-figure-operations)
+    - [属性赋值（Property assignment）](#属性赋值property-assignment)
 
 2020-04-19, 22:51
 *** *
 
-## 图的表达方式
+## Figure 的表达方式
 
-plotly.py 主要用于为 plotly.js JavaScript 库提供Python接口。在 Plotly.js 中，图形是由声明式的 JSON 数据结构指定，所以 plotly.py 需要提供 Python 字典形式的数据，以方便序列化为 JSON 数据结构。
+`plotly.py` 为 `plotly.js` JavaScript 库提供 Python 接口。在 `Plotly.js` 中，图形由声明式的 JSON 数据结构指定，所以 `plotly.py` 需要提供 Python 字典形式的数据，以方便序列化为 JSON 数据结构。
 
-NOTE: plotly 将单个图形，如条形图、散点图等，称为 trace。
+> **NOTE**: plotly 将单个 Figure，如条形图、散点图等，称为 trace。
 
 一个图（figure）两部分：
 

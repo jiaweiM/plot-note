@@ -1,19 +1,19 @@
 # Theming and templates
 
 - [Theming and templates](#theming-and-templates)
-  - [简介](#%e7%ae%80%e4%bb%8b)
-  - [内置主题](#%e5%86%85%e7%bd%ae%e4%b8%bb%e9%a2%98)
-    - [查看可用主题](#%e6%9f%a5%e7%9c%8b%e5%8f%af%e7%94%a8%e4%b8%bb%e9%a2%98)
-    - [指定主题（Express）](#%e6%8c%87%e5%ae%9a%e4%b8%bb%e9%a2%98express)
-    - [指定主题（graph object）](#%e6%8c%87%e5%ae%9a%e4%b8%bb%e9%a2%98graph-object)
-    - [指定默认主题](#%e6%8c%87%e5%ae%9a%e9%bb%98%e8%ae%a4%e4%b8%bb%e9%a2%98)
-    - [禁用默认主题](#%e7%a6%81%e7%94%a8%e9%bb%98%e8%ae%a4%e4%b8%bb%e9%a2%98)
-  - [创建主题](#%e5%88%9b%e5%bb%ba%e4%b8%bb%e9%a2%98)
-    - [layout 属性](#layout-%e5%b1%9e%e6%80%a7)
-    - [data 属性](#data-%e5%b1%9e%e6%80%a7)
+  - [简介](#简介)
+  - [内置主题](#内置主题)
+    - [查看可用主题](#查看可用主题)
+    - [指定主题（Express）](#指定主题express)
+    - [指定主题（graph object）](#指定主题graph-object)
+    - [指定默认主题](#指定默认主题)
+    - [禁用默认主题](#禁用默认主题)
+  - [创建主题](#创建主题)
+    - [layout 属性](#layout-属性)
+    - [data 属性](#data-属性)
     - [Theming object tuple properties](#theming-object-tuple-properties)
-    - [合并主题](#%e5%90%88%e5%b9%b6%e4%b8%bb%e9%a2%98)
-    - [检查内置主题](#%e6%a3%80%e6%9f%a5%e5%86%85%e7%bd%ae%e4%b8%bb%e9%a2%98)
+    - [合并主题](#合并主题)
+    - [检查内置主题](#检查内置主题)
 
 ## 简介
 
