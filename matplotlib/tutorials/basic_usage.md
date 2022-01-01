@@ -1,15 +1,17 @@
-# Introduction
+# 基本用法
 
-- [Introduction](#introduction)
+- [基本用法](#基本用法)
   - [简介](#简介)
+  - [一个简单示例](#一个简单示例)
   - [Figure 结构](#figure-结构)
     - [Figure](#figure)
     - [Axes](#axes)
     - [Axis](#axis)
     - [Artist](#artist)
   - [输入数据类型](#输入数据类型)
-  - [pyplot & pylab](#pyplot--pylab)
-  - [代码风格推荐](#代码风格推荐)
+  - [代码样式](#代码样式)
+    - [面向对象和 pyplot 接口](#面向对象和-pyplot-接口)
+    - [辅助函数](#辅助函数)
   - [后端](#后端)
     - [设置后端](#设置后端)
     - [内置后端](#内置后端)
@@ -22,16 +24,17 @@
     - [Marker 简化](#marker-简化)
     - [线段分段](#线段分段)
     - [fast 样式](#fast-样式)
-  - [References](#references)
+  - [参考](#参考)
 
 2020-06-29, 21:31
+@author Jiawei Mao
 ***
 
 ## 简介
 
 [Matplotlib](https://github.com/matplotlib/matplotlib) 是一个 Python 2D 绘图库，可以生成各种出版品质的硬拷贝格式和跨平台交互式环境数据。Matplotlib 可用于 Python 脚本，Python 和 IPython shell（例如 MATLAB 或 Mathematica），Web 应用程序服务器和各种图形用户界面工具包。
 
-Python 可视化的库很多，包括 seaborn, networkx, vispy. 大多数的库都或多或少依赖于 matplotlib。
+Python 可视化的库很多，包括 seaborn, networkx, vispy. 大多数库都或多或少依赖于 matplotlib。
 
 matplotlib 大致可以分为三部分：
 
@@ -39,7 +42,7 @@ matplotlib 大致可以分为三部分：
 - matplotlib api 提供创建和管理图表、文本、线条、图形等；
 - backends 部分则用于输出图表。
 
-matplotlib 代码很多，初看很难使用。不过大多数 matplotlib 基本框架理解起来比较简单，入门相对容易。
+matplotlib 代码很多，初看很难使用。不过 matplotlib 的基本框架理解起来比较简单，入门相对容易。
 
 matplotlib API 是分层组织的：
 
@@ -47,24 +50,39 @@ matplotlib API 是分层组织的：
 - 下一次是面向对象的接口层，这一层，`pyplot` 只用于少量位置，如创建 `figure`，然后通过 `figure` 创建 `axes`，余下的绘制任务基本由 `axes` 对象完成。
 - 如果要更深层次的控制，如将 matplotlib 图嵌入到 GUI 应用，则完全抛弃 pyplot，完全使用面向对象的方法。
 
+下面介绍 matplotlib 的一些基本使用模式和最佳实践。
+
+## 一个简单示例
+
+Matplotlib 将数据绘制在 **Figure** 上，如 windows, jupyter widgets 等，每个 figure 包含一个或多个轴（**Axes**），Axes 可以理解为坐标系，是指定数据点的地方，如 x-y 坐标系，极坐标系中的 theta-r，3D 绘图中的 x-y-z 等。创建带一个 Axes 的 Figure 最简单方式是使用 `pyplot.subplots`。然后使用 `Axes.plot` 在 Axes 上绘制数据点：
+
+```python
+fig, ax = plt.subplots()  # Create a figure containing a single axes.
+ax.plot([1, 2, 3, 4], [1, 4, 2, 3]);  # Plot some data on the axes.
+```
+
+![](images/2022-01-01-15-56-41.png)
+
 ## Figure 结构
+
+下图是 Figure 的各个组成部分：
 
 ![figure](images/2020-04-09-17-45-50.png)
 
-| 模块        | 说明                                                                        |
-| ----------- | --------------------------------------------------------------------------- |
-| Figure      | 整个区域，一个 figure 可以包含多个 subplots                                 |
-| Subplot     | 在一个 `axes` 展示的所有相关内容的区域，为 figure 的子区域，子图等效于 Axes |
-| Axis        | 坐标轴                                                                      |
-| Axes        | 绘图区域                                                                    |
-| Spine       | 数据区域的边框的四条线                                                      |
-| Grid        | 数据区域内的线，方便数值的读取                                              |
-| Title       | figure 标题                                                                 |
-| Axis labels | 坐标轴标题，最好给出单位                                                    |
-| Ticks       | 坐标轴上的刻度，可以有 major ticks 和 minor ticks                           |
-| Tick labels | major 和 minor ticks 都可以标记。除了常规标记，可以指定格式，log 转换       | 以自定义函数格式化标记 |
-| Legend      | 图例，为每个数据系列设置的标签                                              |
-| Patches     | 形状，通过 `matplotlib.patches`可以添加矩形、圆形等形状                     |
+| 模块 | 说明 |
+| ---- | --- |
+| Figure | 整个区域，一个 figure 可以包含多个 subplots  |
+| Subplot | 在一个 `axes` 展示的所有相关内容的区域，为 figure 的子区域，子图等效于 Axes |
+| Axis | 坐标轴  |
+| Axes | 绘图区域  |
+| Spine | 数据区域的边框的四条线  |
+| Grid        | 数据区域内的线，方便数值的读取 |
+| Title       | figure 标题 |
+| Axis labels | 坐标轴标题，最好给出单位  |
+| Ticks       | 坐标轴上的刻度，可以有 major ticks 和 minor ticks |
+| Tick labels | major 和 minor ticks 都可以标记。除了常规标记，可以指定格式，log 转换以自定义函数格式化标记 |
+| Legend      | 图例，为每个数据系列设置的标签  |
+| Patches     | 形状，通过 `matplotlib.patches`可以添加矩形、圆形等形状 |
 
 ### Figure
 
@@ -73,20 +91,37 @@ matplotlib API 是分层组织的：
 - 所有子图 `Axes`
 - 少量特殊元素（titles, figure legends, etc）
 - 画板（canvas）
+- 嵌套子 figuree
 
 画板是用于绘制图表的对象，在使用 matplotlib 中几乎不接触。
 
 每个 Figure 可以包含任意数目的 `Axes`，不过为 0 没有意义.
 
-创建 figure 的最简单方式是使用 `pyplot`：
+使用 `pyplot` 创建 figure 最简单：
 
-```py
-fig = plt.figure()  # 空 figure，没有 Axes
-fig, ax = plt.subplots()  # 包含一个 Axes 的 figure
-fig, axs = plt.subplots(2, 2)  # 包含 2x2 网格布局的 4 个 Axes 的 figure
+- 创建空 Figure，即没有 Axes
+
+```python
+fig = plt.figure()
 ```
 
-可以在创建 figure 时创建 axes，也可以随后添加 axes。
+- 创建包含一个 Axes 的 Figure
+
+```python
+fig, ax = plt.subplots()
+```
+
+![](images/2022-01-01-17-35-23.png)
+
+- 创建包含 2x2 网格布局共 4 个 Axes 的 Figure
+
+```py
+fig, axs = plt.subplots(2, 2)
+```
+
+![](images/2022-01-01-18-55-13.png)
+
+可以在创建 Figure 时创建 Axes，也可以先创建 Figure，随后逐渐添加 Axes。
 
 ### Axes
 
@@ -94,14 +129,12 @@ Axes 是 Axis 的复数，两个坐标轴组成一个二维坐标空间，每个
 
 即 `Axes` 表示图，具有绘图区域及对应的数据空间，`Axes` 具有如下特征：
 
-- 一个 figure 可以包含多个 `Axes`，但一个 `Axes` 只能属于一个 `Figure`；
-- 一个 `Axes` 包含 2 个（对3D 为 3 个）`Axis` 对象，即坐标轴，包含数据的范围；
+- 一个 Figure 可以包含多个 `Axes`，但一个 `Axes` 只能属于一个 `Figure`；
+- 一个 `Axes` 包含 2 个（对 3D 图为 3 个）`Axis` 对象，即坐标轴，包含数据范围、刻度和刻度标签；
   - 通过 `Axes` 的 `set_xlim()` 和 `set_ylim()` 也可以设置坐标轴范围。
 - 每个 `Axes` 包含标题 `set_title()`，x 轴标签 `set_xlabel()`和 y 轴标签 `set_ylabel()`、
 
-`Axes` 是 OO 接口最重要的类。每个 Axes 包含 `XAixs` 和 `YAxis`，它们包括 ticks, tick locations, labels 等。
-
-大部分绘制工作在 `Axes` 对象上进行，包括数据点、ticks、labels等内容。一般通过 subplot 函数设置 `Axes`。`Axes` 和 `Subplot` 含义相同。
+`Axes` 是 OO 接口最重要的类，大部分绘制工作在 `Axes` 对象上进行，包括数据点、ticks、labels 等内容。一般通过 subplot 函数设置 `Axes`。`Axes` 和 `Subplot` 含义相同。
 
 ### Axis
 
@@ -114,50 +147,65 @@ Axes 是 Axis 的复数，两个坐标轴组成一个二维坐标空间，每个
 
 ### Artist
 
-基本上图上的所有可见元素都是 `Artist` (`Figure`, `Axes`, `Axis` 等)，包括 `Text`, `Line2D`, `collection` 和 `Patch` 对象等。在渲染 figure 时，所有 artists 被绘制到 canvas 上。
+Figure 上的所有可见元素基本都是 `Artist` (`Figure`, `Axes`, `Axis` 等)，还包括 `Text`, `Line2D`, `collections` 和 `Patch` 对象等。在渲染 Figure 时，所有 artists 被绘制到 **canvas**。
 
 大部分 Artists 和 `Axes` 绑定，这些 Artist 不能在多个 `Axes` 中共享，也不能从一个 `Axes` 移到另一个。
 
 ## 输入数据类型
 
-所有的绘图函数支持 `np.array` 或 `np.ma.masked_array` 类型数据作为输入。部分支持其它类似数组的对象，如 pandas 数据对象和 `np.matrix`。
-
-最好在绘图前将输入类型转换为 `np.array` 对象。
+所有的绘图函数支持 `numpy.array` 或 `np.ma.masked_array` 类型数据，或者 `numpy.asarray` 支持的对象。类数组（array-like）对象，如 pandas 数据对象以及 `numpy.matrix` 可能无法正常工作。推荐在绘图前将输入类型转换为 `np.array` 对象。
 
 - 例如，将 `pandas.DataFrame` 转换为 `np.array`:
 
-```py
+```python
 a = pandas.DataFrame(np.random.rand(4,5), columns = list('abcde'))
 a_asndarray = a.values
 ```
 
 - 将 `np.matrix` 转换为 `np.array`:
 
-```py
+```python
 b = np.matrix([[1,2],[3,4]])
 b_asarray = np.asarray(b)
 ```
 
-## pyplot & pylab
+大多数方法还支持可寻址底线，如 `dict`, `numpy.recarray` 或者 `pandas.DataFrame`。通过 `data` 关键字参数提供数据，根据变量名称提取数据。
+
+```python
+np.random.seed(19680801)  # seed the random number generator.
+data = {'a': np.arange(50),
+        'c': np.random.randint(0, 50, 50),
+        'd': np.random.randn(50)}
+data['b'] = data['a'] + 10 * np.random.randn(50)
+data['d'] = np.abs(data['d']) * 100
+
+fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
+ax.scatter('a', 'b', c='c', s='d', data=data)
+ax.set_xlabel('entry a')
+ax.set_ylabel('entry b');
+```
+
+![](images/2022-01-01-20-46-19.png)
+
+## 代码样式
+
+### 面向对象和 pyplot 接口
 
 使用 Matplotlib 的方式有两种：
 
-- 显式创建 figures, axes，然后调用对应对象的方式（OO）；
-- 使用 pyplot 函数创建和设置 figure 和 axes，使用 pyplot 函数绘图。
+- 创建 Figures, Axes，然后调用它们的方法（面向对象风格）；
+- 使用 pyplot 函数创建和设置 Figure 和 Axes，使用 pyplot 函数绘图。
 
-pyplot 模块具有当前 figure 和 axes 的概念，所有操作都作用于当前对象。`pyplot` 为面向对象 API 提供了状态机接口，状态机隐式的自动创建 figures 和 axes。
+pyplot 模块具有当前 figure 和 axes 的概念，所有操作都作用于当前对象。`pyplot` 为面向对象 API 提供了状态机接口，状态机隐式的自动创建 Figures 和 Axes。
 
 例如，`plt.plot` 创建了子图，随后所有的 `plt.plot` 都添加线条到当前子图。
 
 - OO 实例：
 
 ```py
-import matplotlib.pyplot as plt
-import numpy as np
-
 x = np.linspace(0, 2, 100)
 
-# OO样式依然是使用 `pyplot.figure` 创建 figure
+# OO 样式也是使用 `pyplot.figure` 创建 figure
 fig, ax = plt.subplots()  # 创建 figure 和 axes
 ax.plot(x, x, label='linear')
 ax.plot(x, x ** 2, label='quadratic')
@@ -175,9 +223,6 @@ plt.show()
 - pyplot 实例
 
 ```py
-import matplotlib.pyplot as plt
-import numpy as np
-
 x = np.linspace(0, 2, 100)
 
 plt.plot(x, x, label='linear')  # Plot some data on the (implicit) axes.
@@ -187,18 +232,18 @@ plt.xlabel('x label')
 plt.ylabel('y label')
 plt.title("Simple Plot")
 plt.legend()
-plt.show()
 ```
 
 ![line](images/2020-06-29-22-20-33.png)
 
 第一次调用 `plt.plot` 时自动创建了 figure 和 axes，后面调用 `plt.plot` 则利用前面创建的 axes。设置 title, legend, axis labels 也自动使用当前的 axes。
 
-`pylab` 绑定 `matplotlib.pyplot` 和 `numpy` 同时导入，由于命名空间污染，不再推荐使用。
+Matplotlib 的文档和示例同时使用 OO 和 pyplot 样式：
 
-对非交互绘图，推荐使用 pyplot 创建 figures 然后使用 OO 接口绘图。
+- 一般来说，推荐使用 OO 风格，特别是复杂的绘图，以及打算作为更大项目的函数和脚本；
+- pyplot 风格适合快速交互式。
 
-## 代码风格推荐
+### 辅助函数
 
 不同人熟悉的代码风格不一，matplotlib 提供了两种官方风格。
 
@@ -213,7 +258,7 @@ import numpy as np
 
 如果你经常绘制相同的图，只是数据不同，此时可以创建自定义函数，推荐的函数签名：
 
-```py
+```python
 def my_plotter(ax, data1, data2, param_dict):
     """
     绘图函数
@@ -242,7 +287,7 @@ def my_plotter(ax, data1, data2, param_dict):
 
 然后使用如下方式调用：
 
-```py
+```python
 data1, data2, data3, data4 = np.random.randn(4, 100)
 fig, ax = plt.subplots(1, 1)
 my_plotter(ax, data1, data2, {'marker': 'x'})
@@ -250,11 +295,13 @@ my_plotter(ax, data1, data2, {'marker': 'x'})
 
 多图形式：
 
-```py
+```python
 fig, (ax1, ax2) = plt.subplots(1, 2)
 my_plotter(ax1, data1, data2, {'marker': 'x'})
 my_plotter(ax2, data3, data4, {'marker': 'o'})
 ```
+
+![](images/2022-01-01-21-30-56.png)
 
 ## 后端
 
@@ -515,6 +562,6 @@ fast 是很轻量级的样式，和其它样式一起使用也很方便，不会
 mplstyle.use(['dark_background', 'ggplot', 'fast'])
 ```
 
-## References
+## 参考
 
-- [Usage Guide](https://matplotlib.org/stable/tutorials/introductory/usage.html)
+- https://matplotlib.org/stable/tutorials/introductory/usage.html

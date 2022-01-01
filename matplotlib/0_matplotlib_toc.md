@@ -1,8 +1,11 @@
 # matplotlib
 
+## 教程
+
+- [基本用法](tutorials/basic_usage.md)
+
 ## 学习笔记
 
-- [简介](1_intro.md)
 - [Pyplot 教程](2_pyplot.md)
 - [Artist tutorial](artist_tutorial.md)
 - [Axes](axes.md)
