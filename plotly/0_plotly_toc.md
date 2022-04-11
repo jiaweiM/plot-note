@@ -15,17 +15,19 @@
   - [标题](11_title.md)
   - [坐标轴](12_axes.md)
   - [Legend](13_legend.md)
-- 图表
-  - [Bar Chart](chart_bar.md)
-  - [Scatter](chart_scatter.md)
-  - [Line Chart](chart_line.md)
-  - [Pie Chart](chart_pie.md)
-  - [Sunburst](chart_sunburst.md)
-  - [Violin](chart_violin.md)
-  - [Heatmap](chart_heatmap.md)
-  - [等高线图](chart_contour.md)
-  - [Network](chart_network.md)
-  - [风向图](chart_polarbar.md)
+
+## 图标
+
+- [Bar Chart](chart_bar.md)
+- [散点图](plots/scatter.md)
+- [Line Chart](chart_line.md)
+- [Pie Chart](chart_pie.md)
+- [Sunburst](chart_sunburst.md)
+- [Violin](chart_violin.md)
+- [Heatmap](chart_heatmap.md)
+- [等高线图](chart_contour.md)
+- [Network](chart_network.md)
+- [风向图](chart_polarbar.md)
 - 三维图
   - [三维坐标](3D_axes.md)
 - 颜色

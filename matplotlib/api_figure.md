@@ -1,4 +1,5 @@
 # matplotlib.figure
+
 - [matplotlib.figure](#matplotlibfigure)
 	- [简介](#简介)
 	- [figure.Figure](#figurefigure)

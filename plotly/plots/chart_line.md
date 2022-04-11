@@ -1,17 +1,17 @@
 # Line Chart
 
 - [Line Chart](#line-chart)
-  - [简介](#%e7%ae%80%e4%bb%8b)
+  - [简介](#简介)
   - [Line Plot with px](#line-plot-with-px)
     - [set color](#set-color)
   - [Line Plot with go](#line-plot-with-go)
-    - [简单线图 - go](#%e7%ae%80%e5%8d%95%e7%ba%bf%e5%9b%be---go)
+    - [简单线图 - go](#简单线图---go)
     - [Line Plot Modes](#line-plot-modes)
-  - [样式设置](#%e6%a0%b7%e5%bc%8f%e8%ae%be%e7%bd%ae)
+  - [样式设置](#样式设置)
   - [Connect Data Gaps](#connect-data-gaps)
-  - [线条样式](#%e7%ba%bf%e6%9d%a1%e6%a0%b7%e5%bc%8f)
-  - [数据注释](#%e6%95%b0%e6%8d%ae%e6%b3%a8%e9%87%8a)
-  - [填充线图](#%e5%a1%ab%e5%85%85%e7%ba%bf%e5%9b%be)
+  - [线条样式](#线条样式)
+  - [数据注释](#数据注释)
+  - [填充线图](#填充线图)
 
 2020-04-20, 15:23
 *** *

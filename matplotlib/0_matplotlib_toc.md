@@ -2,11 +2,12 @@
 
 ## 教程
 
-- [基本用法](tutorials/basic_usage.md)
+- [基本用法](tutorials/1.basic_usage.md)
+- [pyplot 教程](tutorials/2.pyplot.md)
+- [颜色](tutorials/color.md)
 
 ## 学习笔记
 
-- [Pyplot 教程](2_pyplot.md)
 - [Artist tutorial](artist_tutorial.md)
 - [Axes](axes.md)
   - [Spine 操作](spines.md)

@@ -1,6 +1,6 @@
-# Scatter Plot
+# 散点图
 
-- [Scatter Plot](#scatter-plot)
+- [散点图](#散点图)
   - [PX API](#px-api)
     - [通过 column 名称设置 color 和 size](#通过-column-名称设置-color-和-size)
     - [通过 column 名称设置 symbol](#通过-column-名称设置-symbol)
@@ -16,17 +16,15 @@
   - [参考](#参考)
 
 2020-04-20, 09:38
-*** *
+***
 
 ## PX API
-
-Plotly Express 高级 API，可用于操作各种类型的数据，生成 figure 简单。
 
 使用 `px.scatter` 绘制散点图，数据点由标记（marker）表示，位置由 `x`, `y` 确定。
 
 - 数组作为数据源
 
-```py
+```python
 import plotly.express as px
 
 fig = px.scatter(
@@ -54,7 +52,7 @@ fig.show()
 
 ### 通过 column 名称设置 color 和 size
 
-带有可变大小圆形编辑的散点图也称为气泡图（bubble chart）。
+大小可变的圆形标记的散点图也称为气泡图（bubble chart）。
 
 > `color` 和 `size` 已添加到 hover 信息中，可以通过 `px.scatter` 的 `hover_data` 参数添加额外的 column 到 hover 中。
 
@@ -71,7 +69,7 @@ fig.show()
 
 ![scatter](images/2020-03-26-17-06-33.png)
 
-- 可以和上面一样使用离散值 `species` 作为颜色，也可以将连续值作为颜色，如下
+- 上面设置颜色的 `species` 为离散值，也可以将连续值作为颜色，如下
 
 ```py
 import plotly.express as px
@@ -89,14 +87,13 @@ fig.show()
 
 ```py
 import plotly.express as px
+
 df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol="species")
 fig.show()
 ```
 
 ![](images/2021-11-23-14-49-26.png)
-
-
 
 ### Line plot with px
 
