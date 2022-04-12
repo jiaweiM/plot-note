@@ -19,8 +19,8 @@
 ## 图标
 
 - [Bar Chart](chart_bar.md)
-- [散点图](plots/scatter.md)
-- [Line Chart](chart_line.md)
+- [散点图](charts/scatter.md)
+- [折线图](charts/line.md)
 - [Pie Chart](chart_pie.md)
 - [Sunburst](chart_sunburst.md)
 - [Violin](chart_violin.md)

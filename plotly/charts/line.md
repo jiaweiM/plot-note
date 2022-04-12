@@ -1,26 +1,34 @@
-# Line Chart
+# 折线图
 
-- [Line Chart](#line-chart)
+- [折线图](#折线图)
   - [简介](#简介)
-  - [Line Plot with px](#line-plot-with-px)
-    - [set color](#set-color)
-  - [Line Plot with go](#line-plot-with-go)
-    - [简单线图 - go](#简单线图---go)
-    - [Line Plot Modes](#line-plot-modes)
-  - [样式设置](#样式设置)
-  - [Connect Data Gaps](#connect-data-gaps)
-  - [线条样式](#线条样式)
-  - [数据注释](#数据注释)
-  - [填充线图](#填充线图)
+  - [PX API](#px-api)
+    - [设置颜色](#设置颜色)
+    - [数据顺序](#数据顺序)
+    - [连接散点图](#连接散点图)
+    - [散点图+线图](#散点图线图)
+    - [日期](#日期)
+    - [波形图](#波形图)
+  - [GO API](#go-api)
+    - [简单线图](#简单线图)
+    - [线图模式](#线图模式)
+    - [样式设置](#样式设置)
+    - [Connect Data Gaps](#connect-data-gaps)
+    - [线条样式](#线条样式)
+    - [数据注释](#数据注释)
+    - [填充线图](#填充线图)
+  - [参考](#参考)
 
 2020-04-20, 15:23
-*** *
+****
 
 ## 简介
 
-在 plotly 中，线图是散点图的一个特例。
+在 plotly 中，折线图是散点图的一个特例。关于线图的更多内容可以参考 [散点图](scatter.md)。
 
-## Line Plot with px
+## PX API
+
+使用 `px.line` 绘制折线图。例 1：
 
 ```py
 import plotly.express as px
@@ -32,7 +40,9 @@ fig.show()
 
 ![line](images/2020-03-28-14-35-08.png)
 
-### set color
+### 设置颜色
+
+例 2：
 
 ```py
 import plotly.express as px
@@ -55,11 +65,114 @@ fig.show()
 
 ![line color](images/2020-03-28-14-37-04.png)
 
-## Line Plot with go
+### 数据顺序
+
+```py
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    x = [1, 3, 2, 4],
+    y = [1, 2, 3, 4]
+))
+fig = px.line(df, x="x", y="y", title="Unsorted Input") 
+fig.show()
+
+df = df.sort_values(by="x")
+fig = px.line(df, x="x", y="y", title="Sorted Input") 
+fig.show()
+```
+
+![](images/2022-04-12-14-13-02.png)
+
+![](images/2022-04-12-14-13-17.png)
+
+### 连接散点图
+
+```py
+import plotly.express as px
+
+df = px.data.gapminder().query("country in ['Canada', 'Botswana']")
+
+fig = px.line(df, x="lifeExp", y="gdpPercap", color="country", text="year")
+fig.update_traces(textposition="bottom right")
+fig.show()
+```
+
+![](images/2022-04-12-14-16-37.png)
+
+### 散点图+线图
+
+将 `markers` 参数设置为 `True` 即可。
+
+```py
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', markers=True)
+fig.show()
+```
+
+![](images/2022-04-12-14-17-36.png)
+
+`symbol` 参数用于将数据映射到 marker symbol。
+
+```py
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country', symbol="country")
+fig.show()
+```
+
+![](images/2022-04-12-14-19-36.png)
+
+### 日期
+
+当数据是 ISO 格式的日期字符串、pandas date column 或 numpy datetime array，plotly 会自动将轴类型设置为日期格式。
+
+```py
+import plotly.express as px
+
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
+fig.show()
+```
+
+![](images/2022-04-12-14-23-21.png)
+
+### 波形图
+
+波形图（Sparkline）就是子图中的散点图，去掉网格线、坐标轴以及轴标签。
+
+```py
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, facet_row="company", facet_row_spacing=0.01, height=200, width=200)
+
+# hide and lock down axes
+fig.update_xaxes(visible=False, fixedrange=True)
+fig.update_yaxes(visible=False, fixedrange=True)
+
+# remove facet/subplot labels
+fig.update_layout(annotations=[], overwrite=True)
+
+# strip down the rest of the plot
+fig.update_layout(
+    showlegend=False,
+    plot_bgcolor="white",
+    margin=dict(t=10,l=10,b=10,r=10)
+)
+
+# disable the modebar for such a small plot
+fig.show(config=dict(displayModeBar=False))
+```
+
+![](images/2022-04-12-14-41-00.png)
+
+## GO API
 
 线条图用 `go.Scatter` 函数，和散点图相同。
 
-### 简单线图 - go
+### 简单线图
 
 ```py
 import plotly.graph_objects as go
@@ -73,7 +186,7 @@ fig.show()
 
 ![line](images/2020-03-28-14-38-36.png)
 
-### Line Plot Modes
+### 线图模式
 
 `go.Scatter` 绘制线图还是散点图取决于 `mode` 参数。
 
@@ -106,7 +219,7 @@ fig.show()
 
 ![mode](images/2020-03-28-14-40-28.png)
 
-## 样式设置
+### 样式设置
 
 下面设置线图的颜色和虚线、线条宽度等。
 
@@ -151,7 +264,7 @@ fig.show()
 
 ![style](images/2020-03-28-14-41-54.png)
 
-## Connect Data Gaps
+### Connect Data Gaps
 
 `connectgaps` 用于设置数据中的缺失值是否以 gap 的形式显示出来。
 
@@ -183,7 +296,7 @@ fig.show()
 
 ![connectgaps](images/2020-03-28-15-00-32.png)
 
-## 线条样式
+### 线条样式
 
 ```py
 import plotly.graph_objects as go
@@ -216,7 +329,7 @@ fig.show()
 
 ![line](images/2020-03-28-15-04-52.png)
 
-## 数据注释
+### 数据注释
 
 ```py
 import plotly.graph_objects as go
@@ -329,7 +442,7 @@ fig.show()
 
 ![annotation](images/2020-03-28-15-10-54.png)
 
-## 填充线图
+### 填充线图
 
 ```py
 import plotly.graph_objects as go
@@ -406,3 +519,7 @@ fig.show()
 ```
 
 ![line](images/2020-03-28-15-19-01.png)
+
+## 参考
+
+- https://plotly.com/python/line-charts/
