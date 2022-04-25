@@ -3,7 +3,7 @@
 2020-04-18, 21:18
 ***
 
-## 学习笔记
+## 基础
 
 - [简介](1_intro.md)
 - [图表显示](2_display.md)
@@ -16,7 +16,7 @@
   - [坐标轴](12_axes.md)
   - [Legend](13_legend.md)
 
-## 图标
+## 图表
 
 - [Bar Chart](chart_bar.md)
 - [散点图](charts/scatter.md)
@@ -48,6 +48,10 @@
 
 - [等高线图 - Z多维](chart_contour.md)
 - [热图 - Z多维](chart_heatmap.md)
+
+## 其它
+
+- [CSV 数据绘图](advanced/plot_data_from_csv.md)
 
 ## References
 

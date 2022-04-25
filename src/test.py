@@ -1,24 +1,10 @@
-import plotly.graph_objects as go
-import numpy as np
+import pandas as pd
 
-np.random.seed(1)
+import dash_bio
 
-N = 100
-random_x = np.linspace(0, 1, N)
-random_y0 = np.random.randn(N) + 5
-random_y1 = np.random.randn(N)
-random_y2 = np.random.randn(N) - 5
+df = pd.read_csv(r'D:\repo\dash-bio-docs-files-master\volcano_data1.csv')
 
-fig = go.Figure()
+dash_bio.VolcanoPlot(
+    dataframe=df,
+)
 
-# add trance
-fig.add_trace(go.Scatter(x=random_x, y=random_y0,
-                         mode='markers',
-                         name='markers'))
-fig.add_trace(go.Scatter(x=random_x, y=random_y1,
-                         mode='lines+markers',
-                         name='lines+markers'))
-fig.add_trace(go.Scatter(x=random_x, y=random_y2,
-                         mode='lines',
-                         name="lines"))
-fig.show()

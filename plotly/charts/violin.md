@@ -1,7 +1,8 @@
-# Violin Plots
+# 小提琴图
 
-- [Violin Plots](#violin-plots)
-  - [Violin with px](#violin-with-px)
+- [小提琴图](#小提琴图)
+  - [简介](#简介)
+  - [PX API](#px-api)
     - [基本 violin](#基本-violin)
     - [加入 box 和数据点](#加入-box-和数据点)
     - [多个 violin](#多个-violin)
@@ -13,7 +14,7 @@
     - [不对称 violin](#不对称-violin)
     - [高级 violin](#高级-violin)
     - [Ridgeline plot](#ridgeline-plot)
-  - [参考](#参考)
+  - [API](#api)
     - [violin 属性](#violin-属性)
       - [`name`](#name)
       - [`x`, `y`](#x-y)
@@ -47,13 +48,20 @@
       - [`layout.violinmode`](#layoutviolinmode)
       - [`layout.violingap`](#layoutviolingap)
       - [`layout.violingroupgap`](#layoutviolingroupgap)
+  - [参考](#参考)
 
 2020-06-08, 15:16
-*** **
+***
 
-## Violin with px
+## 简介
 
-`plotly.express.violin(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, hover_name=None, hover_data=None, custom_data=None, animation_frame=None, animation_group=None, category_orders={}, labels={}, color_discrete_sequence=None, color_discrete_map={}, orientation='v', violinmode='group', log_x=False, log_y=False, range_x=None, range_y=None, points=None, box=False, title=None, template=None, width=None, height=None)`
+小提琴图是数值数据的统计表示，它类似于箱线图，但是在两侧添加了密度图。
+
+## PX API
+
+```py
+plotly.express.violin(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, hover_name=None, hover_data=None, custom_data=None, animation_frame=None, animation_group=None, category_orders={}, labels={}, color_discrete_sequence=None, color_discrete_map={}, orientation='v', violinmode='group', log_x=False, log_y=False, range_x=None, range_y=None, points=None, box=False, title=None, template=None, width=None, height=None)
+```
 
 ### 基本 violin
 
@@ -97,6 +105,8 @@ fig = px.violin(df, y="total_bill", box=True, # draw box plot inside the violin
                )
 fig.show()
 ```
+
+- `points='all'` 在旁边绘制所有数据点
 
 ![violin](images/2020-04-29-19-37-26.png)
 
@@ -346,7 +356,7 @@ fig.show()
 
 ![violin](images/2020-04-30-00-04-04.png)
 
-## 参考
+## API
 
 ### violin 属性
 
@@ -642,3 +652,7 @@ enum: `"group"`, `"overlay"`
 [0,1]，默认 0.3.
 
 设置相同位置小提琴之间的间隔，为相对 plot 的比例值。不影响设置了 "width" 的 traces。
+
+## 参考
+
+- https://plotly.com/python/violin/

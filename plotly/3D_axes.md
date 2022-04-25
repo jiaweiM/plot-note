@@ -1,10 +1,10 @@
 # 3D Axes
 
 - [3D Axes](#3d-axes)
-  - [简介](#%e7%ae%80%e4%bb%8b)
-  - [设置范围](#%e8%ae%be%e7%bd%ae%e8%8c%83%e5%9b%b4)
+  - [简介](#简介)
+  - [设置范围](#设置范围)
   - [Fixed Ratio Axes](#fixed-ratio-axes)
-  - [设置坐标轴标题](#%e8%ae%be%e7%bd%ae%e5%9d%90%e6%a0%87%e8%bd%b4%e6%a0%87%e9%a2%98)
+  - [设置坐标轴标题](#设置坐标轴标题)
   - [Ticks Formatting](#ticks-formatting)
   - [Background and Grid Color](#background-and-grid-color)
   - [Disabling tooltip spikes](#disabling-tooltip-spikes)

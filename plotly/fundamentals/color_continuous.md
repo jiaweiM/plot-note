@@ -1,30 +1,34 @@
-# Continuous Color Scales
+# 连续色阶和色条
 
-- [Continuous Color Scales](#continuous-color-scales)
+- [连续色阶和色条](#连续色阶和色条)
   - [简介](#简介)
-  - [Continuous Color with px](#continuous-color-with-px)
+    - [color scales](#color-scales)
+    - [color ranges](#color-ranges)
+    - [color bar](#color-bar)
+    - [color axes](#color-axes)
+  - [PX API](#px-api)
     - [数字型](#数字型)
     - [数字转字符串](#数字转字符串)
     - [字符串转数字](#字符串转数字)
-  - [Color scale in px](#color-scale-in-px)
+    - [PX 色阶](#px-色阶)
     - [反转色阶](#反转色阶)
-  - [创建色阶](#创建色阶)
-  - [创建离散色阶](#创建离散色阶)
-  - [设置 Color range](#设置-color-range)
-  - [设置色阶中点颜色](#设置色阶中点颜色)
-  - [自定义 Color bar](#自定义-color-bar)
-    - [隐藏](#隐藏)
-    - [配置 color bar](#配置-color-bar)
-    - [自定义离散 Color bar 的刻度标签](#自定义离散-color-bar-的刻度标签)
-    - [自定义 Log Color bar 的刻度标签](#自定义-log-color-bar-的刻度标签)
-  - [color - go](#color---go)
-    - [自定义离散 Heatmap 色阶](#自定义离散-heatmap-色阶)
+    - [创建色阶](#创建色阶)
+    - [创建离散色阶](#创建离散色阶)
+    - [设置 Color range](#设置-color-range)
+    - [为发散色阶指定中点颜色](#为发散色阶指定中点颜色)
+    - [自定义色条](#自定义色条)
+      - [隐藏色条](#隐藏色条)
+      - [配置色条](#配置色条)
+      - [离散色条刻度标签设置](#离散色条刻度标签设置)
+      - [Log 色条刻度标签](#log-色条刻度标签)
+  - [GO API](#go-api)
+    - [离散 Heatmap 色阶](#离散-heatmap-色阶)
     - [Scatter 色阶](#scatter-色阶)
     - [Contour Plot 色阶](#contour-plot-色阶)
-    - [Heatmap Color scale](#heatmap-color-scale)
-    - [设置色阶中点](#设置色阶中点)
+    - [Heatmap 色阶设置](#heatmap-色阶设置)
+    - [设置发散色阶中点](#设置发散色阶中点)
     - [自定义 Contour 色阶](#自定义-contour-色阶)
-    - [自定义 color bar](#自定义-color-bar-1)
+    - [自定义 color bar](#自定义-color-bar)
     - [共享 color axis](#共享-color-axis)
     - [Log Color scale](#log-color-scale)
   - [参考](#参考)
@@ -36,50 +40,54 @@
 
 ## 简介
 
-颜色可用于表示连续和分类数据。下面介绍用颜色表示连续输。
+颜色可用于表示连续和分类数据。下面介绍用颜色表示连续数值，涉及到如下几个概念。
 
-连续颜色涉及到如下几个概念：
+### color scales
 
-- color scales（色阶）
+色阶（color scale）表示 0 到 1 数值到某个色域的映射。
 
-色阶表示 0 到 1 之间在某个色域的映射。
+默认色阶取决于当前 [template](6_theme_template.md) 的`layout.colorscales` 属性。
 
-默认的色阶取决于当前 [template](6_theme_template.md) 的`layout.colorscales` 属性。也可以使用 px 的 `color_continuous_scale` 参数，或 `graph_objects` 的 `layout.colorscales` 属性显示指定，例如 `go.Scatter` 的 `marker.colorscale` 或 `go.Heatmap` 的 `colorscale`。
+- px API 使用 `color_continuous_scale` 参数显式指定
+- go API 使用 `graph_objects` 的 `layout.colorscales` 属性显式指定
 
-例如 `[(0,"blue"), (1,"red")]` 是一个简单的色阶，也可以表示为 `["blue", "red"]`，这是内置色阶 `plotly.colors.sequential.Bluered`。
+例如 `go.Scatter` 的 `marker.colorscale` 或 `go.Heatmap` 的 `colorscale`。
 
-- color ranges
+例如 `[(0,"blue"), (1,"red")]` 是一个简单的色阶，两个颜色之间使用紫色插值。也可以表示为 `["blue", "red"]`，等价于内置色阶 `plotly.colors.sequential.Bluered`。
+
+### color ranges
 
 表示映射到色阶 [0,1] 范围数据的最大值和最小值。
 
-Color ranges 默认是输入数据的范围，大多数 Express 函数可以通过 `range_color` 或 `color_continuous_midpoint` 参数指定范围。
+Color ranges 默认是输入数据的范围：
 
-对 `graph_objects`，可以通过 `cmin`, `cmid`, `cmax` 或者 `zmin`, `zmid`, `zmax` 指定。如 `go.Scatter` 的 `layout.coloraxis.cmin`, `marker.cmin`，`go.Heatmap` 的 `cmin`。
+- 大多数 PX 函数可以通过 `range_color` 或 `color_continuous_midpoint` 参数指定范围。
+- go API 可以通过 `cmin`, `cmid`, `cmax` 或者 `zmin`, `zmid`, `zmax` 指定。如 `go.Scatter` 的 `layout.coloraxis.cmin`, `marker.cmin`，`go.Heatmap` 的 `cmin`。
 
 例如，如果 color range 为 `[100, 200]`，对 `["blue", "red"]` 色阶，`color` 值 $\le100$ 为 blue，$\ge200$ 为 red。介于两者之间的则是各种紫色。
 
-- color bars（色条）
+### color bar
 
-类似于 legend 的 color range 和色阶的可视化表示，可以添加刻度标签和刻度线。
+色条（color bar）是类似于图例（Legend）的 color range 和色阶的可视化表示，可以添加刻度线和标签。
 
-可以通过 `layout.coloraxis.colorbar` 属性配置 color bar，或者像 `go.Scatter` 的 `marker.colorbar`，`go.Heatmap` 的 `colorbar` 等地方配置。
+可以通过 `layout.coloraxis.colorbar` 属性配置色条，或者像 `go.Scatter` 的 `marker.colorbar`，`go.Heatmap` 的 `colorbar` 等地方配置。
 
-- color axes (色轴)
+### color axes
 
-color axes 将 color scale, color range 以及 color bar 与数据联系在一起。任何 colorable 属性包含 color axis ，但是不同属性可以共享 color arixs，例如通过 `go.Scatter` 的 `marker.coloraxis`属性。
+色轴（color axes）将色阶, color range 以及色条与数据联系在一起。
 
-Local color axis 属性通过 trace 的属性配置，如 `marker.showscale`，共享 color axis 通过 Layout 配置，如 `layout.coloraxis.showscale`。
+子图的任何可上色属性默认与其自身色轴绑定，但也可以在不同属性和子图之间共享色轴。局部色轴属性在子图内设置，如 `marker.showscale`，共享色轴属性在 Layout 中设置，如 `layout.coloraxis.showscale`。
 
-## Continuous Color with px
+## PX API
 
 大多数 px 函数有 `color` 参数：
 
-- 为其分配数字型数据时，自动成为连续色。
-- 为其分配字符串数据（离散型数据，或分类数据），自动称为离散色。
+- 对数字型数据，自动成为连续色。
+- 对字符串数据（离散型数据，或分类数据），自动称为离散色。
 
 ### 数字型
 
-例如，`tips` 数据中，`size` 为数字型数据：
+例如，`tips` 数据中，`size` 为数字型数据，所以自动设置为连续色：
 
 ```py
 import plotly.express as px
@@ -93,6 +101,8 @@ fig.show()
 ![scatter](images/2020-04-29-09-44-34.png)
 
 ### 数字转字符串
+
+将数值转换为字符串后，对非数值型数据（离散数据），自动设置为离散色：
 
 ```py
 import plotly.express as px
@@ -108,6 +118,8 @@ fig.show()
 
 ### 字符串转数字
 
+对字符串表示的数字，可以将其转换回数字，这样就能以连续色表示：
+
 ```py
 import plotly.express as px
 df = px.data.tips()
@@ -121,11 +133,11 @@ fig.show()
 
 ![scatter](images/2020-04-29-09-53-07.png)
 
-## Color scale in px
+### PX 色阶
 
-Express 默认色阶为当前模板的 `layout.colorscales.sequential` 属性，默认模板为 `plotly`，其色阶为 `Plasma`。
+PX 默认使用当前模板的 `layout.colorscales.sequential` 色阶属性，默认模板为 `plotly`，其色阶为 `Plasma`。
 
-下面用 Express 创建 scatter，使用 `Viridis` 色阶：
+下面用 PX 创建 scatter，使用 `Viridis` 色阶：
 
 ```py
 import plotly.express as px
@@ -136,7 +148,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length",
 fig.show()
 ```
 
-> `color` 用于指定颜色映射的属性，`color_continuous_scale` 用于指定色阶。
+> `color` 用于指定颜色映射的属性，`color_continuous_scale` 用于指定连续色阶。
 
 ![scatter](images/2020-04-29-10-53-29.png)
 
@@ -155,7 +167,7 @@ fig.show()
 
 ### 反转色阶
 
-通过在内置色阶名称后添加后缀 `_r`，可以反转内置色阶，例如：
+通过在内置色阶名称或 plotly 对象后添加后缀 `_r`，可以反转内置色阶，例如：
 
 - 色阶名称添加 `_r` 后缀
 
@@ -170,7 +182,7 @@ fig.show()
 
 ![bar](images/2020-04-29-11-14-36.png)
 
-- 色阶对象添加 `_r` 后缀
+- plotly 色阶对象后添加 `_r` 后缀
 
 ```py
 import plotly.express as px
@@ -183,9 +195,9 @@ fig.show()
 
 ![imshow](images/2020-04-29-11-18-32.png)
 
-## 创建色阶
+### 创建色阶
 
-通过 px 的 `color_continuous_scale` 参数可以指定自定义色阶:
+PX 的 `color_continuous_scale` 参数可以指定自定义色阶:
 
 ```py
 import plotly.express as px
@@ -215,9 +227,9 @@ fig.show()
 
 > 即 `[(0, "red"), (0.5, "green"), (1, "blue")]` 和 `["red", "green", "blue"]` 等价。
 
-## 创建离散色阶
+### 创建离散色阶
 
-通过连续数据点指定相同颜色，可以创建非连续的色阶。对不支持离散颜色的图形对象十分有用。例如：
+将连续数据点指定为相同颜色可以创建离散色阶。对不支持离散颜色的图表十分有用。例如：
 
 ```py
 import plotly.express as px
@@ -231,9 +243,9 @@ fig.show()
 
 ![parallel_coordinates](images/2020-04-29-11-34-19.png)
 
-## 设置 Color range
+### 设置 Color range
 
-如果输入数据的 range 不适合用来作为 Color range，例如创建多个 figures，需要它们具有相同的 Color range，此时可以通过 px 的 `range_color` 参数指定 Color range。例如：
+如果输入数据的数值范围不适合用作 Color range，例如创建多个 figures，需要它们具有相同的 Color range，此时可以通过 PX 的 `range_color` 参数指定 Color range。例如：
 
 ```py
 import plotly.express as px
@@ -245,9 +257,13 @@ fig.show()
 
 ![scatter](images/2020-04-29-11-36-57.png)
 
-## 设置色阶中点颜色
+### 为发散色阶指定中点颜色
 
-px 函数的 `color_continuous_midpoint` 用于设置色阶中点的颜色。该参数不能和 `range_color` 同时使用，因为 `color_continuous_midpoint` 在囊括整个数据集的同时强制颜色以其为中心，这样对非对称数据，色阶中的部分颜色在 figure 中不会出现。
+发散色阶中点颜色有一个较好的区分度，最好映射到一个有意义的数值。
+
+px 函数的 `color_continuous_midpoint` 用于设置色阶中点的颜色。该参数不能和 `range_color` 同时使用，因为 `color_continuous_midpoint` 在囊括整个数据集的同时强制颜色以其为中心，对非对称数据导致色阶中的部分颜色在 figure 中不可见。
+
+例如，在 choropleth map 中可以使用发散色阶高亮显示高于或低于中值的区域：
 
 ```py
 import plotly.express as px
@@ -263,13 +279,13 @@ fig.show()
 
 ![choropleth](images/2020-04-29-12-05-32.png)
 
-## 自定义 Color bar
+### 自定义色条
 
-px 的所有 traces 和 `layout.coloraxis` 绑定，所以可以在此处配置 color bar。
+PX 的所有子图和 `layout.coloraxis` 绑定，而不是使用子图特异性的色轴。因此可以在此处配置色条。
 
-### 隐藏
+#### 隐藏色条
 
-下面隐藏 color bar:
+下面隐藏色条:
 
 ```py
 import plotly.express as px
@@ -282,11 +298,9 @@ fig.show()
 
 ![density heatmap](images/2020-04-29-12-59-19.png)
 
-### 配置 color bar
+#### 配置色条
 
-color bar 的标题、大小、位置、刻度线和刻度标签都可以配置。
-
-例如：
+色条的标题、大小、位置、刻度线和刻度标签都可以配置。例如：
 
 ```py
 import plotly.express as px
@@ -307,7 +321,7 @@ fig.show()
 
 ![density heatmap](images/2020-04-29-13-10-51.png)
 
-### 自定义离散 Color bar 的刻度标签
+#### 离散色条刻度标签设置
 
 ```py
 import plotly.express as px
@@ -329,7 +343,9 @@ fig.show()
 
 ![parallel_coordinates](images/2020-04-29-13-17-10.png)
 
-### 自定义 Log Color bar 的刻度标签
+#### Log 色条刻度标签
+
+定义对数色条上的刻度标签，使其可读性更好：
 
 ```py
 import plotly.express as px
@@ -348,9 +364,9 @@ fig.show()
 
 ![scatter](images/2020-04-29-13-18-08.png)
 
-## color - go
+## GO API
 
-### 自定义离散 Heatmap 色阶
+### 离散 Heatmap 色阶
 
 ```py
 import plotly.graph_objects as go
@@ -360,20 +376,19 @@ fig = go.Figure()
 fig.add_trace(go.Heatmap(
     z=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]],
     colorscale=[
-        # Let first 10% (0.1) of the values have color rgb(0, 0, 0)
+        # 前 10% 数值颜色 rgb(0, 0, 0)
         [0, "rgb(0, 0, 0)"],
         [0.1, "rgb(0, 0, 0)"],
 
-        # Let values between 10-20% of the min and max of z
-        # have color rgb(20, 20, 20)
+        # 10-20% 颜色 rgb(20, 20, 20)
         [0.1, "rgb(20, 20, 20)"],
         [0.2, "rgb(20, 20, 20)"],
 
-        # Values between 20-30% of the min and max of z
-        # have color rgb(40, 40, 40)
+        # 20-30% 颜色 rgb(40, 40, 40)
         [0.2, "rgb(40, 40, 40)"],
         [0.3, "rgb(40, 40, 40)"],
 
+        # 30-40% 颜色 rgb(60, 60, 60)
         [0.3, "rgb(60, 60, 60)"],
         [0.4, "rgb(60, 60, 60)"],
 
@@ -457,7 +472,7 @@ fig.show()
 
 ![Contour](images/2020-04-29-13-22-46.png)
 
-### Heatmap Color scale
+### Heatmap 色阶设置
 
 ```py
 import plotly.graph_objects as go
@@ -492,7 +507,7 @@ fig.show()
 
 ![heatmap](images/2020-04-29-13-29-03.png)
 
-### 设置色阶中点
+### 设置发散色阶中点
 
 设置 `marker.cmid`，使得其到 `cmin`, `cmax` 距离相等，来设置中间颜色。
 
