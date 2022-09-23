@@ -5,6 +5,7 @@
   - [绘制带标签数据](#绘制带标签数据)
   - [绘制多组数据](#绘制多组数据)
   - [参数](#参数)
+  - [返回](#返回)
 
 ***
 
@@ -101,4 +102,37 @@ plot(x1, y1, 'g^', x2, y2, 'g-')
 - 也可以是标量或二维数组（此时 columns 表示单独的数据集）。
 - 这些参数不能作为关键字传递。
 
+**fmt: str, optional**
 
+格式字符串，例如 'ro' 表示 red circles。
+
+格式字符串是一种快速设置线条属性的方法。所有格式化字符串都可以通过关键字参数实现。
+
+该参数不能以关键字传递。
+
+**data: indexable object, optional**
+
+带标签数据对象。
+
+> **Note:** 从技术上讲，如果第二个标签是有效的 `fmt`，会导致歧义。例如 `plot('n', 'o', data=obj)` 可能是 `plt(x, y)` 或 `plt(y, fmt)`。此时会选择前一种解释，但会发出警告。传入空的格式字符串 `plot('n', 'o', '', data=obj)` 可消除警告。
+
+**scalex, scaley: bool, default: True**
+
+设置视图 limit 是否与数据 limit 匹配。
+
+****kwargs: Line2D properties, optional**
+
+`kwargs` 用于指定线条属性，如线宽、反锯齿、标记颜色等。例如：
+
+```python
+plot([1, 2, 3], [1, 2, 3], 'go-', label='line 1', linewidth=2)
+plot([1, 2, 3], [1, 4, 9], 'rs', label='line 2')
+```
+
+
+
+## 返回
+
+list of `Line2D`.
+
+表示绘图数据的线条列表。

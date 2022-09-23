@@ -3,16 +3,19 @@
 - [Pyplot 教程](#pyplot-教程)
   - [简介](#简介)
     - [样式设置](#样式设置)
-  - [关键字字符串绘图](#关键字字符串绘图)
+  - [关键字参数](#关键字参数)
   - [分类变量](#分类变量)
   - [线段属性设置](#线段属性设置)
-  - [Multiple figures and axes](#multiple-figures-and-axes)
+  - [多图](#多图)
   - [text](#text)
     - [使用数学表达式](#使用数学表达式)
+    - [注释文本](#注释文本)
+  - [对数轴和其它非线性轴](#对数轴和其它非线性轴)
   - [参考](#参考)
 
-2020-07-01, 20:58
-****
+Last updated: 2022-09-23, 13:55
+@author Jiawei Mao
+*****
 
 ## 简介
 
@@ -54,13 +57,13 @@ plt.axis([0, 6, 0, 20])
 plt.show()
 ```
 
-`.axis()` 用于指定范围，格式为 `[xmin, xmax, ymin, ymax]`。
+`.axis()` 用于指定坐标轴范围，格式为 `[xmin, xmax, ymin, ymax]`。
 
 ![scatter](images/2020-07-01-21-57-02.png)
 
 matplotlib 内部使用 numpy 存储数据，提供的其它类型数据在内部也被转换为 ndarray。
 
-下面使用一个命令绘制不同样式的线条：
+下面使用一个命令绘制多条不同样式的线条：
 
 ```py
 import numpy as np
@@ -79,13 +82,13 @@ plt.show()
 
 ![line](images/2020-07-01-22-09-29.png)
 
-## 关键字字符串绘图
+## 关键字参数
 
-有些数据类型可以通过变量名称访问数据，例如 `numpy.recarray` 和 `pandas.DataFrame`。
+有些数据类型可以通过变量名称访问数据，如 `numpy.recarray` 和 `pandas.DataFrame`。
 
-Matplotlib 允许通过 `data` 关键字参数提供这类数据，然后通过特定变量的字符串绘图。
+Matplotlib 允许通过 `data` 关键字参数提供这类数据，然后使用变量名称指定绘图数据。
 
-```py
+```python
 data = {'a': np.arange(50),
         'c': np.random.randint(0, 50, 50),
         'd': np.random.randn(50)}
@@ -104,7 +107,7 @@ plt.show()
 
 Matplotlib 可以直接使用分类变量绘图：
 
-```py
+```python
 names = ['group_a', 'group_b', 'group_c']
 values = [1, 10, 100]
 
@@ -135,7 +138,7 @@ plt.show()
 
 1. 使用关键字参数
 
-```py
+```python
 plt.plot(x, y, linewidth=2.0)
 ```
 
@@ -201,7 +204,6 @@ plt.setp(lines, 'color', 'r', 'linewidth', 2.0)
 
 ```py
 In [69]: lines = plt.plot([1, 2, 3])
-
 In [70]: plt.setp(lines)
 alpha: float
 animated: [True | False]
@@ -209,9 +211,11 @@ antialiased or aa: [True | False]
 ...snip
 ```
 
-## Multiple figures and axes
+## 多图
 
-MATLAB 和 pyplot 都有当前 figure 和当前 axes 的概念。所有绘图函数应用于当前 axes。函数 `gca` 返回当前 axes (`matplotlib.axes.Axes` 实例)，`gcf` 返回当前 figure (`matplotlib.figure.Figure` 实例)。下面创建两个 subplots：
+MATLAB 和 pyplot 都有当前 figure 和当前 axes 的概念。所有绘图函数应用于当前 axes。函数 `gca` 返回当前 axes (`matplotlib.axes.Axes` 实例)，`gcf` 返回当前 figure (`matplotlib.figure.Figure` 实例)。
+
+下面创建两个 subplots：
 
 ```py
 def f(t):
@@ -231,13 +235,13 @@ plt.show()
 
 ![](images/2022-04-10-22-51-38.png)
 
-这里调用 `figure` 是可选的，因为如果没有 Figure，Matplotlib 会自动创建一个。`subplot` 指定了 `numrows`, `numcols`, `plot_number`，其中 `plot_number` 范围是 1 到 `numrows*numcols`。如果 `numrows*numcols<10`，`subplot` 中的逗号是可选的，即 `subplot(211)` 等价于 `subplot(2, 1, 1)`。
+这里调用 `figure` 是可选的，因为如果没有 Figure，Matplotlib 会自动创建一个。`subplot` 指定了 `numrows`, `numcols`, `plot_number`，其中 `plot_number` 范围从 1 到 `numrows*numcols`。如果 `numrows*numcols<10`，`subplot` 中的逗号是可选的，即 `subplot(211)` 等价于 `subplot(2, 1, 1)`。
 
 可以创建任意数目的 subplots 和 axes，还可以使用 `axes([left, bottom, width, height])` 手动指定 axes 位置，这些值是 (0 to 1) 的比例值。
 
 可以通过数字编号来创建多个 figure：
 
-```py
+```python
 import matplotlib.pyplot as plt
 plt.figure(1)                # the first figure
 plt.subplot(211)             # the first subplot in the first figure
@@ -254,15 +258,15 @@ plt.subplot(211)             # make subplot(211) in figure1 current
 plt.title('Easy as 1, 2, 3') # subplot 211 title
 ```
 
-可以使用 `clf` 清除当前 figure，使用 `cla` 清除当前 axes。如果你觉得这种当前图像、当前 axes 很烦人，则推荐使用 OO API。
+使用 `clf` 清除当前 figure，使用 `cla` 清除当前 axes。如果你觉得这种当前图像、当前 axes 很烦人，则推荐使用 OO API。
 
 figures 持有的内存不会自动释放，需要调用 `close`。
 
 ## text
 
-`text` 可以用来在任意位置添加文本，`xlabel`, `ylabel` 和 `title` 在特定位置添加文本。
+`text` 可以在任意位置添加文本，`xlabel`, `ylabel` 和 `title` 在特定位置添加文本。
 
-```py
+```python
 mu, sigma = 100, 15
 x = mu + sigma * np.random.randn(10000)
 
@@ -281,19 +285,107 @@ plt.show()
 
 ![](images/2022-04-10-23-22-21.png)
 
-所有的 `text` 函数返回 `matplotlib.text.Text` 实例。可以使用 `setp` 设置文本属性：
+所有的 `text` 函数返回 `matplotlib.text.Text` 实例。可以使用关键字参数或 `setp` 设置文本属性：
 
-```pt
+```python
 t = plt.xlabel('my data', fontsize=14, color='red')
 ```
 
 ### 使用数学表达式
 
-例如：
+matplotlib 支持 TeX 数学表达式。例如，在标题中写入 $\sigma_i=15$，可以用 `$` 包围 TeX 表达式：
 
-```py
+```python
 plt.title(r'$\sigma_i=15$')
 ```
+
+标签字符串前的 `r` 很重要，它表示字符串是原始字符串，这样就不会把反斜杠识别为转义。matplotlib 内置一个 TeX 表达式解析引擎和渲染引擎，并包含数学字体，详情参考 [Writing mathematical expressions](https://matplotlib.org/stable/tutorials/text/mathtext.html)。因此不需要安装 TeX 就能跨平台使用数学文本。对已经安装 LaTeX 和额 dvipng 的用户，还可以使用 LaTeX 来格式化文本，并将输出直接合并到显示的 figure 或保存的 postscript 中，详情请参考 [Text rendering with LaTeX](https://matplotlib.org/stable/tutorials/text/usetex.html)。
+
+### 注释文本
+
+`text` 可以将文本放到 Axes 的任意位置。`text` 一般用来注释图的某些特征，而 `annotate` 方法提供了一些辅助功能，使得注释更容易。在注释中，需要考虑两个点：待注释数据点的位置 `xy` 和注释文本的位置 `xytext`。这两个参数都是 `(x, y)` tuple。
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+ax = plt.subplot()
+
+t = np.arange(0.0, 5.0, 0.01)
+s = np.cos(2 * np.pi * t)
+line, = plt.plot(t, s, lw=2)
+
+plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5),
+             arrowprops=dict(facecolor='black', shrink=0.05), )
+
+plt.ylim(-2, 2)
+plt.show()
+```
+
+![](images/text_1.png)
+
+## 对数轴和其它非线性轴
+
+`matplotlib.pyplot` 除了线性轴，还支持对数和 logit 轴。如果数据跨度多个数量级，则可以使用该方法。更改轴的 scale 很容易：
+
+```python
+plt.xscale('log')
+```
+
+例如，四个具有相同数据，但 y 轴 scale 不同的图：
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Fixing random state for reproducibility
+np.random.seed(19680801)
+
+# make up some data in the open interval (0, 1)
+y = np.random.normal(loc=0.5, scale=0.4, size=1000)
+y = y[(y > 0) & (y < 1)]
+y.sort()
+x = np.arange(len(y))
+
+# plot with various axes scales
+plt.figure()
+
+# linear
+plt.subplot(221)
+plt.plot(x, y)
+plt.yscale('linear')
+plt.title('linear')
+plt.grid(True)
+
+# log
+plt.subplot(222)
+plt.plot(x, y)
+plt.yscale('log')
+plt.title('log')
+plt.grid(True)
+
+# symmetric log
+plt.subplot(223)
+plt.plot(x, y - y.mean())
+plt.yscale('symlog', linthresh=0.01)
+plt.title('symlog')
+plt.grid(True)
+
+# logit
+plt.subplot(224)
+plt.plot(x, y)
+plt.yscale('logit')
+plt.title('logit')
+plt.grid(True)
+# Adjust the subplot layout, because the logit one may take more space
+# than usual, due to y-tick labels like "1 - 10^{-3}"
+plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
+                    wspace=0.35)
+
+plt.show()
+```
+
+![](images/2022-09-23-13-55-10.png)
 
 ## 参考
 
