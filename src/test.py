@@ -1,8 +1,5 @@
-import pandas as pd
-import dash_bio
+import matplotlib.pyplot as plt
 
-df = pd.read_csv('https://git.io/volcano_data1.csv')
-
-dash_bio.VolcanoPlot(
-    dataframe=df,
-)
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers')
+plt.show()

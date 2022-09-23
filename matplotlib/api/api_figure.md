@@ -1,20 +1,13 @@
 # matplotlib.figure
 
-- [matplotlib.figure](#matplotlibfigure)
-	- [简介](#简介)
-	- [figure.Figure](#figurefigure)
-	- [add_axes](#add_axes)
-	- [add_gridspec](#add_gridspec)
-	- [tight_layout](#tight_layout)
-	- [suptitle](#suptitle)
-- [SubplotParams](#subplotparams)
-	- [update](#update)
+***
 
 ## 简介
 
 该模块提供包含所有绘图元素顶层容器 Figure。
 
 该模块包含两个类：
+
 - SubplotParams, 控制子图间距
 - Figure, 绘图元素的顶层容器
 

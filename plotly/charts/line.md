@@ -24,11 +24,11 @@
 
 ## 简介
 
-在 plotly 中，折线图是散点图的一个特例。关于线图的更多内容可以参考 [散点图](scatter.md)。
+在 plotly 中，折线图是散点图的一个特例。关于线图的更多内容可以参考[散点图](https://plotly.com/python/line-and-scatter/)。
 
 ## PX API
 
-使用 `px.line` 绘制折线图。例 1：
+使用 `px.line` 绘制折线图。
 
 ```py
 import plotly.express as px
@@ -42,7 +42,7 @@ fig.show()
 
 ### 设置颜色
 
-例 2：
+- 不同国家不同颜色
 
 ```py
 import plotly.express as px
@@ -53,6 +53,8 @@ fig.show()
 ```
 
 ![line](images/2020-03-28-14-36-22.png)
+
+- 不同洲不同颜色
 
 ```py
 import plotly.express as px

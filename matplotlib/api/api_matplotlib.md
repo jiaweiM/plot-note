@@ -1,19 +1,4 @@
 # Content
-- [Content](#content)
-- [Artist](#artist)
-- [Axes](#axes)
-  - [bar](#bar)
-  - [stem](#stem)
-  - [set_xlabel, set_ylabel](#setxlabel-setylabel)
-- [Axis](#axis)
-  - [Axis.get_label_position](#axisgetlabelposition)
-  - [subplots_adjust](#subplotsadjust)
-- [pyplot](#pyplot)
-  - [bar](#bar-1)
-  - [figure](#figure)
-  - [xlabel](#xlabel)
-  - [pyplot.subplots](#pyplotsubplots)
-  - [suptitle(t, **kwargs)](#suptitlet-kwargs)
 
 # Artist
 `Artist` 是渲染到 `FigureCanvas` 的所有元素的基类。

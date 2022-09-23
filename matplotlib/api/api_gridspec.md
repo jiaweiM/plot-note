@@ -1,10 +1,6 @@
 # TOC
-- [TOC](#toc)
-- [matplotlib.gridspec](#matplotlibgridspec)
-- [matplotlib.gridspec.GridSpec](#matplotlibgridspecgridspec)
-- [SubplotSpec](#subplotspec)
-  - [get_geometry](#getgeometry)
-  - [get_position](#getposition)
+
+
 
 # matplotlib.gridspec
 `gridspec` 模块包含以网格形式布局 figure 中多个 `Axes` 的类。
