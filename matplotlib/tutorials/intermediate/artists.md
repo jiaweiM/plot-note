@@ -1,13 +1,21 @@
-# 简介
+# Artist 教程
+
+- [Artist 教程](#artist-教程)
+  - [概述](#概述)
+
+***
+
+## 概述
 
 使用 `Artist` 对象渲染 canvas.
 
 matplotlib API 有三层：
+
 - `matplotlib.backend_bases.FigureCanvas` 是绘图区域；
 - `matplotlib.backend_bases.Renderer` 执行在 `FigureCanvas` 绘制的任务；
 - `matplotlib.artist.Artist` 使用 `Renderer` 在 canvas 绘制。
 
-`FigureCanvas` 和 `Renderer` 执行所有和用户界面工具（如 `wxPython`）或绘图语言（如 PostScript）交互的任务,`Artist`则处理所有的高级命令，如布置图形、文本和线段等。用户 95% 以上的时间都在使用 `Artist`。
+`FigureCanvas` 和 `Renderer` 执行所有和用户界面工具（如 `wxPython`）或绘图语言（如 PostScript）交互的任务，而 `Artist`则处理所有的高级构造，如布置图形、文本和线段等。用户 95% 以上的时间都在使用 `Artist`。
 
 `Artist` 有两种类型：基础类型（primitive）和容器类型（container）。基础类型指需要绘制的标准图形对象，如 `Line2D`, `Rectangle`, `Text`, `AxesImage`等；容器类型用于放置基础类型，如 `Axis`, `Axes`, `Figure`等。
 
