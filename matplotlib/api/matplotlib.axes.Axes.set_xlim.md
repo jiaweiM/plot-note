@@ -1,5 +1,8 @@
 # matplotlib.axes.Axes.set_xlim
 
+Last updated: 2022-09-23, 10:55
+****
+
 ## 概述
 
 ```python
@@ -54,7 +57,11 @@ left, right = set_xlim(left, right)
 set_xlim(right=right_lim)
 ```
 
-也可以按相反顺序传递 xlim，导致 x 轴反转。
+也可以按相反顺序传递 xlim，使 x 轴反向反转。例如，假设 x 表示多少年前。可以按如下方式设置坐标轴，此时 5000 表示 5000 年前，在坐标轴左侧，0 表示现在，在坐标轴右侧：
+
+```python
+set_xlim(5000, 0)
+```
 
 ## 参考
 
