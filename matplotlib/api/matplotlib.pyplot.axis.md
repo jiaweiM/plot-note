@@ -1,6 +1,7 @@
 # matplotlib.pyplot.axis
 
-***
+Last updated: 2022-09-23, 11:08
+****
 
 ## 概述
 
@@ -37,26 +38,23 @@ ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax))
 |---|---|
 |'on'|启用轴线和标签，等价于 `True`|
 |'off'|关闭轴线和标签，等价于 `False`|
-|'equal'|
+|'equal'|通过设置轴 limits 设置相等缩放（使圆成为圆）。等价于 `ax.set_aspect('equal', adjustable='datalim')`。可能不尊重数据范围|
+|'scaled'|通过设置绘图框的尺寸来设置相等缩放（使圆成为圆）。等价于 `ax.set_aspect('equal', adjustable='box', anchor='C')`。此外，将禁用进一步的自动缩放|
+|'tight'|设置 limits 刚好足够显示所有数据，禁用进一步的自动缩放|
+|'auto'|自动缩放|
+|'image'|缩放到坐标轴 limit 等于 数据 Limit|
+|'square'|方块图，类似 `'scaled'`，但是强制 `xmax-xmin == ymax-ymin`|
 
-Set equal scaling (i.e., make circles circular) by changing axis limits. This is the same as ax.set_aspect('equal', adjustable='datalim'). Explicit data limits may not be respected in this case.
+**emit: bool, default: True**
 
-'scaled'
+是否通知 observers 坐标轴 limit 的更改。该选项被传递给 `set_xlim` 和 `set_ylim`。
 
-Set equal scaling (i.e., make circles circular) by changing dimensions of the plot box. This is the same as ax.set_aspect('equal', adjustable='box', anchor='C'). Additionally, further autoscaling will be disabled.
+## 返回
 
-'tight'
+**xmin, xmax, ymin, ymax: float**
 
-Set limits just large enough to show all data, then disable further autoscaling.
+坐标轴范围。
 
-'auto'
+## 参考
 
-Automatic scaling (fill plot box with data).
-
-'image'
-
-'scaled' with axis limits equal to data limits.
-
-'square'
-
-Square plot; similar to 'scaled', but initially forcing xmax-xmin == ymax-ymin.
+- https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.axis.html
