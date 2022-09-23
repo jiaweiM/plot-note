@@ -10,7 +10,7 @@
     - [日期](#日期)
     - [波形图](#波形图)
   - [GO API](#go-api)
-    - [简单线图](#简单线图)
+    - [简单折线图](#简单折线图)
     - [线图模式](#线图模式)
     - [样式设置](#样式设置)
     - [Connect Data Gaps](#connect-data-gaps)
@@ -68,6 +68,8 @@ fig.show()
 ![line color](images/2020-03-28-14-37-04.png)
 
 ### 数据顺序
+
+plotly 将折线图实现为连接的散点图，这意味着数据点按照提供的顺序绘制、并使用线段连接起来。如果可以下面样式的图：
 
 ```py
 import plotly.express as px
@@ -129,6 +131,8 @@ fig.show()
 
 ### 日期
 
+折线图可以使用任意类型的笛卡尔坐标系，包括线性、对数、分类和日期轴。日期轴上的折线图通常称为时间序列图。
+
 当数据是 ISO 格式的日期字符串、pandas date column 或 numpy datetime array，plotly 会自动将轴类型设置为日期格式。
 
 ```py
@@ -143,7 +147,7 @@ fig.show()
 
 ### 波形图
 
-波形图（Sparkline）就是子图中的散点图，去掉网格线、坐标轴以及轴标签。
+波形图（Sparkline）就是包含多个散点图的 subplots，去掉网格线、坐标轴以及轴标签。
 
 ```py
 import plotly.express as px
@@ -174,7 +178,7 @@ fig.show(config=dict(displayModeBar=False))
 
 线条图用 `go.Scatter` 函数，和散点图相同。
 
-### 简单线图
+### 简单折线图
 
 ```py
 import plotly.graph_objects as go
