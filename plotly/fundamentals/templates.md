@@ -1,6 +1,6 @@
-# Theming and templates
+# 主题和模板
 
-- [Theming and templates](#theming-and-templates)
+- [主题和模板](#主题和模板)
   - [简介](#简介)
   - [内置主题](#内置主题)
     - [查看可用主题](#查看可用主题)
@@ -14,12 +14,15 @@
     - [Theming object tuple properties](#theming-object-tuple-properties)
     - [合并主题](#合并主题)
     - [检查内置主题](#检查内置主题)
+  - [参考](#参考)
+
+***
 
 ## 简介
 
-Plotly Python 库内置了几个主题，还支持创建和添加自定义主题。
+Plotly.py 库内置了几个主题，还支持创建和添加自定义主题。
 
-这里主题（Theming）通常指定义可视化元素的默认样式。plotly 中使用模板（templates）对象实现主题功能。模板比传统的主题更通用，除了定义默认样式，模板还添加了注释、形状、图像等。
+这里主题（Theming）通常指定义可视化元素的默认样式。plotly 中使用模板（templates）实现主题功能。模板比传统的主题更通用，除了定义默认样式，模板还添加了注释、形状、图像等。
 
 ## 内置主题
 
@@ -254,3 +257,6 @@ fig.show()
 
 ### 检查内置主题
 
+## 参考
+
+- https://plotly.com/python/templates/

@@ -1,10 +1,11 @@
 # matplotlib
 
-## 教程
+## matplotlib 入门
 
 - [基本用法](tutorials/1.basic_usage.md)
 - [pyplot 教程](tutorials/2.pyplot.md)
 - [颜色](tutorials/color.md)
+- [使用样式表和 rcParams 自定义 Matplotlib](tutorials/introductory/customizing.md)
 
 ## 学习笔记
 

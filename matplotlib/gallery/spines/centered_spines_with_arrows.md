@@ -1,3 +1,11 @@
+# Spines 居中带箭头
+
+Last updated: 2022-09-23, 16:45
+****
+
+下面绘制数学课本上的那种样式的图，其 spines（坐标轴线）绘制在 `x=0`, `y=0` 处，末端带箭头。
+
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,3 +27,10 @@ x = np.linspace(-0.5, 1., 100)
 ax.plot(x, np.sin(x * np.pi))
 
 plt.show()
+```
+
+![](images/2022-09-23-16-45-19.png)
+
+## 参考
+
+- https://matplotlib.org/stable/gallery/spines/centered_spines_with_arrows.html
