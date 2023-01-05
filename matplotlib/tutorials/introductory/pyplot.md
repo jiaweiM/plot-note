@@ -1,23 +1,22 @@
 # Pyplot 教程
 
 - [Pyplot 教程](#pyplot-教程)
-  - [简介](#简介)
-    - [样式设置](#样式设置)
-  - [关键字参数](#关键字参数)
-  - [分类变量](#分类变量)
-  - [线段属性设置](#线段属性设置)
-  - [多图](#多图)
-  - [text](#text)
-    - [使用数学表达式](#使用数学表达式)
-    - [注释文本](#注释文本)
-  - [对数轴和其它非线性轴](#对数轴和其它非线性轴)
-  - [参考](#参考)
+  - [1. 简介](#1-简介)
+    - [1.1 样式设置](#11-样式设置)
+  - [2. 关键字参数](#2-关键字参数)
+  - [3. 分类变量](#3-分类变量)
+  - [4. 线段属性设置](#4-线段属性设置)
+  - [5. 多图](#5-多图)
+  - [6. text](#6-text)
+    - [6.1 数学表达式](#61-数学表达式)
+    - [6.2 注释文本](#62-注释文本)
+  - [7. 对数轴和其它非线性轴](#7-对数轴和其它非线性轴)
+  - [8. 参考](#8-参考)
 
-Last updated: 2022-09-23, 13:55
-@author Jiawei Mao
+Last updated: 2023-01-05, 14:26
 *****
 
-## 简介
+## 1. 简介
 
 `matplotlib.pyplot` 包含一系列类似 MATLAB 的绘图函数。每个 `pyplot` 函数对 figure 进行一些修改，如创建 figure，在 figure 中创建 plot，在 plot 中添加线段、标签等。
 
@@ -25,9 +24,9 @@ Last updated: 2022-09-23, 13:55
 
 > pyplot 主要用于交互式绘图以及较为简单的绘图，对复杂的绘图，还是建议面向对象 API。且 `pyplot` 的大部分函数 `Axes` 对象也有。
 
-使用 pyplot 生成 figure 很快：
+使用 pyplot 绘图很方便：
 
-```py
+```python
 import matplotlib.pyplot as plt
 
 plt.plot([1, 2, 3, 4])
@@ -35,9 +34,9 @@ plt.ylabel('some numbers')
 plt.show()
 ```
 
-如果只为 `plot()` 函数提供单个列表或数组，matplotlib 默认其为 y 值，并以索引作为 x 值，所以此处 x 为 `[0, 1, 2, 3]`。
+![](images/pp1.png)
 
-![line](images/2020-07-01-21-07-41.png)
+只为 `plot()` 函数提供一个列表或数组，matplotlib 默认其为 y 值，并以索引作为 x 值，所以上图中 x 为 `[0, 1, 2, 3]`。
 
 `plot()` 是一个多功能函数，可以使用多个参数。例如：
 
@@ -45,11 +44,11 @@ plt.show()
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 ```
 
-![line](images/2020-07-01-21-53-35.png)
+![](images/pp2.png)
 
-### 样式设置
+### 1.1 样式设置
 
-对每个 x, y 参数对，都有第三个可选的格式字符串，用于设置线条类型和颜色。格式字符串来自 MATLAB，可以将颜色和线条样式串一起。默认格式化字符串为 `'b-'`，表示蓝色实线。例如，下面绘制红色圆圈：
+对每对 x, y 参数，都有第三个可选的格式化字符串参数，用于设置线条类型和颜色。格式化字符串来自 MATLAB，可以将颜色和线条样式串一起。默认格式化字符串为 `'b-'`，表示蓝色实线。例如，绘制红色圆圈：
 
 ```python
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
@@ -57,36 +56,34 @@ plt.axis([0, 6, 0, 20])
 plt.show()
 ```
 
+![](images/pp3.png)
+
 `.axis()` 用于指定坐标轴范围，格式为 `[xmin, xmax, ymin, ymax]`。
 
-![scatter](images/2020-07-01-21-57-02.png)
-
-matplotlib 内部使用 numpy 存储数据，提供的其它类型数据在内部也被转换为 ndarray。
+matplotlib 内部使用 numpy 存储数据，其它序列类型数据在内部也被转换为 ndarray。
 
 下面使用一个命令绘制多条不同样式的线条：
 
-```py
+```python
 import numpy as np
 
 # evenly sampled time at 200ms intervals
 t = np.arange(0., 5., 0.2)
 
 # red dashes, blue squares and green triangles
-plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
+plt.plot(t, t, 'r--', t, t ** 2, 'bs', t, t ** 3, 'g^')
 plt.show()
 ```
 
+![](images/pp4.png)
+
 `np.arange(start, end, step)` 生成一个 `ndarray`，然后使用 `plot()` 函数绘制 $y=x$, $y=x^2$, $y=x^3$。
 
-'r--' 对应红色虚线，'bs' 对应红色方块，'g^' 对应绿色三角。
+'r--' 表示红色虚线，'bs' 表示红色方块，'g^' 表示绿色三角。
 
-![line](images/2020-07-01-22-09-29.png)
+## 2. 关键字参数
 
-## 关键字参数
-
-有些数据类型可以通过变量名称访问数据，如 `numpy.recarray` 和 `pandas.DataFrame`。
-
-Matplotlib 允许通过 `data` 关键字参数提供这类数据，然后使用变量名称指定绘图数据。
+有些数据类型可以通过变量名称访问数据，如 `numpy.recarray` 和 `pandas.DataFrame`。Matplotlib 允许通过 `data` 关键字参数提供这类数据，然后使用变量名称指定绘图数据。
 
 ```python
 data = {'a': np.arange(50),
@@ -101,11 +98,11 @@ plt.ylabel('entry b')
 plt.show()
 ```
 
-![scatter](images/2020-07-01-22-22-05.png)
+![](images/pp5.png)
 
-## 分类变量
+## 3. 分类变量
 
-Matplotlib 可以直接使用分类变量绘图：
+Matplotlib 可以使用分类变量绘图：
 
 ```python
 names = ['group_a', 'group_b', 'group_c']
@@ -126,13 +123,11 @@ plt.suptitle('Categorical Plotting')
 plt.show()
 ```
 
-`subplot(131)` 表示1行3列的第一个。
+![](images/pp6.png)
 
-![subplot](images/2020-07-01-22-24-24.png)
+## 4. 线段属性设置
 
-## 线段属性设置
-
-线段的属性包括：linewidth, dash style, antialiased 等；线段由 [`matplotlib.lines.Line2D`](https://matplotlib.org/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D) 类表示。
+线段的属性包括：linewidth, dash style, antialiased 等；线段由 [`matplotlib.lines.Line2D`](https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html) 类表示。
 
 设置 Line2D 属性的方法有三种：
 
@@ -146,7 +141,7 @@ plt.plot(x, y, linewidth=2.0)
 
 `plot()` 函数返回 `Line2D` 对象列表，例如 `line1, line2 = plot(x1, y1, x2, y2)`。下面创建一个 `Line2D` 对象：
 
-```py
+```python
 line, = plt.plot(x, y, '-')
 line.set_antialiased(False) # turn off antialiasing
 ```
@@ -202,22 +197,22 @@ plt.setp(lines, 'color', 'r', 'linewidth', 2.0)
 
 通过 `setp` 函数可以查看线段可以设置的属性：
 
-```py
-In [69]: lines = plt.plot([1, 2, 3])
-In [70]: plt.setp(lines)
+```python
+In [1]: lines = plt.plot([1, 2, 3])
+In [2]: plt.setp(lines)
 alpha: float
 animated: [True | False]
 antialiased or aa: [True | False]
 ...snip
 ```
 
-## 多图
+## 5. 多图
 
 MATLAB 和 pyplot 都有当前 figure 和当前 axes 的概念。所有绘图函数应用于当前 axes。函数 `gca` 返回当前 axes (`matplotlib.axes.Axes` 实例)，`gcf` 返回当前 figure (`matplotlib.figure.Figure` 实例)。
 
 下面创建两个 subplots：
 
-```py
+```python
 def f(t):
     return np.exp(-t) * np.cos(2*np.pi*t)
 
@@ -235,7 +230,7 @@ plt.show()
 
 ![](images/2022-04-10-22-51-38.png)
 
-这里调用 `figure` 是可选的，因为如果没有 Figure，Matplotlib 会自动创建一个。`subplot` 指定了 `numrows`, `numcols`, `plot_number`，其中 `plot_number` 范围从 1 到 `numrows*numcols`。如果 `numrows*numcols<10`，`subplot` 中的逗号是可选的，即 `subplot(211)` 等价于 `subplot(2, 1, 1)`。
+这里调用 `figure` 是可选的，如果没有 Figure，Matplotlib 会自动创建一个。`subplot` 指定 `numrows`, `numcols`, `plot_number`，其中 `plot_number` 范围从 1 到 `numrows*numcols`。如果 `numrows*numcols<10`，`subplot` 中的逗号是可选的，即 `subplot(211)` 等价于 `subplot(2, 1, 1)`。
 
 可以创建任意数目的 subplots 和 axes，还可以使用 `axes([left, bottom, width, height])` 手动指定 axes 位置，这些值是 (0 to 1) 的比例值。
 
@@ -243,12 +238,12 @@ plt.show()
 
 ```python
 import matplotlib.pyplot as plt
+
 plt.figure(1)                # the first figure
 plt.subplot(211)             # the first subplot in the first figure
 plt.plot([1, 2, 3])
 plt.subplot(212)             # the second subplot in the first figure
 plt.plot([4, 5, 6])
-
 
 plt.figure(2)                # a second figure
 plt.plot([4, 5, 6])          # creates a subplot() by default
@@ -262,17 +257,16 @@ plt.title('Easy as 1, 2, 3') # subplot 211 title
 
 figures 持有的内存不会自动释放，需要调用 `close`。
 
-## text
+## 6. text
 
-`text` 可以在任意位置添加文本，`xlabel`, `ylabel` 和 `title` 在特定位置添加文本。
+`text` 可以在任意位置添加文本，`xlabel`, `ylabel` 和 `title` 则在特定位置添加文本。
 
 ```python
 mu, sigma = 100, 15
 x = mu + sigma * np.random.randn(10000)
 
-# the histogram of the data
+# 直方图数据
 n, bins, patches = plt.hist(x, 50, density=1, facecolor='g', alpha=0.75)
-
 
 plt.xlabel('Smarts')
 plt.ylabel('Probability')
@@ -285,13 +279,13 @@ plt.show()
 
 ![](images/2022-04-10-23-22-21.png)
 
-所有的 `text` 函数返回 `matplotlib.text.Text` 实例。可以使用关键字参数或 `setp` 设置文本属性：
+`text` 函数返回 `matplotlib.text.Text` 实例。可以使用关键字参数或 `setp` 设置文本属性：
 
 ```python
 t = plt.xlabel('my data', fontsize=14, color='red')
 ```
 
-### 使用数学表达式
+### 6.1 数学表达式
 
 matplotlib 支持 TeX 数学表达式。例如，在标题中写入 $\sigma_i=15$，可以用 `$` 包围 TeX 表达式：
 
@@ -299,9 +293,9 @@ matplotlib 支持 TeX 数学表达式。例如，在标题中写入 $\sigma_i=15
 plt.title(r'$\sigma_i=15$')
 ```
 
-标签字符串前的 `r` 很重要，它表示字符串是原始字符串，这样就不会把反斜杠识别为转义。matplotlib 内置一个 TeX 表达式解析引擎和渲染引擎，并包含数学字体，详情参考 [Writing mathematical expressions](https://matplotlib.org/stable/tutorials/text/mathtext.html)。因此不需要安装 TeX 就能跨平台使用数学文本。对已经安装 LaTeX 和额 dvipng 的用户，还可以使用 LaTeX 来格式化文本，并将输出直接合并到显示的 figure 或保存的 postscript 中，详情请参考 [Text rendering with LaTeX](https://matplotlib.org/stable/tutorials/text/usetex.html)。
+标签字符串前的 `r` 很重要，它表示字符串是原始字符串，以避免把反斜杠识别为转义。matplotlib 内置一个 TeX 表达式解析引擎和渲染引擎，并包含数学字体，详情参考 [Writing mathematical expressions](https://matplotlib.org/stable/tutorials/text/mathtext.html)。因此不需要安装 TeX 就能跨平台使用数学文本。对已经安装 LaTeX 和 dvipng 的用户，也可以使用 LaTeX 来格式化文本，并将输出直接合并到显示的 figure 或保存的 postscript 中，详情请参考 [Text rendering with LaTeX](https://matplotlib.org/stable/tutorials/text/usetex.html)。
 
-### 注释文本
+### 6.2 注释文本
 
 `text` 可以将文本放到 Axes 的任意位置。`text` 一般用来注释图的某些特征，而 `annotate` 方法提供了一些辅助功能，使得注释更容易。在注释中，需要考虑两个点：待注释数据点的位置 `xy` 和注释文本的位置 `xytext`。这两个参数都是 `(x, y)` tuple。
 
@@ -324,9 +318,9 @@ plt.show()
 
 ![](images/text_1.png)
 
-## 对数轴和其它非线性轴
+## 7. 对数轴和其它非线性轴
 
-`matplotlib.pyplot` 除了线性轴，还支持对数和 logit 轴。如果数据跨度多个数量级，则可以使用该方法。更改轴的 scale 很容易：
+`matplotlib.pyplot` 除了线性轴，还支持对数和 logit 轴。当数据跨度多个数量级，可以使用该方法。更改轴的 scale 很容易：
 
 ```python
 plt.xscale('log')
@@ -387,6 +381,6 @@ plt.show()
 
 ![](images/2022-09-23-13-55-10.png)
 
-## 参考
+## 8. 参考
 
 - https://matplotlib.org/stable/tutorials/introductory/pyplot.html
