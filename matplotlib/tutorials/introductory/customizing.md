@@ -1,20 +1,21 @@
 # 使用样式表和 rcParams 自定义 Matplotlib
 
 - [使用样式表和 rcParams 自定义 Matplotlib](#使用样式表和-rcparams-自定义-matplotlib)
-  - [简介](#简介)
-  - [运行时 rc 设置](#运行时-rc-设置)
-    - [临时修改 rc](#临时修改-rc)
-  - [样式表](#样式表)
-    - [自定义样式](#自定义样式)
-    - [合成样式](#合成样式)
-    - [临时样式](#临时样式)
-  - [matplotlibrc 文件](#matplotlibrc-文件)
-    - [默认 matplotlibrc 文件](#默认-matplotlibrc-文件)
-  - [参考](#参考)
+  - [1. 简介](#1-简介)
+  - [2. 运行时 rc 设置](#2-运行时-rc-设置)
+    - [2.1 临时修改 rc](#21-临时修改-rc)
+  - [3. 样式表](#3-样式表)
+    - [3.1 自定义样式](#31-自定义样式)
+    - [3.2 合成样式](#32-合成样式)
+    - [3.3 临时样式](#33-临时样式)
+  - [4. matplotlibrc 文件](#4-matplotlibrc-文件)
+    - [4.1 默认 matplotlibrc 文件](#41-默认-matplotlibrc-文件)
+  - [1.5. 参考](#15-参考)
 
-***
+Last updated: 2023-01-05, 13:28
+****
 
-## 简介
+## 1. 简介
 
 自定义 Matplotlib 的方式有三种：
 
@@ -24,7 +25,7 @@
 
 三种方式的优先级为：运行时修改 rcParams > 样式表 > matplotlibrc。
 
-## 运行时 rc 设置
+## 2. 运行时 rc 设置
 
 可以在 Python 脚本中动态更改默认的 rc (runtime configuration) 设置，也可以在 Python shell 中交互更改。所有的 rc 设置都存储一个字典变量 `matplotlib.rcParams` 中，为 matplotlib 的全局参数。
 
@@ -62,7 +63,7 @@ plt.plot(data)
 
 ![](images/rc_3.png)
 
-### 临时修改 rc
+### 2.1 临时修改 rc
 
 使用 `matplotlib.rc_context` 可以临时修改 `matplotlib.rcParams`。例如：
 
@@ -89,7 +90,7 @@ plotting_function()
 
 在设置 rcParams 会有验证，详情可参考 [matplotlib.rcsetup](https://matplotlib.org/stable/api/rcsetup_api.html)。
 
-## 样式表
+## 3. 样式表
 
 修改样式的另一种方式，是在样式表中设置 rcParams 只，然后用 `matplotlib.style.use` 导入样式表。只需要更改导入的样式表，就可以轻松地在不同的样式之间切换。样式表看起来与 matplotlibrc 文件相同，但是只能设置与样式相关的参数，而 `matplotlibrc` 文件支持所有的 rcParams。这样做是为了使样式表可以在不同机器之间移植。
 
@@ -111,7 +112,7 @@ print(plt.style.available)
 ['Solarize_Light2', '_classic_test_patch', '_mpl-gallery', '_mpl-gallery-nogrid', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark', 'seaborn-dark-palette', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'tableau-colorblind10']
 ```
 
-### 自定义样式
+### 3.1 自定义样式
 
 可以自定义样式表，然后调用 `style.use` 通过样式表 URL 或路径载入。
 
@@ -146,7 +147,7 @@ import matplotlib.pyplot as plt
 plt.style.use(<style-name>)
 ```
 
-### 合成样式
+### 3.2 合成样式
 
 可以将多个样式表组合在一起使用。例如，可以在一个样式表中定义颜色，一个样式表中定义线条尺寸等。然后以列表传入 `style.use`：
 
@@ -157,7 +158,7 @@ plt.style.use(['dark_background', 'presentation'])
 
 对重复定义的样式，右侧样式覆盖左侧样式。
 
-### 临时样式
+### 3.3 临时样式
 
 如果只想对特定代码块使用样式，不修改全局样式，则可以按如下方式使用样式表：
 
@@ -169,7 +170,7 @@ plt.show()
 
 ![](images/rc_6.png)
 
-## matplotlibrc 文件
+## 4. matplotlibrc 文件
 
 Matplotlib 使用 `matplotlibrc` 配置文件自定义各种属性，可以用来设置几乎所有属性的默认值。在 Matplotlib 启动时读取 `matplotlibrc`，按如下顺序在 4 个位置查找 `matplotlibrc` 文件：
 
@@ -190,7 +191,7 @@ Matplotlib 使用 `matplotlibrc` 配置文件自定义各种属性，可以用�
 '/home/foo/.config/matplotlib/matplotlibrc'
 ```
 
-### 默认 matplotlibrc 文件
+### 4.1 默认 matplotlibrc 文件
 
 ```python
 #### MATPLOTLIBRC FORMAT
@@ -980,6 +981,6 @@ Matplotlib 使用 `matplotlibrc` 配置文件自定义各种属性，可以用�
                                   # animation in HTML (i.e. IPython notebook)
 ```
 
-## 参考
+## 1.5. 参考
 
 - https://matplotlib.org/stable/tutorials/introductory/customizing.html
