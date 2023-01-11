@@ -1,11 +1,16 @@
 # matplotlib
 
-## matplotlib 入门
+## Matplotlib 教程
+
+### matplotlib 入门
 
 - [Matplotlib 入门指南](tutorials/introductory/quick_start.md)
 - [pyplot 教程](tutorials/introductory/pyplot.md)
-- [颜色](tutorials/color.md)
 - [使用样式表和 rcParams 自定义 Matplotlib](tutorials/introductory/customizing.md)
+
+### 颜色
+
+- [如何指定颜色](tutorials/colors/colors.md)
 
 ## 学习笔记
 
