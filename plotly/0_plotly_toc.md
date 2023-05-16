@@ -3,7 +3,7 @@
 2020-04-18, 21:18
 ***
 
-## 基础
+## plotly 基础
 
 - [简介](1_intro.md)
 - [图表显示](2_display.md)
@@ -11,6 +11,8 @@
 - [Plotly Express](4_express.md)
 - [图形导出](5_output.md)
 - [主题和模板](6_theme_template.md)
+- 颜色
+	- [[colorscales|连续色阶]]
 - 自定义选项
   - [标题](11_title.md)
   - [坐标轴](12_axes.md)
@@ -27,12 +29,11 @@
 - [Heatmap](chart_heatmap.md)
 - [等高线图](chart_contour.md)
 - [Network](chart_network.md)
-- [风向图](chart_polarbar.md)
+- [玫瑰图或极坐标条形图](charts/wind-rose-charts.md)
 - 三维图
   - [三维坐标](3D_axes.md)
 - 颜色
   - [离散颜色](color_discrete.md)
-  - [连续颜色](color_continuous.md)
   - [内置色阶](color_builtin_color_scale.md)
 - [WebGL-大规模数据绘图](webgl.md)
 - [多图 Figure](15_subplot.md)
